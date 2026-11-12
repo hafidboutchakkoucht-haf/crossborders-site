@@ -108,6 +108,28 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .case .ph.tile b{font-family:var(--serif);font-weight:500;font-style:italic;font-size:clamp(2.4rem,5vw,4.2rem);line-height:.95;letter-spacing:-.02em}
 .case .ph.tile span{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
 .gal .w6{grid-column:span 6}.gal .w6 img{aspect-ratio:3/2}
+/* Mouvement et fraîcheur */
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--gold);transform-origin:0 50%;transform:scaleX(0)}
+.menu{display:none;font:inherit;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}
+.rot{display:inline-block;position:relative;white-space:nowrap}
+.rot span{display:inline-block;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.rot span.out{opacity:0;transform:translateY(-.25em)}
+.rot span.pre{opacity:0;transform:translateY(.25em);transition:none}
+.hero figure{overflow:hidden}
+.hero figure img{animation:drift 22s ease-in-out infinite alternate;transform-origin:60% 40%}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.08)}}
+html.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+html.js .rv.in{opacity:1;transform:none}
+.case{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.case:hover{transform:translateY(-4px)}
+.case .ph.tile b{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.case:hover .ph.tile b{transform:translateX(8px)}
+.idea h3::after{content:" →";font-style:normal;opacity:0;transition:opacity .3s}
+.idea:hover h3::after{opacity:1}
+.gal figure{overflow:hidden}
+.gal img{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.gal figure:hover img{transform:scale(1.05)}
+.swipe{display:none;font-size:.78rem;color:var(--muted);margin-top:12px}
 /* Manifeste */
 .manifest{display:grid;grid-template-columns:7fr 5fr;gap:72px}
 .manifest>*{min-width:0}
@@ -237,6 +259,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .legal{margin-top:72px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between;font-size:.82rem;color:rgba(241,242,248,.6)}
 
 @media (max-width:960px){
+  .top .wrap{flex-wrap:nowrap}
+  .menu{display:inline-block}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--rule);flex-direction:column;gap:0;padding:8px 24px 20px;font-size:1.05rem}
+  .nav a{padding-block:12px;border-top:1px solid var(--rule)}
+  .top.open .nav{display:flex}
+  .top .btn{display:none}
   .head,.hero-row,.word-grid,.manifest,.fgrid{grid-template-columns:1fr;gap:36px}
   .actions,.steps,.figs{grid-template-columns:repeat(2,1fr)}
   .steps li:nth-child(3),.figs div:nth-child(3){border-left:0;padding-left:0}
@@ -250,6 +278,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   .case,.case.lg,.case.sm{grid-column:span 12;margin-top:0}
 }
 @media (max-width:640px){
+  .word .text{font-size:1rem;gap:14px}
+  .word h3{font-size:1.8rem}
+  .gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:-20px;padding-inline:20px;scrollbar-width:none}
+  .gal::-webkit-scrollbar{display:none}
+  .gal figure,.gal .w4,.gal .w5,.gal .w6,.gal .w7{flex:0 0 84%;scroll-snap-align:center}
+  .gal figure img,.gal .w7 img,.gal .w5 img,.gal .w6 img{aspect-ratio:4/5}
+  .swipe{display:block}
   body{font-size:16px}
   .wrap{padding-inline:20px}
   .sec{padding-block:72px}.sec.tight{padding-block:60px}
@@ -262,7 +297,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   .ticker div{font-size:1.3rem}
   .foot{padding-block:72px 28px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker div{animation:none}.case .ph img,.idea,.btn::after{transition:none}}
+@media (prefers-reduced-motion:reduce){.hero figure img{animation:none}html.js .rv{opacity:1;transform:none;transition:none}.case,.gal img{transition:none}html{scroll-behavior:auto}.ticker div{animation:none}.case .ph img,.idea,.btn::after{transition:none}}
 </style>
 </head>
 <body>
@@ -270,7 +305,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#accueil" aria-label="Cross Borders, accueil">Cross<span>Borders</span></a>
-    <nav class="nav" aria-label="Navigation principale">
+    <nav class="nav" id="nav" aria-label="Navigation principale">
       <a href="#president">Le mot du président</a>
       <a href="#association">L'association</a>
       <a href="#projets">Projets</a>
@@ -280,14 +315,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <a href="#partenaires">Partenaires</a>
     </nav>
     <a class="btn small" href="#contact">Nous écrire</a>
+    <button class="menu" id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
   </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 </header>
 
 <main id="accueil">
 <div class="hero">
   <div class="wrap">
     <div class="meta label"><span>Association loi 1901</span><span>Fondée en 2024</span><span>Mobilité internationale · Inclusion sociale · Erasmus+</span></div>
-    <h1>Ensemble, dépassons les <i>frontières.</i></h1>
+    <h1>Ensemble, dépassons les <i class="rot" id="rot"><span lang="fr">frontières.</span></i></h1>
     <div class="hero-row">
       <div class="intro">
         <p>Cross Borders conçoit et conduit des projets européens qui ouvrent aux jeunes et aux femmes les portes de la mobilité, de l'entrepreneuriat et de l'engagement citoyen.</p>
@@ -432,11 +469,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <li><b>4</b><strong>Le dépôt</strong><p>Rédaction, budget et dépôt du dossier auprès du financeur.</p></li>
     </ol>
     <div class="ideas">
-      <article class="idea"><span class="st dep label">Dossier déposé</span><h3>WoGreen</h3><p>Women Greenpreneurs : un échange de jeunes Erasmus+ pour encourager l'entrepreneuriat vert au féminin.</p></article>
-      <article class="idea"><span class="st label">En montage</span><h3>SPORT4ALL</h3><p>Un partenariat Erasmus+ autour du sport pour tous, avec nos partenaires d'Allemagne et d'Espagne.</p></article>
-      <article class="idea"><span class="st label">À l'étude</span><h3>Sources Communes</h3><p>Une piste de coopération Nord-Sud avec le Bénin, autour de l'accès à l'eau et de l'inclusion numérique.</p></article>
+      <article class="idea"><span class="st dep label">En évaluation</span><h3>Entrepreneuriat vert au féminin</h3><p>Un projet européen pour aider les jeunes femmes à créer des activités respectueuses de l'environnement.</p></article>
+      <article class="idea"><span class="st label">En montage</span><h3>Le sport pour tous</h3><p>Un partenariat européen qui fait du sport un levier d'inclusion et de respect.</p></article>
+      <article class="idea"><span class="st label">À l'étude</span><h3>Coopération Nord-Sud</h3><p>Une piste de coopération autour de l'accès à l'eau et de l'inclusion numérique.</p></article>
       <article class="idea"><span class="st label">À l'étude</span><h3>Festivals interculturels</h3><p>Trois jours consacrés à une culture invitée : expositions, projections, ateliers, spectacles et rencontres économiques.</p></article>
-      <article class="idea"><span class="st label">En préparation</span><h3>Nouvelles mobilités</h3><p>Une mobilité vers la Hongrie et de nouveaux partenariats avec des structures espagnoles.</p></article>
+      <article class="idea"><span class="st label">En préparation</span><h3>Nouvelles mobilités</h3><p>De nouvelles destinations et de nouveaux partenaires en Europe pour les jeunes que nous accompagnons.</p></article>
       <article class="idea call"><span class="label">À vous</span><h3>Votre idée ici</h3><p>Jeune, habitant, association ou collectivité : écrivez-nous en quelques lignes, nous revenons vers vous pour un premier échange.</p><a class="btn small" href="#contact">Proposer une idée</a></article>
     </div>
   </div>
@@ -482,6 +519,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <figure class="w6"><img src="img/hambourg-groupe.jpg" alt="Groupe de participants devant la table italienne"><figcaption>Les participants de la délégation italienne</figcaption></figure>
       <figure class="w6"><img src="img/hambourg-atelier-respect.jpg" alt="Une participante présente l'atelier sur le respect des joueurs" style="object-position:50% 40%"><figcaption>Atelier : respecter les joueurs sur le terrain</figcaption></figure>
     </div>
+    <p class="swipe">Faites glisser pour voir toutes les photos →</p>
   </div>
 </section>
 
@@ -530,8 +568,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 var COMMUNIQUES=[
  {date:"2026-11-01",titre:"Une nouvelle adresse, la même ambition",
   texte:["Chers adhérents, chers partenaires, Cross Borders ouvre ce mois-ci son site internet, www.crossborders.ngo. Vous y trouverez nos projets, les dispositifs européens que nous faisons connaître et notre laboratoire d'idées.",
-  "L'automne a aussi été celui du changement. Réunis en assemblée générale extraordinaire le 25 septembre, nos membres ont décidé de transférer le siège de l'association à Miremont, en Haute-Garonne, et ont élu un nouveau bureau. Notre ancrage s'élargit, notre mission reste la même : ouvrir aux jeunes et aux femmes les portes de l'Europe.",
-  "Nous avons déposé le projet WoGreen, consacré à l'entrepreneuriat vert au féminin. Nous en attendons la réponse avec confiance.",
+  "L'automne est aussi celui du renouveau : une nouvelle équipe est en place, et l'association s'ancre désormais à Miremont, en Haute-Garonne. Notre ancrage s'élargit, notre mission reste la même : ouvrir aux jeunes et aux femmes les portes de l'Europe.",
+  "Plusieurs projets sont en préparation ou en cours d'évaluation. Nous vous les présenterons dès qu'ils seront confirmés.",
   "Vous avez une idée de projet ? Le Lab est ouvert : écrivez-nous."]},
  {date:"2026-10-01",titre:"Une rentrée pour ouvrir plus grand les portes de l'Europe",
   texte:["Chers adhérents, chers partenaires, chers amis de Cross Borders, cette rentrée est pour nous celle de la consolidation. En mars, nous avons accueilli à Rezé des jeunes venus de Hongrie, d'Allemagne, d'Italie et de Turquie. Ces neuf jours ont montré ce qu'une petite association peut apporter à son territoire lorsqu'elle s'ouvre à l'Europe.",
@@ -562,6 +600,26 @@ document.querySelectorAll('.copy').forEach(function(b){
     try{navigator.clipboard.writeText(b.dataset.copy).then(done,sel)}catch(e){sel()}
   });
 });
+
+/* Menu mobile */
+(function(){var t=document.querySelector('.top'),m=document.getElementById('menu');if(!m)return;
+m.addEventListener('click',function(){var o=t.classList.toggle('open');m.setAttribute('aria-expanded',o);m.textContent=o?'Fermer':'Menu'});
+t.querySelectorAll('.nav a').forEach(function(a){a.addEventListener('click',function(){t.classList.remove('open');m.setAttribute('aria-expanded','false');m.textContent='Menu'})});})();
+/* Barre de progression */
+(function(){var b=document.getElementById('progress');function u(){var h=document.documentElement,max=h.scrollHeight-h.clientHeight;b.style.transform='scaleX('+(max>0?h.scrollTop/max:0)+')'}window.addEventListener('scroll',u,{passive:true});u();})();
+var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* Mot qui change de langue */
+(function(){var r=document.getElementById('rot');if(!r||calm)return;var s=r.querySelector('span');
+var W=[['frontières.','fr'],['borders.','en'],['fronteras.','es'],['Grenzen.','de'],['confini.','it'],['határok.','hu'],['sınırlar.','tr'],['fronteiras.','pt']],i=0;
+setInterval(function(){s.classList.add('out');setTimeout(function(){i=(i+1)%W.length;s.textContent=W[i][0];s.lang=W[i][1];s.classList.remove('out');s.classList.add('pre');s.offsetWidth;s.classList.remove('pre')},450)},2800);})();
+/* Apparition au défilement et compteurs */
+(function(){if(calm||!('IntersectionObserver' in window))return;document.documentElement.classList.add('js');
+var sel='.index,.head,.manifest .big,.mv div,.rows article,.case,.actions article,.guide-t,.steps li,.idea,.figs div,.tl li,.gal,.pt>div,.join article,.word-grid>*';
+var els=[].slice.call(document.querySelectorAll(sel));
+els.forEach(function(e){var sib=[].slice.call(e.parentNode.children).indexOf(e);e.style.transitionDelay=Math.min(sib,4)*90+'ms';e.classList.add('rv')});
+function count(b){var t=b.textContent,nums=t.match(/\d+/g);if(!nums)return;var st=null;function f(ts){if(!st)st=ts;var k=Math.min((ts-st)/1400,1),e=1-Math.pow(1-k,3),j=0;b.textContent=t.replace(/\d+/g,function(n){return Math.round(+n*e)});if(k<1)requestAnimationFrame(f);else b.textContent=t}requestAnimationFrame(f)}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');var b=en.target.querySelector&&en.target.matches('.figs div')&&en.target.querySelector('b');if(b)count(b);io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+els.forEach(function(e){io.observe(e)});})();
 </script>
 
 </body>
