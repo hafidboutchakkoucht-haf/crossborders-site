@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Cross Borders, association loi 1901 : projets Erasmus+, mobilité internationale des jeunes, inclusion sociale et égalité femmes-hommes.">
+<meta property="og:title" content="Cross Borders">
+<meta property="og:description" content="Ensemble, dépassons les frontières. Projets européens pour la jeunesse, l'inclusion et l'engagement citoyen.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/groupe-partenaires.jpg">
+<meta name="theme-color" content="#1b2ee0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231b2ee0'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23ffffff'%3ECB%3C/text%3E%3C/svg%3E">
+<title>Cross Borders</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout : grille éditoriale 12 colonnes, grandes capitales serif, un seul bleu outremer en aplats pleins ; chaque section s'ouvre par un index (numéro de rubrique + intitulé) comme un rapport d'agence. */
+:root{
+  --paper:#f7f7f4; --surface:#ffffff; --ink:#0d1020; --muted:#565b70; --rule:#d9dbe3;
+  --blue:#1b2ee0; --blue-deep:#0f1a8f; --on-blue:#ffffff; --accent:#1b2ee0; --tint:#e8ebff; --gold:#e3b23c; --night:#0b0e1c; --on-night:#f1f2f8;
+  --serif:"Cormorant Garamond","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0b0d18; --surface:#12152a; --ink:#eef0f8; --muted:#a3a8bf; --rule:#272b45;
+  --blue:#2236e6; --blue-deep:#101a8a; --on-blue:#ffffff; --accent:#8e9aff; --tint:#181d44; --gold:#e3b23c; --night:#05060d; --on-night:#f1f2f8; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#0b0d18; --surface:#12152a; --ink:#eef0f8; --muted:#a3a8bf; --rule:#272b45;
+  --blue:#2236e6; --blue-deep:#101a8a; --on-blue:#ffffff; --accent:#8e9aff; --tint:#181d44; --gold:#e3b23c; --night:#05060d; --on-night:#f1f2f8; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:500;line-height:1;letter-spacing:-.015em;text-wrap:balance}
+h1 i,h2 i{font-weight:500;color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:24px}
+.label{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.sec{padding-block:112px}
+.sec.tight{padding-block:88px}
+.index{display:flex;gap:16px;align-items:baseline;padding-bottom:18px;border-bottom:1px solid var(--rule);margin-bottom:56px}
+.index b{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.3rem;color:var(--accent)}
+.h2{font-size:clamp(2.5rem,6vw,4.8rem)}
+.lead{font-size:1.14rem;color:var(--muted);max-width:38rem}
+.head{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end;margin-bottom:64px}
+.head>*{min-width:0}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;padding-block:14px;flex-wrap:wrap}
+.brand{text-decoration:none;font-family:var(--serif);font-size:1.7rem;font-weight:600;letter-spacing:-.02em;line-height:1;display:flex;align-items:baseline;gap:2px}
+.brand span{color:var(--accent);font-style:italic}
+.nav{display:flex;flex-wrap:wrap;gap:4px 24px;font-size:.84rem;font-weight:500}
+.nav a{text-decoration:none;padding-block:4px;background:linear-gradient(var(--ink),var(--ink)) 0 100%/0 1px no-repeat;transition:background-size .3s}
+.nav a:hover{background-size:100% 1px}
+.btn{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-weight:600;font-size:.9rem;letter-spacing:.02em;padding:15px 26px;background:var(--blue);color:var(--on-blue);border:1px solid var(--blue);border-radius:999px;transition:transform .25s}
+.btn::after{content:"→";transition:transform .25s}
+.btn:hover::after{transform:translateX(5px)}
+.btn.line{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.small{padding:10px 18px;font-size:.8rem}
+
+/* Hero */
+.hero{padding-block:72px 0}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 32px;color:var(--muted);margin-bottom:40px}
+.hero h1{font-size:clamp(3.4rem,11.2vw,10.4rem);line-height:.88;letter-spacing:-.03em}
+.hero-row{display:grid;grid-template-columns:5fr 7fr;gap:56px;margin-top:56px;align-items:end}
+.hero-row>*{min-width:0}
+.hero .intro{display:grid;gap:28px;padding-bottom:8px}
+.hero .intro p{font-size:1.2rem;max-width:30rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero figure{margin:0;position:relative}
+.hero figure img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.hero figcaption{position:absolute;left:0;bottom:0;background:var(--blue);color:var(--on-blue);padding:12px 18px;max-width:80%}
+.ticker{margin-top:72px;background:var(--blue);color:var(--on-blue);overflow:hidden;padding-block:18px}
+.ticker div{display:flex;gap:48px;width:max-content;animation:slide 48s linear infinite;font-family:var(--serif);font-size:1.7rem;font-style:italic;white-space:nowrap}
+.ticker span::after{content:"✦";font-style:normal;font-size:.8rem;margin-left:48px;color:var(--gold);vertical-align:middle}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* Communiqué */
+.word{background:var(--night);color:var(--on-night)}
+.word .index{border-color:rgba(255,255,255,.18)}
+.word .index b{color:var(--gold)}
+.word-grid{display:grid;grid-template-columns:4fr 8fr;gap:64px}
+.word-grid>*{min-width:0}
+.word aside{display:grid;gap:22px;align-content:start}
+.word .month{font-family:var(--serif);font-size:clamp(2.6rem,5vw,4rem);line-height:.95}
+.word .month i{color:var(--gold)}
+.word aside p{color:rgba(241,242,248,.66);font-size:.92rem;max-width:20rem}
+.word h3{font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.05;margin-bottom:28px}
+.word .text{display:grid;gap:18px;font-size:1.08rem;max-width:44rem;color:rgba(241,242,248,.9)}
+.word .text p:first-child::first-letter{font-family:var(--serif);font-size:3.9em;float:left;line-height:.78;padding:6px 10px 0 0;color:var(--gold)}
+.sign{margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;align-items:baseline}
+.sign strong{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.7rem}
+.sign span{color:rgba(241,242,248,.66);font-size:.86rem}
+.archive{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px}
+.archive button{font:inherit;font-size:.8rem;font-weight:600;background:transparent;color:var(--on-night);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;cursor:pointer}
+.archive button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#201600}
+
+/* Manifeste */
+.manifest{display:grid;grid-template-columns:7fr 5fr;gap:72px}
+.manifest>*{min-width:0}
+.manifest .big{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.9rem);line-height:1.12;letter-spacing:-.01em}
+.manifest .big i{color:var(--accent)}
+.mv{display:grid;align-content:start}
+.mv div{padding-block:24px;border-top:1px solid var(--rule);display:grid;gap:8px}
+.mv div:last-child{border-bottom:1px solid var(--rule)}
+.mv p{color:var(--muted);font-size:.98rem}
+.values{list-style:none;padding:0;margin:40px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.values li{border:1px solid var(--ink);border-radius:999px;padding:6px 16px;font-size:.84rem;font-weight:500}
+
+/* Expertises */
+.band{background:var(--surface);border-block:1px solid var(--rule)}
+.rows{display:grid}
+.rows article{display:grid;grid-template-columns:1fr 5fr 6fr;gap:32px;padding-block:32px;border-top:1px solid var(--rule);align-items:baseline}
+.rows article:last-child{border-bottom:1px solid var(--rule)}
+.rows article>*{min-width:0}
+.rows .n{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:1.2rem}
+.rows h3{font-size:clamp(1.7rem,3vw,2.5rem)}
+.rows p{color:var(--muted)}
+
+/* Projets */
+.cases{display:grid;grid-template-columns:repeat(12,1fr);gap:56px 32px}
+.case{grid-column:span 6;display:grid;gap:18px;align-content:start;min-width:0}
+.case.lg{grid-column:span 7}.case.sm{grid-column:span 5;margin-top:72px}
+.case .ph{overflow:hidden;background:var(--tint)}
+.case .ph img{width:100%;aspect-ratio:3/2;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.case:hover .ph img{transform:scale(1.04)}
+.case .ph.empty{aspect-ratio:3/2;display:grid;place-items:center;color:var(--muted)}
+.case .row{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;color:var(--muted)}
+.case .row em{font-style:normal;color:var(--accent)}
+.case h3{font-size:clamp(1.7rem,2.8vw,2.4rem);line-height:1.04}
+.case p{color:var(--muted);font-size:.98rem;max-width:34rem}
+
+/* Europe */
+.europe{background:var(--blue);color:var(--on-blue)}
+.europe .index{border-color:rgba(255,255,255,.3)}
+.europe .index b,.europe h2 i{color:var(--gold)}
+.europe .lead{color:rgba(255,255,255,.84)}
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:88px}
+.actions article{border-top:1px solid rgba(255,255,255,.4);padding-top:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.actions h3{font-size:1.7rem;line-height:1.05}
+.actions p{font-size:.95rem;color:rgba(255,255,255,.84)}
+.guide-t{font-family:var(--serif);font-size:clamp(1.9rem,3.4vw,2.8rem);margin-bottom:8px}
+.guide{border-top:1px solid rgba(255,255,255,.4)}
+.guide details{border-bottom:1px solid rgba(255,255,255,.4)}
+.guide summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:5fr 4fr 3fr auto;gap:24px;align-items:baseline;padding-block:22px}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary>*{min-width:0}
+.guide summary strong{font-family:var(--serif);font-weight:500;font-size:1.65rem;line-height:1.1}
+.guide summary span{font-size:.92rem;color:rgba(255,255,255,.84)}
+.guide summary::after{content:"+";font-family:var(--serif);font-size:1.8rem;line-height:1;color:var(--gold)}
+.guide details[open] summary::after{content:"–"}
+.guide details p{padding:0 0 26px;max-width:46rem;color:rgba(255,255,255,.9)}
+.europe .note{margin-top:28px;font-size:.84rem;color:rgba(255,255,255,.7)}
+
+/* Lab */
+.steps{list-style:none;margin:0 0 72px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-block:1px solid var(--rule)}
+.steps li{padding:28px 24px 28px 0;display:grid;gap:8px;align-content:start;min-width:0}
+.steps li+li{border-left:1px solid var(--rule);padding-left:24px}
+.steps b{font-family:var(--serif);font-style:italic;font-weight:500;font-size:2.4rem;line-height:1;color:var(--accent)}
+.steps strong{font-size:1.02rem}
+.steps p{color:var(--muted);font-size:.93rem}
+.ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.idea{background:var(--surface);border:1px solid var(--rule);padding:28px;display:grid;gap:14px;align-content:start;min-width:0;transition:border-color .3s,transform .3s}
+.idea:hover{border-color:var(--accent);transform:translateY(-3px)}
+.idea .st{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.idea .st::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.idea .st.dep::before{background:var(--accent)}
+.idea h3{font-size:1.9rem;line-height:1.02}
+.idea p{color:var(--muted);font-size:.95rem}
+.idea.call{background:var(--tint);border-color:var(--tint)}
+.idea.call p{color:var(--ink)}
+
+/* Impact */
+.figs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule)}
+.figs div{padding:32px 24px 0 0;min-width:0}
+.figs div+div{border-left:1px solid var(--rule);padding-left:24px}
+.figs b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(3.2rem,7vw,6rem);line-height:.9;letter-spacing:-.03em;font-variant-numeric:lining-nums}
+.figs span{display:block;margin-top:14px;color:var(--muted);font-size:.95rem;max-width:16rem}
+
+/* Agenda */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:3fr 9fr;gap:32px;padding-block:24px;border-top:1px solid var(--rule)}
+.tl li:last-child{border-bottom:1px solid var(--rule)}
+.tl li>*{min-width:0}
+.tl time{color:var(--accent);padding-top:6px}
+.tl h3{font-size:1.75rem;line-height:1.08}
+.tl p{color:var(--muted);font-size:.96rem;margin-top:6px;max-width:42rem}
+
+/* Galerie */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.gal figure{margin:0;min-width:0;display:grid;gap:8px;align-content:start}
+.gal img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.gal .w7{grid-column:span 7}.gal .w5{grid-column:span 5}.gal .w4{grid-column:span 4}
+.gal .w7 img{aspect-ratio:7/4}.gal .w5 img{aspect-ratio:5/4}
+.gal figcaption{font-size:.8rem;color:var(--muted)}
+
+/* Partenaires */
+.pt{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.pt>div{min-width:0}
+.pt h3{font-size:1.7rem;margin-bottom:16px}
+.pt ul{list-style:none;margin:0;padding:0}
+.pt li{padding-block:12px;border-top:1px solid var(--rule);font-size:.97rem}
+
+/* Rejoindre */
+.join{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule);background:var(--surface)}
+.join article{padding:36px;display:grid;gap:14px;align-content:start;min-width:0}
+.join article+article{border-left:1px solid var(--rule)}
+.join h3{font-size:2.2rem}
+.join .k{color:var(--accent)}
+.join p{color:var(--muted);font-size:.97rem}
+
+/* Contact */
+.foot{background:var(--night);color:var(--on-night);padding-block:112px 36px}
+.foot h2{font-size:clamp(3rem,9vw,8rem);line-height:.9;letter-spacing:-.03em}
+.foot h2 i{color:var(--gold)}
+.fgrid{display:grid;grid-template-columns:7fr 5fr;gap:56px;margin-top:64px;align-items:end}
+.fgrid>*{min-width:0}
+.fgrid>p{color:rgba(241,242,248,.72);max-width:30rem;font-size:1.08rem}
+.cl{margin:0;display:grid}
+.cl div{display:grid;gap:4px;padding-block:16px;border-top:1px solid rgba(255,255,255,.18)}
+.cl dt{color:var(--gold)}
+.cl dd{margin:0;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:1.08rem;overflow-wrap:anywhere}
+.copy{font:inherit;font-size:.76rem;font-weight:600;background:transparent;color:var(--on-night);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 12px;cursor:pointer}
+.legal{margin-top:72px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between;font-size:.82rem;color:rgba(241,242,248,.6)}
+
+@media (max-width:960px){
+  .head,.hero-row,.word-grid,.manifest,.fgrid{grid-template-columns:1fr;gap:36px}
+  .actions,.steps,.figs{grid-template-columns:repeat(2,1fr)}
+  .steps li:nth-child(3),.figs div:nth-child(3){border-left:0;padding-left:0}
+  .steps li:nth-child(n+3){border-top:1px solid var(--rule)}
+  .figs div:nth-child(n+3){margin-top:32px;border-top:1px solid var(--rule)}
+  .ideas,.pt{grid-template-columns:1fr 1fr}
+  .join{grid-template-columns:1fr}.join article+article{border-left:0;border-top:1px solid var(--rule)}
+  .rows article{grid-template-columns:auto 1fr;gap:8px 20px}.rows p{grid-column:2}
+  .guide summary{grid-template-columns:1fr auto;gap:4px 16px}.guide summary span{grid-column:1}
+  .guide summary::after{grid-row:1;grid-column:2}
+  .case,.case.lg,.case.sm{grid-column:span 12;margin-top:0}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding-inline:20px}
+  .sec{padding-block:72px}.sec.tight{padding-block:60px}
+  .index{margin-bottom:36px}.head{margin-bottom:40px}
+  .nav{gap:2px 16px;font-size:.8rem}
+  .top .btn{display:none}
+  .actions,.ideas,.pt{grid-template-columns:1fr}
+  .tl li{grid-template-columns:1fr;gap:6px}
+  .gal .w7,.gal .w5{grid-column:span 12}.gal .w4{grid-column:span 6}
+  .ticker div{font-size:1.3rem}
+  .foot{padding-block:72px 28px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker div{animation:none}.case .ph img,.idea,.btn::after{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="Cross Borders, accueil">Cross<span>Borders</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#president">Le mot du président</a>
+      <a href="#association">L'association</a>
+      <a href="#projets">Projets</a>
+      <a href="#europe">Dispositifs européens</a>
+      <a href="#lab">Le Lab</a>
+      <a href="#impact">Impact</a>
+      <a href="#partenaires">Partenaires</a>
+    </nav>
+    <a class="btn small" href="#contact">Nous écrire</a>
+  </div>
+</header>
+
+<main id="accueil">
+<div class="hero">
+  <div class="wrap">
+    <div class="meta label"><span>Association loi 1901</span><span>Fondée en 2024</span><span>Mobilité internationale · Inclusion sociale · Erasmus+</span></div>
+    <h1>Ensemble, dépassons les <i>frontières.</i></h1>
+    <div class="hero-row">
+      <div class="intro">
+        <p>Cross Borders conçoit et conduit des projets européens qui ouvrent aux jeunes et aux femmes les portes de la mobilité, de l'entrepreneuriat et de l'engagement citoyen.</p>
+        <div class="cta"><a class="btn" href="#projets">Découvrir nos projets</a><a class="btn line" href="#lab">Proposer une idée</a></div>
+      </div>
+      <figure>
+        <img src="img/groupe-partenaires.jpg" alt="Jeunes et partenaires européens réunis devant un bâtiment historique, banderoles du projet à la main">
+        <figcaption class="label">Rencontre de partenaires européens</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true"><div>
+    <span>Rezé</span><span>Hendaye</span><span>Málaga</span><span>Braga</span><span>Arad</span><span>Hambourg</span><span>Fuente de Piedra</span><span>Toulouse</span>
+    <span>Rezé</span><span>Hendaye</span><span>Málaga</span><span>Braga</span><span>Arad</span><span>Hambourg</span><span>Fuente de Piedra</span><span>Toulouse</span>
+  </div></div>
+</div>
+
+<section class="sec word" id="president">
+  <div class="wrap">
+    <div class="index"><b>01</b><span class="label">Le communiqué du président</span></div>
+    <div class="word-grid">
+      <aside>
+        <p class="month" id="w-month"></p>
+        <p>Chaque mois, le président de Cross Borders s'adresse aux adhérents, aux partenaires et aux habitants.</p>
+        <div class="archive" id="w-archive" aria-label="Communiqués précédents"></div>
+      </aside>
+      <div>
+        <h3 id="w-title"></h3>
+        <div class="text" id="w-text"></div>
+        <div class="sign"><strong>Hafid Boutchakkoucht</strong><span>Président de Cross Borders</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="association">
+  <div class="wrap">
+    <div class="index"><b>02</b><span class="label">L'association</span></div>
+    <div class="manifest">
+      <div>
+        <p class="big">Nous croyons qu'une expérience à l'étranger <i>change une trajectoire</i>, et qu'elle doit ensuite nourrir la vie du quartier, de la commune, de l'association d'à côté.</p>
+        <ul class="values" aria-label="Nos valeurs"><li>Solidarité</li><li>Interculturalité</li><li>Engagement citoyen</li><li>Développement durable</li><li>Innovation sociale</li></ul>
+      </div>
+      <div class="mv">
+        <div><span class="label">Mission</span><p>Favoriser une coopération internationale qui fait progresser l'égalité sociale et l'autonomie économique, par l'éducation non formelle et l'échange culturel.</p></div>
+        <div><span class="label">Vision</span><p>Un monde où les frontières relient au lieu de limiter, où l'inclusion est la norme et l'action collective un moteur de progrès social.</p></div>
+        <div><span class="label">Objet statutaire</span><p>Rapprocher les peuples Nord-Nord et Nord-Sud, contribuer à la construction européenne, faciliter l'insertion professionnelle des jeunes, lutter contre le racisme et l'antisémitisme.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tight band">
+  <div class="wrap">
+    <div class="index"><b>03</b><span class="label">Nos expertises</span></div>
+    <div class="rows">
+      <article><span class="n">a.</span><h3>Jeunesse et mobilité</h3><p>Échanges de jeunes Erasmus+, coopération franco-allemande, ateliers de leadership, de communication interculturelle et de gestion de projet.</p></article>
+      <article><span class="n">b.</span><h3>Égalité et autonomie des femmes</h3><p>Rencontres féminines, accès aux droits des femmes issues de l'immigration, inclusion socio-économique des femmes en milieu rural.</p></article>
+      <article><span class="n">c.</span><h3>Entrepreneuriat rural</h3><p>Formation et mentorat pour aider les jeunes à créer leur activité et à faire vivre leur territoire.</p></article>
+      <article><span class="n">d.</span><h3>Ingénierie de projets européens</h3><p>Montage de dossiers, recherche de partenaires, coordination de consortiums et évaluation, pour nos projets et ceux des structures que nous accompagnons.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="projets">
+  <div class="wrap">
+    <div class="index"><b>04</b><span class="label">Projets</span></div>
+    <div class="head"><h2 class="h2">Des projets européens, <i>ancrés</i> dans le territoire.</h2><p class="lead">Nos actions sont cofinancées par le programme Erasmus+ de l'Union européenne et menées avec des partenaires dans plusieurs pays.</p></div>
+    <div class="cases">
+      <article class="case lg">
+        <div class="ph"><img src="img/atelier-travail.jpg" alt="Jeunes et formatrice travaillant autour d'une table avec des ordinateurs"></div>
+        <div class="row label"><span>Erasmus+ Jeunesse · Rezé</span><em>22–30 juin 2025</em></div>
+        <h3>Jeunes : développez votre esprit d'entreprise en milieu rural !</h3>
+        <p>Un échange de jeunes validé par l'Agence Erasmus+ France Jeunesse &amp; Sport. Dix jeunes rezéens formés au leadership, à la communication interculturelle et à la gestion de projet, avec l'implication de leurs familles.</p>
+      </article>
+      <article class="case sm">
+        <div class="ph"><img src="img/echange-groupe.jpg" alt="Groupe en cercle pendant un temps d'échange"></div>
+        <div class="row label"><span>Erasmus+ Jeunesse · Rezé</span><em>22–30 mars 2026</em></div>
+        <h3>Inclusion socio-économique des femmes en milieu rural</h3>
+        <p>Hongrie, Allemagne, Italie, Turquie et France réunies à Rezé. Sept jeunes rezéennes impliquées dans les ateliers et les activités interculturelles.</p>
+      </article>
+      <article class="case sm" style="margin-top:0">
+        <div class="ph"><img src="img/tgs4inclusion.jpg" alt="Jeunes tenant le drapeau européen et la banderole du projet TGS4Inclusion"></div>
+        <div class="row label"><span>Erasmus+ Sport · Espagne, Pays basque</span><em>Réalisé</em></div>
+        <h3>TGS4Inclusion</h3>
+        <p>Jeux traditionnels et sport au service de l'inclusion : des jeunes d'origines diverses se rencontrent, avec une formation de formateurs à Fuente de Piedra.</p>
+      </article>
+      <article class="case lg">
+        <div class="ph"><img src="img/arad.jpg" alt="Participants devant l'hôtel de ville d'Arad, en Roumanie"></div>
+        <div class="row label"><span>Erasmus+ KA2 · Arad, Roumanie</span><em>Réalisé</em></div>
+        <h3>ECOBRUB</h3>
+        <p>« Entrepreneurial Countryside to Boost Rural Businesses » : une initiative écologique et économique pour le développement durable des communautés rurales.</p>
+      </article>
+      <article class="case">
+        <div class="ph empty label">Photo à venir</div>
+        <div class="row label"><span>Ayedara · Consulat du Maroc · Ville de Rezé</span><em>En cours</em></div>
+        <h3>Femmes issues de l'immigration : accès aux droits et inclusion sociale</h3>
+        <p>Ateliers d'information sur les droits, formations en français, en numérique et en entrepreneuriat, groupes d'entraide et forums avec les institutions locales.</p>
+      </article>
+      <article class="case">
+        <div class="ph empty label">Photo à venir</div>
+        <div class="row label"><span>OFAJ · Hambourg, Rezé</span><em>En cours</em></div>
+        <h3>Coopération franco-allemande avec Hambourg</h3>
+        <p>Deux rencontres à Hambourg en 2025, puis un projet mené dans le cadre de l'Office franco-allemand pour la Jeunesse au bénéfice de quinze jeunes de Rezé.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec europe" id="europe">
+  <div class="wrap">
+    <div class="index"><b>05</b><span class="label">Faire connaître l'Europe</span></div>
+    <div class="head"><h2 class="h2">Les dispositifs européens, <i>à portée de main.</i></h2><p class="lead">Trop de jeunes et d'associations ignorent ce que l'Europe finance près de chez eux. Nous allons à leur rencontre pour l'expliquer simplement et les accompagner jusqu'au départ.</p></div>
+    <div class="actions">
+      <article><span class="label">Ateliers</span><h3>Ateliers d'information</h3><p>Présentation interactive des dispositifs d'engagement, témoignages de jeunes partis en mobilité et atelier « Dessine ton association de demain ».</p></article>
+      <article><span class="label">Terrain</span><h3>Forums et stands</h3><p>Présence au Forum des associations de Rezé et participation à son comité de pilotage, pour rendre les programmes européens visibles du grand public.</p></article>
+      <article><span class="label">Réseau</span><h3>Rencontres institutionnelles</h3><p>Rencontres régionales de la mobilité internationale (DRAJES, Angers), soirée à la Maison de l'Europe à Nantes, Rencontres de la vie associative.</p></article>
+      <article><span class="label">Conseil</span><h3>Accompagnement</h3><p>Orientation des jeunes vers le bon dispositif et appui aux associations et collectivités qui veulent monter leur premier projet européen.</p></article>
+    </div>
+    <h3 class="guide-t">Le guide express des dispositifs</h3>
+    <div class="guide">
+      <details open><summary><strong>Erasmus+ Jeunesse</strong><span>Échanges de jeunes et projets de participation</span><span>13–30 ans</span></summary><p>Des groupes de jeunes de plusieurs pays se retrouvent quelques jours ou quelques semaines autour d'un thème commun. Voyage, hébergement et activités sont pris en charge par le programme. C'est le cœur de notre action.</p></details>
+      <details><summary><strong>Corps européen de solidarité</strong><span>Volontariat et projets de solidarité</span><span>18–30 ans</span></summary><p>Un volontariat de quelques semaines à douze mois dans une structure d'un autre pays, ou un projet de solidarité porté localement par un groupe de jeunes.</p></details>
+      <details><summary><strong>Erasmus+ Sport</strong><span>Partenariats autour du sport et de l'inclusion</span><span>Associations et clubs</span></summary><p>Des coopérations entre organisations sportives et associatives européennes, pour faire du sport un levier d'inclusion, de santé et d'égalité.</p></details>
+      <details><summary><strong>OFAJ</strong><span>Rencontres et échanges franco-allemands</span><span>Jeunes et structures</span></summary><p>L'Office franco-allemand pour la Jeunesse soutient les rencontres de jeunes, les échanges scolaires et extrascolaires et les projets communs entre la France et l'Allemagne.</p></details>
+      <details><summary><strong>Service civique</strong><span>Mission d'intérêt général indemnisée</span><span>16–25 ans</span></summary><p>Un engagement volontaire de six à douze mois, en France ou à l'étranger, ouvert jusqu'à 30 ans aux jeunes en situation de handicap.</p></details>
+      <details><summary><strong>CERV</strong><span>Citoyens, égalité, droits et valeurs</span><span>Associations et collectivités</span></summary><p>Le programme européen qui finance les projets de participation citoyenne, d'égalité, de lutte contre les discriminations et de protection des droits.</p></details>
+    </div>
+    <p class="note">Les conditions précises évoluent chaque année : nous vérifions avec vous l'éligibilité et le calendrier avant toute démarche.</p>
+  </div>
+</section>
+
+<section class="sec" id="lab">
+  <div class="wrap">
+    <div class="index"><b>06</b><span class="label">Le Lab</span></div>
+    <div class="head"><h2 class="h2">Le laboratoire <i>d'idées</i> de Cross Borders.</h2><p class="lead">Une idée de projet commence souvent par une conversation. Le Lab est l'endroit où nous la travaillons, avec vous, jusqu'à en faire un dossier solide.</p></div>
+    <ol class="steps">
+      <li><b>1</b><strong>L'idée</strong><p>Un besoin repéré sur le terrain, par un jeune, une habitante, une association.</p></li>
+      <li><b>2</b><strong>Le cadrage</strong><p>Objectifs, public, résultats attendus et dispositif de financement adapté.</p></li>
+      <li><b>3</b><strong>Les partenaires</strong><p>Constitution du consortium en France et à l'étranger.</p></li>
+      <li><b>4</b><strong>Le dépôt</strong><p>Rédaction, budget et dépôt du dossier auprès du financeur.</p></li>
+    </ol>
+    <div class="ideas">
+      <article class="idea"><span class="st dep label">Dossier déposé</span><h3>WoGreen</h3><p>Women Greenpreneurs : un échange de jeunes Erasmus+ pour encourager l'entrepreneuriat vert au féminin.</p></article>
+      <article class="idea"><span class="st label">En montage</span><h3>SPORT4ALL</h3><p>Un partenariat Erasmus+ autour du sport pour tous, avec nos partenaires d'Allemagne et d'Espagne.</p></article>
+      <article class="idea"><span class="st label">À l'étude</span><h3>Sources Communes</h3><p>Une piste de coopération Nord-Sud avec le Bénin, autour de l'accès à l'eau et de l'inclusion numérique.</p></article>
+      <article class="idea"><span class="st label">À l'étude</span><h3>Festivals interculturels</h3><p>Trois jours consacrés à une culture invitée : expositions, projections, ateliers, spectacles et rencontres économiques.</p></article>
+      <article class="idea"><span class="st label">En préparation</span><h3>Nouvelles mobilités</h3><p>Une mobilité vers la Hongrie et de nouveaux partenariats avec des structures espagnoles.</p></article>
+      <article class="idea call"><span class="label">À vous</span><h3>Votre idée ici</h3><p>Jeune, habitant, association ou collectivité : écrivez-nous en quelques lignes, nous revenons vers vous pour un premier échange.</p><a class="btn small" href="#contact">Proposer une idée</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec tight band" id="impact">
+  <div class="wrap">
+    <div class="index"><b>07</b><span class="label">Impact local · Rapport d'activités 2025</span></div>
+    <div class="figs">
+      <div><b>180–220</b><span>personnes concernées à Rezé, bénéficiaires directs et indirects</span></div>
+      <div><b>25–35</b><span>jeunes impliqués dans des projets européens</span></div>
+      <div><b>30</b><span>participantes aux rencontres féminines</span></div>
+      <div><b>5</b><span>pays partenaires réunis à Rezé en mars 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="agenda">
+  <div class="wrap">
+    <div class="index"><b>08</b><span class="label">Temps forts</span></div>
+    <ol class="tl">
+      <li><time class="label">22–30 mars 2026 · Rezé</time><div><h3>Échange de jeunes sur l'inclusion socio-économique des femmes en milieu rural</h3><p>Cinq pays partenaires accueillis pour neuf jours d'ateliers et d'activités interculturelles.</p></div></li>
+      <li><time class="label">Oct. et déc. 2025 · Rezé</time><div><h3>Rencontres féminines</h3><p>Trente participantes autour de l'autonomisation, du leadership, de la confiance en soi et de l'inclusion socio-économique.</p></div></li>
+      <li><time class="label">10–11 octobre 2025 · Rezé</time><div><h3>Atelier « L'investissement des jeunes et l'impact de l'international »</h3><p>Dix dirigeants associatifs en atelier, quarante participants à la table ronde.</p></div></li>
+      <li><time class="label">22–30 juin 2025 · Rezé</time><div><h3>Échange Erasmus+ sur l'esprit d'entreprise en milieu rural</h3><p>Dix jeunes rezéens bénéficiaires directs.</p></div></li>
+      <li><time class="label">12 juin 2025 · Nantes</time><div><h3>Soirée éco-responsable à la Maison de l'Europe</h3><p>Rencontre avec les acteurs européens du territoire nantais.</p></div></li>
+      <li><time class="label">22–23 mai 2025 · Angers</time><div><h3>Rencontres régionales de la mobilité internationale</h3><p>Ateliers collaboratifs organisés par la DRAJES.</p></div></li>
+      <li><time class="label">Février et avril 2025 · Hambourg</time><div><h3>Rencontres franco-allemandes</h3><p>Autonomisation des femmes et entrepreneuriat, puis inclusion des femmes issues de l'immigration.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec tight band" id="galerie">
+  <div class="wrap">
+    <div class="index"><b>09</b><span class="label">Sur le terrain</span></div>
+    <div class="gal">
+      <figure class="w7"><img src="img/visite-groupe.jpg" alt="Participants en visite dans un parc"><figcaption>Découverte de la ville d'accueil</figcaption></figure>
+      <figure class="w5"><img src="img/attestations.jpg" alt="Participants avec leurs attestations"><figcaption>Remise des attestations</figcaption></figure>
+      <figure class="w4"><img src="img/jeux-plein-air.jpg" alt="Jeunes jouant à un jeu traditionnel en plein air"><figcaption>Jeux traditionnels en plein air</figcaption></figure>
+      <figure class="w4"><img src="img/jeux-cooperatifs.jpg" alt="Jeunes participant à un jeu coopératif"><figcaption>Jeu coopératif</figcaption></figure>
+      <figure class="w4"><img src="img/atelier-ordinateur.jpg" alt="Deux jeunes et un formateur devant un ordinateur"><figcaption>Atelier en petit groupe</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="partenaires">
+  <div class="wrap">
+    <div class="index"><b>10</b><span class="label">Partenaires</span></div>
+    <div class="head"><h2 class="h2">Un réseau en Europe <i>et au Maroc.</i></h2><p class="lead">Associations, collectivités et institutions qui partagent la même exigence d'inclusion.</p></div>
+    <div class="pt">
+      <div><h3>Institutions</h3><ul><li>Programme Erasmus+ de l'Union européenne</li><li>Agence Erasmus+ France Jeunesse &amp; Sport</li><li>Office franco-allemand pour la Jeunesse</li><li>Ville de Rezé</li><li>Consulat du Maroc</li></ul></div>
+      <div><h3>Territoires</h3><ul><li>Hendaye et le Pays basque</li><li>Braga, Portugal</li><li>Arad, Roumanie</li><li>Hambourg, Allemagne</li><li>Miremont et Toulouse, France</li></ul></div>
+      <div><h3>Réseau associatif</h3><ul><li>Ayedara, Allemagne</li><li>Maison de l'Europe à Nantes</li><li>Partenaires en Hongrie, Italie et Turquie</li><li>Associations de Rezé</li><li>Partenaires espagnols</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec tight" id="rejoindre" style="padding-top:0">
+  <div class="wrap">
+    <div class="index"><b>11</b><span class="label">S'engager</span></div>
+    <div class="join">
+      <article><span class="label k">20 € par an</span><h3>Adhérer</h3><p>Devenez membre actif, participez à l'assemblée générale et à la vie de l'association, ouverte à tous sans condition ni distinction.</p></article>
+      <article><span class="label k">Jeunes de 16 à 30 ans</span><h3>Partir</h3><p>Rejoignez un échange de jeunes, un atelier ou une rencontre. Écrivez-nous pour connaître les prochains départs.</p></article>
+      <article><span class="label k">Collectivités · associations</span><h3>Coopérer</h3><p>Co-construisons un projet Erasmus+, un atelier sur l'engagement des jeunes ou une action de coopération Nord-Sud.</p></article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <span class="label" style="color:var(--gold)">Contact</span>
+    <h2 style="margin-top:20px">Parlons de <i>votre projet.</i></h2>
+    <div class="fgrid">
+      <p>Jeunes, familles, associations, élus et services des collectivités : nous répondons à chaque message.</p>
+      <dl class="cl">
+        <div><dt class="label">Courriel</dt><dd><span>hafidboutchakkoucht@gmail.com</span><button class="copy" id="c-mail" data-copy="hafidboutchakkoucht@gmail.com">Copier</button></dd></div>
+        <div><dt class="label">Siège</dt><dd>18 rue Cassiopée, 44400 Rezé</dd></div>
+      </dl>
+    </div>
+    <div class="legal"><span>Cross Borders · Association régie par la loi du 1<sup>er</sup> juillet 1901</span><span>Président : Hafid Boutchakkoucht · <a href="mentions-legales.html">Mentions légales</a></span></div>
+  </div>
+</footer>
+
+<script>
+/* Communiqués du président : ajouter une entrée par mois en tête de liste (date = 1er du mois). La page affiche automatiquement le plus récent déjà paru et range les autres en archives. */
+var COMMUNIQUES=[
+ {date:"2026-10-01",titre:"Une rentrée pour ouvrir plus grand les portes de l'Europe",
+  texte:["Chers adhérents, chers partenaires, chers amis de Cross Borders, cette rentrée est pour nous celle de la consolidation. En mars, nous avons accueilli à Rezé des jeunes venus de Hongrie, d'Allemagne, d'Italie et de Turquie. Ces neuf jours ont montré ce qu'une petite association peut apporter à son territoire lorsqu'elle s'ouvre à l'Europe.",
+  "Notre priorité des prochains mois est simple : faire connaître les dispositifs européens à celles et ceux qui pensent qu'ils ne sont pas faits pour eux. Erasmus+, le Corps européen de solidarité, l'OFAJ ne sont pas réservés aux étudiants ni aux initiés. Nous irons l'expliquer dans les forums, les ateliers et les associations.",
+  "Nous ouvrons aussi le Lab, notre laboratoire d'idées. Chaque projet que nous avons mené est né d'une conversation. Nous voulons que ces conversations aient désormais un lieu, et que chacun puisse y déposer une idée.",
+  "Merci aux bénévoles, aux familles et aux partenaires qui rendent ce travail possible. Notre porte vous est ouverte."]}
+];
+(function(){
+  var now=new Date(), list=COMMUNIQUES.filter(function(c){return new Date(c.date)<=now}).sort(function(a,b){return a.date<b.date?1:-1});
+  if(!list.length)list=[COMMUNIQUES[COMMUNIQUES.length-1]];
+  var M=["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+  var arch=document.getElementById('w-archive');
+  function show(i){
+    var c=list[i], d=c.date.split('-');
+    document.getElementById('w-month').innerHTML=M[+d[1]-1]+' <i>'+d[0]+'</i>';
+    document.getElementById('w-title').textContent=c.titre;
+    var t=document.getElementById('w-text'); t.textContent='';
+    c.texte.forEach(function(p){var e=document.createElement('p');e.textContent=p;t.appendChild(e)});
+    Array.prototype.forEach.call(arch.children,function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false')});
+  }
+  if(list.length>1)list.forEach(function(c,i){var d=c.date.split('-'),b=document.createElement('button');b.textContent=M[+d[1]-1]+' '+d[0];b.addEventListener('click',function(){show(i)});arch.appendChild(b)});
+  show(0);
+})();
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    function done(){b.textContent='Copié';setTimeout(function(){b.textContent='Copier'},1600)}
+    function sel(){var r=document.createRange();r.selectNodeContents(b.previousElementSibling);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText(b.dataset.copy).then(done,sel)}catch(e){sel()}
+  });
+});
+</script>
+
+</body>
+</html>
