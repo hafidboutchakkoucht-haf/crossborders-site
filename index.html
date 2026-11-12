@@ -7,7 +7,7 @@
 <meta property="og:title" content="Cross Borders">
 <meta property="og:description" content="Ensemble, dépassons les frontières. Projets européens pour la jeunesse, l'inclusion et l'engagement citoyen.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="img/groupe-partenaires.jpg">
+<meta property="og:image" content="img/hambourg-equipe.jpg">
 <meta name="theme-color" content="#1b2ee0">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231b2ee0'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23ffffff'%3ECB%3C/text%3E%3C/svg%3E">
 <title>Cross Borders</title>
@@ -98,6 +98,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .archive button{font:inherit;font-size:.8rem;font-weight:600;background:transparent;color:var(--on-night);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;cursor:pointer}
 .archive button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#201600}
 
+.portrait{margin:0;display:grid;gap:10px;max-width:260px}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;filter:saturate(.95)}
+.portrait figcaption{font-size:.78rem;color:rgba(241,242,248,.6);letter-spacing:.06em;text-transform:uppercase}
+.case .ph.tile{aspect-ratio:3/2;display:flex;flex-direction:column;justify-content:space-between;padding:28px;background:var(--blue);color:var(--on-blue)}
+.case .ph.tile.n{background:var(--night);color:var(--on-night)}
+.case .ph.tile.g{background:var(--gold);color:#201600}
+.case .ph.tile.t{background:var(--tint);color:var(--ink)}
+.case .ph.tile b{font-family:var(--serif);font-weight:500;font-style:italic;font-size:clamp(2.4rem,5vw,4.2rem);line-height:.95;letter-spacing:-.02em}
+.case .ph.tile span{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.gal .w6{grid-column:span 6}.gal .w6 img{aspect-ratio:3/2}
 /* Manifeste */
 .manifest{display:grid;grid-template-columns:7fr 5fr;gap:72px}
 .manifest>*{min-width:0}
@@ -248,7 +258,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   .top .btn{display:none}
   .actions,.ideas,.pt{grid-template-columns:1fr}
   .tl li{grid-template-columns:1fr;gap:6px}
-  .gal .w7,.gal .w5{grid-column:span 12}.gal .w4{grid-column:span 6}
+  .gal .w7,.gal .w5,.gal .w6{grid-column:span 12}.gal .w4{grid-column:span 6}
   .ticker div{font-size:1.3rem}
   .foot{padding-block:72px 28px}
 }
@@ -284,8 +294,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
         <div class="cta"><a class="btn" href="#projets">Découvrir nos projets</a><a class="btn line" href="#lab">Proposer une idée</a></div>
       </div>
       <figure>
-        <img src="img/groupe-partenaires.jpg" alt="Jeunes et partenaires européens réunis devant un bâtiment historique, banderoles du projet à la main">
-        <figcaption class="label">Rencontre de partenaires européens</figcaption>
+        <img src="img/hambourg-equipe.jpg" alt="L'équipe d'accueil réunie derrière la banderole de l'association partenaire Ayedara à Hambourg">
+        <figcaption class="label">Hambourg · juillet 2026 · avec Ayedara e.V.</figcaption>
       </figure>
     </div>
   </div>
@@ -300,6 +310,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="index"><b>01</b><span class="label">Le communiqué du président</span></div>
     <div class="word-grid">
       <aside>
+        <figure class="portrait"><img src="img/president.jpg" alt="Portrait de Hafid Boutchakkoucht, président de Cross Borders"><figcaption>Hafid Boutchakkoucht, président</figcaption></figure>
         <p class="month" id="w-month"></p>
         <p>Chaque mois, le président de Cross Borders s'adresse aux adhérents, aux partenaires et aux habitants.</p>
         <div class="archive" id="w-archive" aria-label="Communiqués précédents"></div>
@@ -348,40 +359,40 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="head"><h2 class="h2">Des projets européens, <i>ancrés</i> dans le territoire.</h2><p class="lead">Nos actions sont cofinancées par le programme Erasmus+ de l'Union européenne et menées avec des partenaires dans plusieurs pays.</p></div>
     <div class="cases">
       <article class="case lg">
-        <div class="ph"><img src="img/atelier-travail.jpg" alt="Jeunes et formatrice travaillant autour d'une table avec des ordinateurs"></div>
-        <div class="row label"><span>Erasmus+ Jeunesse · Rezé</span><em>22–30 juin 2025</em></div>
-        <h3>Jeunes : développez votre esprit d'entreprise en milieu rural !</h3>
-        <p>Un échange de jeunes validé par l'Agence Erasmus+ France Jeunesse &amp; Sport. Dix jeunes rezéens formés au leadership, à la communication interculturelle et à la gestion de projet, avec l'implication de leurs familles.</p>
+        <div class="ph"><img src="img/hambourg-attestations.jpg" alt="Participants montrant leurs attestations devant la banderole d'Ayedara, à Hambourg" style="object-position:50% 40%"></div>
+        <div class="row label"><span>Avec Ayedara e.V. · Hambourg</span><em>Juillet 2026</em></div>
+        <h3>Rencontre internationale de jeunes à Hambourg</h3>
+        <p>Dans le prolongement de notre coopération franco-allemande, des jeunes venus de plusieurs pays européens ont travaillé ensemble : présentation des associations, ateliers sur le fair-play et le respect dans le sport, soirée interculturelle autour des cuisines italienne, hongroise et turque, puis remise des attestations.</p>
       </article>
       <article class="case sm">
-        <div class="ph"><img src="img/echange-groupe.jpg" alt="Groupe en cercle pendant un temps d'échange"></div>
+        <div class="ph tile n"><span>Erasmus+ Jeunesse</span><b>Rezé</b></div>
         <div class="row label"><span>Erasmus+ Jeunesse · Rezé</span><em>22–30 mars 2026</em></div>
         <h3>Inclusion socio-économique des femmes en milieu rural</h3>
         <p>Hongrie, Allemagne, Italie, Turquie et France réunies à Rezé. Sept jeunes rezéennes impliquées dans les ateliers et les activités interculturelles.</p>
       </article>
       <article class="case sm" style="margin-top:0">
-        <div class="ph"><img src="img/tgs4inclusion.jpg" alt="Jeunes tenant le drapeau européen et la banderole du projet TGS4Inclusion"></div>
+        <div class="ph tile g"><span>Erasmus+ Sport</span><b>Fuente de Piedra</b></div>
         <div class="row label"><span>Erasmus+ Sport · Espagne, Pays basque</span><em>Réalisé</em></div>
         <h3>TGS4Inclusion</h3>
         <p>Jeux traditionnels et sport au service de l'inclusion : des jeunes d'origines diverses se rencontrent, avec une formation de formateurs à Fuente de Piedra.</p>
       </article>
       <article class="case lg">
-        <div class="ph"><img src="img/arad.jpg" alt="Participants devant l'hôtel de ville d'Arad, en Roumanie"></div>
+        <div class="ph tile"><span>Erasmus+ KA2</span><b>Arad</b></div>
         <div class="row label"><span>Erasmus+ KA2 · Arad, Roumanie</span><em>Réalisé</em></div>
         <h3>ECOBRUB</h3>
         <p>« Entrepreneurial Countryside to Boost Rural Businesses » : une initiative écologique et économique pour le développement durable des communautés rurales.</p>
       </article>
       <article class="case">
-        <div class="ph empty label">Photo à venir</div>
+        <div class="ph tile t"><span>Erasmus+ Jeunesse</span><b>Rezé</b></div>
+        <div class="row label"><span>Erasmus+ Jeunesse · Rezé</span><em>22–30 juin 2025</em></div>
+        <h3>Jeunes : développez votre esprit d'entreprise en milieu rural !</h3>
+        <p>Un échange de jeunes validé par l'Agence Erasmus+ France Jeunesse &amp; Sport. Dix jeunes rezéens formés au leadership, à la communication interculturelle et à la gestion de projet.</p>
+      </article>
+      <article class="case">
+        <div class="ph tile n"><span>Accès aux droits</span><b>Rezé · Hambourg</b></div>
         <div class="row label"><span>Ayedara · Consulat du Maroc · Ville de Rezé</span><em>En cours</em></div>
         <h3>Femmes issues de l'immigration : accès aux droits et inclusion sociale</h3>
         <p>Ateliers d'information sur les droits, formations en français, en numérique et en entrepreneuriat, groupes d'entraide et forums avec les institutions locales.</p>
-      </article>
-      <article class="case">
-        <div class="ph empty label">Photo à venir</div>
-        <div class="row label"><span>OFAJ · Hambourg, Rezé</span><em>En cours</em></div>
-        <h3>Coopération franco-allemande avec Hambourg</h3>
-        <p>Deux rencontres à Hambourg en 2025, puis un projet mené dans le cadre de l'Office franco-allemand pour la Jeunesse au bénéfice de quinze jeunes de Rezé.</p>
       </article>
     </div>
   </div>
@@ -447,6 +458,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <div class="wrap">
     <div class="index"><b>08</b><span class="label">Temps forts</span></div>
     <ol class="tl">
+      <li><time class="label">Juillet 2026 · Hambourg</time><div><h3>Rencontre internationale de jeunes avec Ayedara e.V.</h3><p>Ateliers sur l'engagement associatif et le fair-play, soirée interculturelle et remise des attestations aux participants.</p></div></li>
       <li><time class="label">22–30 mars 2026 · Rezé</time><div><h3>Échange de jeunes sur l'inclusion socio-économique des femmes en milieu rural</h3><p>Cinq pays partenaires accueillis pour neuf jours d'ateliers et d'activités interculturelles.</p></div></li>
       <li><time class="label">Oct. et déc. 2025 · Rezé</time><div><h3>Rencontres féminines</h3><p>Trente participantes autour de l'autonomisation, du leadership, de la confiance en soi et de l'inclusion socio-économique.</p></div></li>
       <li><time class="label">10–11 octobre 2025 · Rezé</time><div><h3>Atelier « L'investissement des jeunes et l'impact de l'international »</h3><p>Dix dirigeants associatifs en atelier, quarante participants à la table ronde.</p></div></li>
@@ -462,11 +474,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <div class="wrap">
     <div class="index"><b>09</b><span class="label">Sur le terrain</span></div>
     <div class="gal">
-      <figure class="w7"><img src="img/visite-groupe.jpg" alt="Participants en visite dans un parc"><figcaption>Découverte de la ville d'accueil</figcaption></figure>
-      <figure class="w5"><img src="img/attestations.jpg" alt="Participants avec leurs attestations"><figcaption>Remise des attestations</figcaption></figure>
-      <figure class="w4"><img src="img/jeux-plein-air.jpg" alt="Jeunes jouant à un jeu traditionnel en plein air"><figcaption>Jeux traditionnels en plein air</figcaption></figure>
-      <figure class="w4"><img src="img/jeux-cooperatifs.jpg" alt="Jeunes participant à un jeu coopératif"><figcaption>Jeu coopératif</figcaption></figure>
-      <figure class="w4"><img src="img/atelier-ordinateur.jpg" alt="Deux jeunes et un formateur devant un ordinateur"><figcaption>Atelier en petit groupe</figcaption></figure>
+      <figure class="w7"><img src="img/hambourg-presentation.jpg" alt="Présentation de Cross Borders devant les participants, diapositive « Qui sommes-nous ? »"><figcaption>Présentation de Cross Borders aux participants · Hambourg, juillet 2026</figcaption></figure>
+      <figure class="w5"><img src="img/hambourg-tournoi.jpg" alt="Deux participants présentent le code de bonne conduite d'un tournoi sportif" style="object-position:50% 45%"><figcaption>Atelier : le code de bonne conduite du tournoi</figcaption></figure>
+      <figure class="w4"><img src="img/hambourg-soiree-italie.jpg" alt="Table de spécialités italiennes lors de la soirée interculturelle"><figcaption>Soirée interculturelle : l'Italie</figcaption></figure>
+      <figure class="w4"><img src="img/hambourg-soiree-hongrie.jpg" alt="Des participants présentent des spécialités hongroises"><figcaption>Soirée interculturelle : la Hongrie</figcaption></figure>
+      <figure class="w4"><img src="img/hambourg-soiree-turquie.jpg" alt="Table de spécialités turques sur un drapeau turc"><figcaption>Soirée interculturelle : la Turquie</figcaption></figure>
+      <figure class="w6"><img src="img/hambourg-groupe.jpg" alt="Groupe de participants devant la table italienne"><figcaption>Les participants de la délégation italienne</figcaption></figure>
+      <figure class="w6"><img src="img/hambourg-atelier-respect.jpg" alt="Une participante présente l'atelier sur le respect des joueurs" style="object-position:50% 40%"><figcaption>Atelier : respecter les joueurs sur le terrain</figcaption></figure>
     </div>
   </div>
 </section>
