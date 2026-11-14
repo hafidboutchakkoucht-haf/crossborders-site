@@ -145,6 +145,21 @@ html.js .rv.in{opacity:1;transform:none}
 
 /* Expertises */
 .band{background:var(--surface);border-block:1px solid var(--rule)}
+.sky{background:var(--night);color:var(--on-night);overflow:hidden}
+.sky .h2 i{color:var(--gold)}
+.sky .index b{color:var(--gold)}.sky .index .label{color:rgba(241,242,248,.7)}
+.sky .lead{color:rgba(241,242,248,.78)}
+.sky-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.sky-shot{position:relative;display:block;border-radius:10px;overflow:hidden;border:1px solid rgba(241,242,248,.14);box-shadow:0 30px 60px -30px #000}
+.sky-shot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;transition:transform .8s ease}
+.sky-shot:hover img{transform:scale(1.03)}
+.sky-shot span{position:absolute;left:18px;bottom:16px;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.sky-facts{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:10px}
+.sky-facts li{display:flex;gap:14px;align-items:baseline;border-bottom:1px solid rgba(241,242,248,.12);padding-bottom:10px}
+.sky-facts b{font-family:var(--serif);font-size:2rem;font-weight:500;color:var(--gold);min-width:2.2ch;font-variant-numeric:tabular-nums}
+.sky .btn{background:var(--gold);border-color:var(--gold);color:var(--night)}
+@media (max-width:860px){.sky-grid{grid-template-columns:1fr}}
+
 .rows{display:grid}
 .rows article{display:grid;grid-template-columns:1fr 5fr 6fr;gap:32px;padding-block:32px;border-top:1px solid var(--rule);align-items:baseline}
 .rows article:last-child{border-bottom:1px solid var(--rule)}
@@ -487,9 +502,23 @@ html.js .rv.in{opacity:1;transform:none}
   </div>
 </section>
 
+<section class="sec sky" id="constellations">
+  <div class="wrap">
+    <div class="index"><b>06</b><span class="label">Constellations de la rencontre</span></div>
+    <div class="head"><h2 class="h2">Les mots de la rencontre, <i>dans toutes les langues.</i></h2><p class="lead">Interculturalité, échange, solidarité, hospitalité : chaque notion qui guide nos projets devient une constellation, écrite en douze langues et définie en sept, de l'arabe au portugais.</p></div>
+    <div class="sky-grid">
+      <a class="sky-shot" href="constellations/"><img src="img/constellations.jpg" alt="Un ciel de nuit où des mots en plusieurs langues forment des constellations" width="1600" height="900" loading="lazy"><span>Ouvrir le ciel →</span></a>
+      <div>
+        <ul class="sky-facts"><li><b>16</b>notions de l'interculturalité et de la solidarité</li><li><b>12</b>langues, dont l'arabe, le turc et le swahili</li><li><b>112</b>définitions écrites pour les jeunes</li></ul>
+        <a class="btn" href="constellations/">Explorer les constellations</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="lab">
   <div class="wrap">
-    <div class="index"><b>06</b><span class="label">Le Lab</span></div>
+    <div class="index"><b>07</b><span class="label">Le Lab</span></div>
     <div class="head"><h2 class="h2">Le laboratoire <i>d'idées</i> de Cross Borders.</h2><p class="lead">Une idée de projet commence souvent par une conversation. Le Lab est l'endroit où nous la travaillons, avec vous, jusqu'à en faire un dossier solide.</p></div>
     <ol class="steps">
       <li><b>1</b><strong>L'idée</strong><p>Un besoin repéré sur le terrain, par un jeune, une habitante, une association.</p></li>
@@ -510,7 +539,7 @@ html.js .rv.in{opacity:1;transform:none}
 
 <section class="sec tight band" id="impact">
   <div class="wrap">
-    <div class="index"><b>07</b><span class="label">Impact local · Rapport d'activités 2025</span></div>
+    <div class="index"><b>08</b><span class="label">Impact local · Rapport d'activités 2025</span></div>
     <div class="figs">
       <div><b>180–220</b><span>personnes concernées à Rezé, bénéficiaires directs et indirects</span></div>
       <div><b>25–35</b><span>jeunes impliqués dans des projets européens</span></div>
@@ -522,7 +551,7 @@ html.js .rv.in{opacity:1;transform:none}
 
 <section class="sec" id="agenda">
   <div class="wrap">
-    <div class="index"><b>08</b><span class="label">Temps forts</span></div>
+    <div class="index"><b>09</b><span class="label">Temps forts</span></div>
     <ol class="tl">
       <li><time class="label">Juillet 2026 · Hambourg</time><div><h3>Rencontre internationale de jeunes avec Ayedara e.V.</h3><p>Ateliers sur l'engagement associatif et le fair-play, soirée interculturelle et remise des attestations aux participants.</p></div></li>
       <li><time class="label">22–30 mars 2026 · Rezé</time><div><h3>Échange de jeunes sur l'inclusion socio-économique des femmes en milieu rural</h3><p>Cinq pays partenaires accueillis pour neuf jours d'ateliers et d'activités interculturelles.</p></div></li>
@@ -538,7 +567,7 @@ html.js .rv.in{opacity:1;transform:none}
 
 <section class="sec tight band" id="galerie">
   <div class="wrap">
-    <div class="index"><b>09</b><span class="label">Sur le terrain</span></div>
+    <div class="index"><b>10</b><span class="label">Sur le terrain</span></div>
     <div class="gal">
       <figure class="w7"><img src="img/hambourg-presentation.jpg" alt="Présentation de Cross Borders devant les participants, diapositive « Qui sommes-nous ? »"><figcaption>Présentation de Cross Borders aux participants · Hambourg, juillet 2026</figcaption></figure>
       <figure class="w5"><img src="img/hambourg-tournoi.jpg" alt="Deux participants présentent le code de bonne conduite d'un tournoi sportif" style="object-position:50% 45%"><figcaption>Atelier : le code de bonne conduite du tournoi</figcaption></figure>
@@ -554,7 +583,7 @@ html.js .rv.in{opacity:1;transform:none}
 
 <section class="sec" id="partenaires">
   <div class="wrap">
-    <div class="index"><b>10</b><span class="label">Partenaires</span></div>
+    <div class="index"><b>11</b><span class="label">Partenaires</span></div>
     <div class="head"><h2 class="h2">Un réseau en Europe <i>et au Maroc.</i></h2><p class="lead">Associations, collectivités et institutions qui partagent la même exigence d'inclusion.</p></div>
     <div class="pt">
       <div><h3>Institutions</h3><ul><li>Programme Erasmus+ de l'Union européenne</li><li>Agence Erasmus+ France Jeunesse &amp; Sport</li><li>Office franco-allemand pour la Jeunesse</li><li>Ville de Rezé</li><li>Consulat du Maroc</li></ul></div>
@@ -566,7 +595,7 @@ html.js .rv.in{opacity:1;transform:none}
 
 <section class="sec tight" id="rejoindre" style="padding-top:0">
   <div class="wrap">
-    <div class="index"><b>11</b><span class="label">S'engager</span></div>
+    <div class="index"><b>12</b><span class="label">S'engager</span></div>
     <div class="join">
       <article><span class="label k">20 € par an</span><h3>Adhérer</h3><p>Devenez membre actif, participez à l'assemblée générale et à la vie de l'association, ouverte à tous sans condition ni distinction.</p></article>
       <article><span class="label k">Jeunes de 16 à 30 ans</span><h3>Partir</h3><p>Rejoignez un échange de jeunes, un atelier ou une rencontre. Écrivez-nous pour connaître les prochains départs.</p></article>

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Seize notions de l'interculturalité, de l'échange et de la solidarité en douze langues, avec leur définition en sept langues. Une création de Cross Borders.">
+<meta property="og:title" content="Constellations de la rencontre · Cross Borders">
+<meta property="og:image" content="https://www.crossborders.ngo/img/constellations.jpg">
+<link rel="icon" href="../brand/icone.svg">
+<title>Constellations de la rencontre</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,400&family=Amiri:wght@400;700&family=Noto+Sans:wght@400;500&family=Noto+Sans+Arabic:wght@400;500&family=Noto+Sans+JP:wght@400&family=Noto+Sans+SC:wght@400&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: a full-bleed night sky on canvas; a thin instrument bar at the edges; a spotlight sheet that rises over the sky for one notion at a time. Single dark look, by choice. */
+:root{
+  color-scheme:dark;
+  --night:#04060c; --deep:#0a1020; --star:#f3ecdc; --halo:#ffd89a; --dawn:#ff8a5c; --cold:#8fb4ff; --dim:#7d8597;
+  --f-display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --f-ar:"Amiri","Noto Sans Arabic","Geeza Pro",serif;
+  --f-body:"Noto Sans","Noto Sans Arabic","Noto Sans JP","Noto Sans SC",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--night);color:var(--star);overflow:hidden}
+body{font:400 15px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+:focus-visible{outline:1.5px solid var(--halo);outline-offset:3px}
+#sky{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:crosshair}
+
+/* instrument bar */
+.bar{position:fixed;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;pointer-events:none;
+  padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.bar>*{pointer-events:auto}
+.bar.top{top:0;padding-top:max(16px,env(safe-area-inset-top,0px))}
+.bar.bottom{bottom:0;padding-bottom:max(14px,env(safe-area-inset-bottom,0px));align-items:flex-end}
+.title h1{margin:0;font:300 clamp(22px,3.2vw,40px)/1.05 var(--f-display);letter-spacing:-.01em;text-wrap:balance}
+.title h1 em{font-style:italic;color:var(--halo)}
+.title .home{display:inline-block;margin-bottom:8px;font:400 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none}.title .home:hover{color:var(--halo)}
+.title p{margin:6px 0 0;font:400 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.ctrl{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:1px solid rgba(243,236,220,.18);background:rgba(10,16,32,.55);backdrop-filter:blur(8px);border-radius:999px;padding:7px 14px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:7px}
+.btn:hover{border-color:rgba(243,236,220,.5)}
+.btn svg{width:14px;height:14px}
+select.btn{appearance:none;padding-right:28px;background-image:linear-gradient(45deg,transparent 50%,var(--star) 50%),linear-gradient(135deg,var(--star) 50%,transparent 50%);background-position:calc(100% - 14px) 52%,calc(100% - 9px) 52%;background-size:5px 5px;background-repeat:no-repeat}
+select.btn option{background:var(--deep);color:var(--star)}
+.legend{font:400 11px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--dim);max-width:46ch}
+.legend b{color:var(--star);font-weight:400}
+.next{display:flex;align-items:center;gap:10px;font:400 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.next i{display:block;width:120px;height:2px;background:rgba(243,236,220,.12);position:relative;overflow:hidden;border-radius:2px}
+.next i u{position:absolute;inset:0;background:var(--halo);transform-origin:left;transform:scaleX(var(--p,0))}
+
+/* tooltip */
+.tip{position:fixed;z-index:6;pointer-events:none;transform:translate(-50%,-140%);background:rgba(4,6,12,.86);border:1px solid rgba(255,216,154,.35);border-radius:6px;padding:5px 10px;font-size:13px;white-space:nowrap}
+.tip small{display:block;font:400 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+/* spotlight sheet */
+.sheet{position:fixed;inset:0;z-index:10;display:grid;place-items:center;overflow:auto;
+  padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-block:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-bottom,0px));
+  background:radial-gradient(120% 90% at 50% 40%,rgba(8,12,26,.84),rgba(4,6,12,.96) 70%);opacity:0;transition:opacity .9s ease}
+.sheet.on{opacity:1}
+.card{width:min(1100px,100%);display:grid;gap:clamp(16px,2.4vw,28px);text-align:center}
+.idx{font:400 11px var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.idx b{color:var(--halo);font-weight:400}
+.word{margin:0;font:300 clamp(54px,11vw,150px)/1 var(--f-display);letter-spacing:-.02em;text-shadow:0 0 40px rgba(255,216,154,.35),0 0 2px rgba(255,255,255,.6)}
+.word[lang=ar]{font:700 clamp(56px,11vw,150px)/1.2 var(--f-ar);letter-spacing:0}
+.word[lang=zh],.word[lang=ja]{font-family:"Noto Sans SC","Noto Sans JP",var(--f-body);font-weight:400}
+.sheet.on .word{animation:ignite 1.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ignite{from{opacity:0;filter:blur(14px);letter-spacing:.12em}}
+.ring{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;max-width:900px;margin:0 auto}
+.ring span{font-size:clamp(14px,1.5vw,17px);color:var(--star);opacity:0;animation:twinkle .8s ease both}
+.ring span small{font:400 9.5px var(--f-mono);letter-spacing:.12em;color:var(--dim);margin-inline-end:6px;vertical-align:2px}
+.ring span[lang=ar]{font-family:var(--f-ar);font-size:clamp(17px,1.8vw,21px)}
+@keyframes twinkle{from{opacity:0;transform:translateY(6px)}to{opacity:.92}}
+.main-def{margin:6px auto 0;max-width:46ch;font:300 italic clamp(19px,2.3vw,28px)/1.45 var(--f-display);color:var(--star);text-wrap:balance}
+.main-def[lang=ar]{font:400 clamp(21px,2.5vw,30px)/1.7 var(--f-ar);font-style:normal}
+.defs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 26px;text-align:start;border-top:1px solid rgba(243,236,220,.12);padding-top:18px}
+@media (max-width:820px){.defs{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.defs{grid-template-columns:1fr}}
+.defs div{min-width:0;opacity:0;animation:twinkle .8s ease both}
+.defs b{display:block;font:400 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--halo);margin-bottom:3px}
+.defs p{margin:0;font-size:14px;line-height:1.55;color:rgba(243,236,220,.82)}
+.defs div[lang=ar] p{font-family:var(--f-ar);font-size:17px;line-height:1.6}
+.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.list{position:fixed;z-index:12;inset:auto max(18px,env(safe-area-inset-right,0px)) 64px auto;width:min(320px,calc(100% - 36px));max-height:min(70vh,560px);overflow:auto;
+  background:rgba(8,12,24,.94);border:1px solid rgba(243,236,220,.16);border-radius:10px;padding:10px}
+.list button{display:flex;justify-content:space-between;gap:10px;width:100%;text-align:start;border:0;background:none;padding:8px 10px;border-radius:6px;cursor:pointer}
+.list button:hover{background:rgba(243,236,220,.06)}
+.list button span:last-child{font-family:var(--f-ar);color:var(--dim)}
+@media (max-width:640px){.legend{display:none}.next i{width:70px}.title p{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+
+<canvas id="sky" aria-label="Ciel de mots : seize notions de l'interculturalité, chacune écrite en douze langues et reliée en constellation."></canvas>
+
+<header class="bar top">
+  <div class="title"><a class="home" href="../">← Cross Borders</a><h1>Constellations <em>de la rencontre</em></h1><p>16 notions · 12 langues · 112 définitions</p></div>
+  <div class="ctrl">
+    <label class="sr" for="lang" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Langue principale</label>
+    <select class="btn" id="lang" title="Langue principale"></select>
+    <button class="btn" id="btn-list" type="button" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="6" r="1.6"/><circle cx="12" cy="4" r="1.6"/><circle cx="19" cy="9" r="1.6"/><circle cx="9" cy="16" r="1.6"/><circle cx="17" cy="19" r="1.6"/><path d="M5 6l7-2 7 5-10 7 8 3"/></svg>Constellations</button>
+    <button class="btn" id="btn-full" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Plein écran</button>
+  </div>
+</header>
+<footer class="bar bottom">
+  <p class="legend">Chaque étoile est un mot. Chaque constellation relie <b>une même idée dans douze langues</b>. Survolez une étoile pour lire sa langue, cliquez pour l'ouvrir.</p>
+  <div class="ctrl">
+    <div class="next" id="next"><span id="next-l">Prochaine notion</span><i><u id="next-p"></u></i></div>
+    <button class="btn" id="btn-pause" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor" id="ico-pause"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg><span id="pause-l">Pause</span></button>
+  </div>
+</footer>
+<div class="tip" id="tip" hidden></div>
+<div class="list" id="list" hidden></div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sp-word">
+  <div class="card">
+    <div class="idx" id="sp-idx"></div>
+    <h2 class="word" id="sp-word"></h2>
+    <div class="ring" id="sp-ring"></div>
+    <p class="main-def" id="sp-def"></p>
+    <div class="defs" id="sp-defs"></div>
+    <div class="actions">
+      <button class="btn" type="button" id="sp-prev">← Notion précédente</button>
+      <button class="btn" type="button" id="sp-close">Revenir au ciel</button>
+      <button class="btn" type="button" id="sp-next">Notion suivante →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const LANGS={fr:"Français",ar:"العربية",en:"English",es:"Español",de:"Deutsch",it:"Italiano",pt:"Português",tr:"Türkçe",ru:"Русский",zh:"中文",ja:"日本語",sw:"Kiswahili"};
+const DEF_LANGS=["fr","ar","en","es","de","it","pt"];
+const CONCEPTS=[
+{id:"interculturalite",w:{fr:"Interculturalité",ar:"البينثقافية",en:"Interculturality",es:"Interculturalidad",de:"Interkulturalität",it:"Interculturalità",pt:"Interculturalidade",tr:"Kültürlerarasılık",ru:"Межкультурность",zh:"跨文化性",ja:"異文化間性",sw:"Mwingiliano wa tamaduni"},
+ d:{fr:"Rencontre entre des cultures qui se transforment mutuellement en dialoguant, au lieu de simplement coexister.",
+    ar:"لقاء بين ثقافات يغيّر بعضها بعضًا عبر الحوار، بدل أن تكتفي بالتجاور.",
+    en:"A meeting of cultures that change one another through dialogue, instead of merely living side by side.",
+    es:"Encuentro entre culturas que se transforman mutuamente al dialogar, en lugar de limitarse a coexistir.",
+    de:"Begegnung von Kulturen, die sich im Dialog gegenseitig verändern, statt nur nebeneinander zu bestehen.",
+    it:"Incontro tra culture che si trasformano a vicenda dialogando, invece di limitarsi a coesistere.",
+    pt:"Encontro entre culturas que se transformam mutuamente pelo diálogo, em vez de apenas coexistirem."}},
+{id:"echange",w:{fr:"Échange",ar:"تبادل",en:"Exchange",es:"Intercambio",de:"Austausch",it:"Scambio",pt:"Intercâmbio",tr:"Değişim",ru:"Обмен",zh:"交流",ja:"交流",sw:"Ubadilishanaji"},
+ d:{fr:"Action de donner et de recevoir : des idées, des savoirs, des séjours. Chacun repart avec quelque chose de l'autre.",
+    ar:"أن تعطي وتأخذ: أفكارًا ومعارف وإقامات. يعود كل طرف بشيء من الآخر.",
+    en:"Giving and receiving ideas, knowledge and stays abroad. Each side leaves with something of the other.",
+    es:"Dar y recibir ideas, saberes y estancias. Cada parte se lleva algo de la otra.",
+    de:"Geben und Nehmen von Ideen, Wissen und Aufenthalten. Jede Seite nimmt etwas vom anderen mit.",
+    it:"Dare e ricevere idee, saperi e soggiorni. Ognuno riparte con qualcosa dell'altro.",
+    pt:"Dar e receber ideias, saberes e estadias. Cada parte leva consigo algo da outra."}},
+{id:"solidarite",w:{fr:"Solidarité",ar:"تضامن",en:"Solidarity",es:"Solidaridad",de:"Solidarität",it:"Solidarietà",pt:"Solidariedade",tr:"Dayanışma",ru:"Солидарность",zh:"团结",ja:"連帯",sw:"Mshikamano"},
+ d:{fr:"Lien qui pousse à soutenir l'autre parce que son sort nous concerne aussi.",
+    ar:"رابط يدفعنا إلى مساندة الآخر لأن مصيره يعنينا نحن أيضًا.",
+    en:"A bond that moves us to support others because their fate concerns us too.",
+    es:"Vínculo que nos lleva a apoyar al otro porque su suerte también nos concierne.",
+    de:"Ein Band, das uns andere unterstützen lässt, weil ihr Schicksal auch uns betrifft.",
+    it:"Legame che spinge a sostenere l'altro perché il suo destino riguarda anche noi.",
+    pt:"Vínculo que nos leva a apoiar o outro porque o seu destino também nos diz respeito."}},
+{id:"hospitalite",w:{fr:"Hospitalité",ar:"ضيافة",en:"Hospitality",es:"Hospitalidad",de:"Gastfreundschaft",it:"Ospitalità",pt:"Hospitalidade",tr:"Misafirperverlik",ru:"Гостеприимство",zh:"好客",ja:"もてなし",sw:"Ukarimu"},
+ d:{fr:"Art d'accueillir l'étranger chez soi et de lui faire une place à sa table.",
+    ar:"فنّ استقبال الغريب في بيتك وإفساح مكان له على مائدتك.",
+    en:"The art of welcoming a stranger into your home and making room for them at your table.",
+    es:"Arte de recibir al extranjero en casa y hacerle sitio en la mesa.",
+    de:"Die Kunst, Fremde bei sich aufzunehmen und ihnen einen Platz am Tisch zu geben.",
+    it:"Arte di accogliere lo straniero in casa e di fargli posto alla propria tavola.",
+    pt:"Arte de acolher o estrangeiro em casa e de lhe dar lugar à mesa."}},
+{id:"dialogue",w:{fr:"Dialogue",ar:"حوار",en:"Dialogue",es:"Diálogo",de:"Dialog",it:"Dialogo",pt:"Diálogo",tr:"Diyalog",ru:"Диалог",zh:"对话",ja:"対話",sw:"Mazungumzo"},
+ d:{fr:"Parole partagée où chacun écoute autant qu'il parle, pour comprendre avant de juger.",
+    ar:"كلام مشترك يُصغي فيه كل طرف بقدر ما يتكلم، ليفهم قبل أن يحكم.",
+    en:"Shared speech in which each person listens as much as they speak, to understand before judging.",
+    es:"Palabra compartida en la que cada uno escucha tanto como habla, para comprender antes de juzgar.",
+    de:"Gemeinsames Gespräch, in dem jeder so viel zuhört wie er spricht, um zu verstehen, bevor er urteilt.",
+    it:"Parola condivisa in cui ciascuno ascolta quanto parla, per capire prima di giudicare.",
+    pt:"Palavra partilhada em que cada um ouve tanto quanto fala, para compreender antes de julgar."}},
+{id:"mobilite",w:{fr:"Mobilité",ar:"تنقّل",en:"Mobility",es:"Movilidad",de:"Mobilität",it:"Mobilità",pt:"Mobilidade",tr:"Hareketlilik",ru:"Мобильность",zh:"流动",ja:"移動",sw:"Uhamaji"},
+ d:{fr:"Possibilité de partir étudier, travailler ou s'engager ailleurs, et d'en revenir enrichi.",
+    ar:"إمكانية السفر للدراسة أو العمل أو التطوع في مكان آخر، والعودة بتجربة أغنى.",
+    en:"The chance to study, work or volunteer elsewhere, and to come back richer for it.",
+    es:"Posibilidad de irse a estudiar, trabajar o comprometerse en otro lugar, y volver enriquecido.",
+    de:"Die Möglichkeit, anderswo zu lernen, zu arbeiten oder sich zu engagieren und bereichert zurückzukehren.",
+    it:"Possibilità di partire per studiare, lavorare o impegnarsi altrove, e di tornare arricchiti.",
+    pt:"Possibilidade de partir para estudar, trabalhar ou fazer voluntariado noutro lugar, e regressar enriquecido."}},
+{id:"inclusion",w:{fr:"Inclusion",ar:"إدماج",en:"Inclusion",es:"Inclusión",de:"Inklusion",it:"Inclusione",pt:"Inclusão",tr:"Kapsayıcılık",ru:"Инклюзия",zh:"包容",ja:"包摂",sw:"Ujumuishaji"},
+ d:{fr:"Faire en sorte que personne ne reste au bord du chemin, quelles que soient son origine, sa situation ou ses capacités.",
+    ar:"ألّا يبقى أحد على الهامش، مهما كان أصله أو وضعه أو قدراته.",
+    en:"Making sure no one is left behind, whatever their background, situation or abilities.",
+    es:"Lograr que nadie se quede al margen, sean cuales sean su origen, su situación o sus capacidades.",
+    de:"Dafür sorgen, dass niemand außen vor bleibt, unabhängig von Herkunft, Lage oder Fähigkeiten.",
+    it:"Fare in modo che nessuno resti ai margini, qualunque siano origine, situazione o capacità.",
+    pt:"Garantir que ninguém fica à margem, sejam quais forem a sua origem, situação ou capacidades."}},
+{id:"diversite",w:{fr:"Diversité",ar:"تنوّع",en:"Diversity",es:"Diversidad",de:"Vielfalt",it:"Diversità",pt:"Diversidade",tr:"Çeşitlilik",ru:"Разнообразие",zh:"多样性",ja:"多様性",sw:"Utofauti"},
+ d:{fr:"Pluralité des langues, des croyances et des façons de vivre, vue comme une richesse commune.",
+    ar:"تعدّد اللغات والمعتقدات وأنماط العيش، بوصفه ثروة مشتركة.",
+    en:"The plurality of languages, beliefs and ways of life, seen as a shared wealth.",
+    es:"Pluralidad de lenguas, creencias y formas de vida, vista como una riqueza común.",
+    de:"Die Vielzahl von Sprachen, Überzeugungen und Lebensweisen, verstanden als gemeinsamer Reichtum.",
+    it:"Pluralità di lingue, credenze e modi di vivere, vista come una ricchezza comune.",
+    pt:"Pluralidade de línguas, crenças e modos de vida, vista como uma riqueza comum."}},
+{id:"respect",w:{fr:"Respect",ar:"احترام",en:"Respect",es:"Respeto",de:"Respekt",it:"Rispetto",pt:"Respeito",tr:"Saygı",ru:"Уважение",zh:"尊重",ja:"尊重",sw:"Heshima"},
+ d:{fr:"Reconnaître la dignité de l'autre, surtout quand il ne pense pas comme nous.",
+    ar:"الاعتراف بكرامة الآخر، خاصة حين لا يفكّر مثلنا.",
+    en:"Recognising the dignity of others, especially when they do not think as we do.",
+    es:"Reconocer la dignidad del otro, sobre todo cuando no piensa como nosotros.",
+    de:"Die Würde des anderen anerkennen, vor allem wenn er anders denkt als wir.",
+    it:"Riconoscere la dignità dell'altro, soprattutto quando non la pensa come noi.",
+    pt:"Reconhecer a dignidade do outro, sobretudo quando não pensa como nós."}},
+{id:"empathie",w:{fr:"Empathie",ar:"تعاطف",en:"Empathy",es:"Empatía",de:"Empathie",it:"Empatia",pt:"Empatia",tr:"Empati",ru:"Эмпатия",zh:"同理心",ja:"共感",sw:"Huruma"},
+ d:{fr:"Capacité de se mettre à la place de l'autre et de ressentir ce qu'il vit.",
+    ar:"القدرة على وضع النفس مكان الآخر والإحساس بما يعيشه.",
+    en:"The ability to put yourself in someone else's place and feel what they are living through.",
+    es:"Capacidad de ponerse en el lugar del otro y sentir lo que vive.",
+    de:"Die Fähigkeit, sich in andere hineinzuversetzen und mitzufühlen, was sie erleben.",
+    it:"Capacità di mettersi nei panni dell'altro e di sentire ciò che vive.",
+    pt:"Capacidade de se pôr no lugar do outro e de sentir o que ele vive."}},
+{id:"citoyennete",w:{fr:"Citoyenneté",ar:"مواطنة",en:"Citizenship",es:"Ciudadanía",de:"Bürgerschaft",it:"Cittadinanza",pt:"Cidadania",tr:"Vatandaşlık",ru:"Гражданственность",zh:"公民身份",ja:"市民性",sw:"Uraia"},
+ d:{fr:"Appartenance active à une communauté politique, avec des droits et des devoirs, ici et au-delà des frontières.",
+    ar:"انتماء فاعل إلى جماعة سياسية بحقوق وواجبات، هنا وما وراء الحدود.",
+    en:"Active membership of a political community, with rights and duties, here and beyond borders.",
+    es:"Pertenencia activa a una comunidad política, con derechos y deberes, aquí y más allá de las fronteras.",
+    de:"Aktive Zugehörigkeit zu einem Gemeinwesen mit Rechten und Pflichten, hier und über Grenzen hinweg.",
+    it:"Appartenenza attiva a una comunità politica, con diritti e doveri, qui e oltre i confini.",
+    pt:"Pertença ativa a uma comunidade política, com direitos e deveres, aqui e além das fronteiras."}},
+{id:"paix",w:{fr:"Paix",ar:"سلام",en:"Peace",es:"Paz",de:"Frieden",it:"Pace",pt:"Paz",tr:"Barış",ru:"Мир",zh:"和平",ja:"平和",sw:"Amani"},
+ d:{fr:"Plus que l'absence de guerre : un ordre juste où les différends se règlent sans violence.",
+    ar:"أكثر من غياب الحرب: نظام عادل تُحَلّ فيه الخلافات دون عنف.",
+    en:"More than the absence of war: a just order in which disputes are settled without violence.",
+    es:"Más que la ausencia de guerra: un orden justo en el que los conflictos se resuelven sin violencia.",
+    de:"Mehr als die Abwesenheit von Krieg: eine gerechte Ordnung, in der Konflikte gewaltfrei gelöst werden.",
+    it:"Più dell'assenza di guerra: un ordine giusto in cui i conflitti si risolvono senza violenza.",
+    pt:"Mais do que a ausência de guerra: uma ordem justa em que os conflitos se resolvem sem violência."}},
+{id:"jeunesse",w:{fr:"Jeunesse",ar:"شباب",en:"Youth",es:"Juventud",de:"Jugend",it:"Gioventù",pt:"Juventude",tr:"Gençlik",ru:"Молодёжь",zh:"青年",ja:"若者",sw:"Vijana"},
+ d:{fr:"Âge des premiers départs et des premiers engagements, celui où l'on apprend le monde en le parcourant.",
+    ar:"عمر الرحلات الأولى والالتزامات الأولى، حين نتعلّم العالم ونحن نجوبه.",
+    en:"The age of first journeys and first commitments, when we learn the world by travelling it.",
+    es:"Edad de los primeros viajes y los primeros compromisos, cuando se aprende el mundo recorriéndolo.",
+    de:"Die Zeit der ersten Reisen und des ersten Engagements, in der man die Welt erlernt, indem man sie bereist.",
+    it:"L'età delle prime partenze e dei primi impegni, quando si impara il mondo percorrendolo.",
+    pt:"A idade das primeiras partidas e dos primeiros compromissos, quando se aprende o mundo a percorrê-lo."}},
+{id:"fraternite",w:{fr:"Fraternité",ar:"أخوّة",en:"Fraternity",es:"Fraternidad",de:"Brüderlichkeit",it:"Fraternità",pt:"Fraternidade",tr:"Kardeşlik",ru:"Братство",zh:"博爱",ja:"友愛",sw:"Udugu"},
+ d:{fr:"Sentiment d'appartenir à une même famille humaine, au-delà du sang, de la langue et de la frontière.",
+    ar:"الشعور بالانتماء إلى عائلة إنسانية واحدة، أبعد من الدم واللغة والحدود.",
+    en:"The feeling of belonging to one human family, beyond blood, language and borders.",
+    es:"Sentimiento de pertenecer a una misma familia humana, más allá de la sangre, la lengua y la frontera.",
+    de:"Das Gefühl, zu einer einzigen Menschheitsfamilie zu gehören, jenseits von Blut, Sprache und Grenze.",
+    it:"Sentimento di appartenere a un'unica famiglia umana, al di là del sangue, della lingua e dei confini.",
+    pt:"Sentimento de pertencer a uma mesma família humana, para além do sangue, da língua e da fronteira."}},
+{id:"cooperation",w:{fr:"Coopération",ar:"تعاون",en:"Cooperation",es:"Cooperación",de:"Zusammenarbeit",it:"Cooperazione",pt:"Cooperação",tr:"İşbirliği",ru:"Сотрудничество",zh:"合作",ja:"協力",sw:"Ushirikiano"},
+ d:{fr:"Travail mené ensemble, entre personnes ou pays, pour atteindre ce qu'aucun n'atteindrait seul.",
+    ar:"عمل مشترك بين أشخاص أو بلدان لبلوغ ما لا يبلغه أحدهم وحده.",
+    en:"Work carried out together, between people or countries, to reach what none could reach alone.",
+    es:"Trabajo realizado en común, entre personas o países, para lograr lo que nadie lograría solo.",
+    de:"Gemeinsame Arbeit von Menschen oder Ländern, um zu erreichen, was keiner allein erreichen würde.",
+    it:"Lavoro svolto insieme, tra persone o paesi, per raggiungere ciò che nessuno raggiungerebbe da solo.",
+    pt:"Trabalho feito em conjunto, entre pessoas ou países, para alcançar o que ninguém alcançaria sozinho."}},
+{id:"confiance",w:{fr:"Confiance",ar:"ثقة",en:"Trust",es:"Confianza",de:"Vertrauen",it:"Fiducia",pt:"Confiança",tr:"Güven",ru:"Доверие",zh:"信任",ja:"信頼",sw:"Uaminifu"},
+ d:{fr:"Pari sur la parole de l'autre. Elle se construit lentement et se perd en un instant.",
+    ar:"رهان على كلمة الآخر. تُبنى ببطء وتضيع في لحظة.",
+    en:"A wager on another person's word. It is built slowly and lost in a moment.",
+    es:"Una apuesta por la palabra del otro. Se construye despacio y se pierde en un instante.",
+    de:"Eine Wette auf das Wort des anderen. Es wächst langsam und ist in einem Augenblick verloren.",
+    it:"Una scommessa sulla parola dell'altro. Si costruisce lentamente e si perde in un attimo.",
+    pt:"Uma aposta na palavra do outro. Constrói-se devagar e perde-se num instante."}}
+];
+
+const $=id=>document.getElementById(id);
+const cv=$("sky"),cx=cv.getContext("2d");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let lang="fr";try{const s=localStorage.getItem("cst-lang");if(s&&LANGS[s]&&DEF_LANGS.includes(s))lang=s}catch(e){}
+const ORDER=["fr","ar","en","es","de","it","pt","tr","ru","zh","ja","sw"];
+const FONT={ar:'"Amiri","Noto Sans Arabic",serif',zh:'"Noto Sans SC",sans-serif',ja:'"Noto Sans JP",sans-serif'};
+const fontFor=(l,px,w=400)=>`${w} ${px}px ${FONT[l]||'"Noto Sans",system-ui,sans-serif'}`;
+function rng(s){return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646}}
+
+/* ---------- build the sky ---------- */
+const COLS=4,ROWS=4,GX=640,GY=470;
+const WORLD={w:COLS*GX,h:ROWS*GY};
+const R0=rng(42);
+const CST=CONCEPTS.map((c,i)=>{const r=rng(1000+i*77);const col=i%COLS,row=Math.floor(i/COLS);
+  const cxw=(col+.5)*GX+(r()-.5)*GX*.28,cyw=(row+.5)*GY+(r()-.5)*GY*.26;
+  const others=ORDER.filter(l=>l!=="fr");
+  const stars=[{l:"fr",x:cxw,y:cyw,m:1}];
+  others.forEach((l,j)=>{const ring=j<5?0:1;const n=ring?6:5;const k=ring?j-5:j;const a=(k/n)*Math.PI*2+(ring?.45:0)+r()*.5+i;const rad=(ring?165:92)+r()*28;
+    stars.push({l,x:cxw+Math.cos(a)*rad*1.15,y:cyw+Math.sin(a)*rad*.72,m:ring?.55:.75})});
+  /* constellation lines: Prim's minimum spanning tree */
+  const inT=[0],edges=[];while(inT.length<stars.length){let best=null;for(const a of inT)for(let b=0;b<stars.length;b++){if(inT.includes(b))continue;const d=Math.hypot(stars[a].x-stars[b].x,stars[a].y-stars[b].y);if(!best||d<best[2])best=[a,b,d]}edges.push(best);inT.push(best[1])}
+  stars.forEach(s=>{s.tw=r()*6.28;s.c=c});
+  return {c,i,x:cxw,y:cyw,stars,edges}});
+const DUST=Array.from({length:900},()=>({x:R0()*WORLD.w*1.4-WORLD.w*.2,y:R0()*WORLD.h*1.4-WORLD.h*.2,s:R0()*1.3+.2,t:R0()*6.28,p:.25+R0()*.5,h:R0()}));
+
+/* ---------- camera ---------- */
+let W=0,H=0,DPR=1,baseZ=1;
+const cam={x:WORLD.w/2,y:WORLD.h/2,z:1};let tgt=null,T0=performance.now();
+function resize(){DPR=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;baseZ=Math.max(.42,Math.min(1.05,Math.min(W/1500,H/900)));if(!tgt)cam.z=baseZ}
+addEventListener("resize",resize);resize();
+const toScr=(x,y,par=1)=>[(x-cam.x*par)*cam.z+W/2,(y-cam.y*par)*cam.z+H/2];
+
+/* ---------- state ---------- */
+let mode="sky",paused=false,focus=-1,hover=null,cycle=0,phaseT=0,last=performance.now(),shoot=null,nextShoot=4;
+const SKY_T=7,SPOT_T=16;
+let order=[...CONCEPTS.keys()];for(let i=order.length-1;i>0;i--){const j=Math.floor(R0()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+
+function draw(now){const dt=Math.min(.05,(now-last)/1000);last=now;const t=(now-T0)/1000;
+  /* camera: drift on a slow Lissajous path, or glide to the focused constellation */
+  if(tgt){cam.x+=(tgt.x-cam.x)*Math.min(1,dt*2.2);cam.y+=(tgt.y-cam.y)*Math.min(1,dt*2.2);cam.z+=(tgt.z-cam.z)*Math.min(1,dt*2.2)}
+  else if(!reduce){const wx=WORLD.w/2+Math.sin(t*.021)*WORLD.w*.33,wy=WORLD.h/2+Math.sin(t*.033+1)*WORLD.h*.3;cam.x+=(wx-cam.x)*dt*.5;cam.y+=(wy-cam.y)*dt*.5;cam.z+=(baseZ-cam.z)*dt*1.2}
+  cx.setTransform(DPR,0,0,DPR,0,0);
+  const g=cx.createRadialGradient(W*.7,H*.25,0,W*.7,H*.25,Math.max(W,H));g.addColorStop(0,"#0d1630");g.addColorStop(.55,"#070b17");g.addColorStop(1,"#04060c");cx.fillStyle=g;cx.fillRect(0,0,W,H);
+  /* milky band */
+  cx.save();cx.translate(W/2,H/2);cx.rotate(-.42);const mb=cx.createLinearGradient(0,-H*.25,0,H*.25);mb.addColorStop(0,"rgba(143,180,255,0)");mb.addColorStop(.5,"rgba(143,180,255,.05)");mb.addColorStop(1,"rgba(143,180,255,0)");cx.fillStyle=mb;cx.fillRect(-W,-H*.25,W*2,H*.5);cx.restore();
+  /* dust stars with parallax */
+  for(const d of DUST){const [x,y]=toScr(d.x,d.y,d.p);if(x<-4||y<-4||x>W+4||y>H+4)continue;const a=.35+.35*Math.sin(t*1.3+d.t);cx.fillStyle=d.h>.85?`rgba(255,216,154,${a})`:`rgba(220,228,255,${a*.8})`;cx.fillRect(x,y,d.s,d.s)}
+  /* constellations */
+  const dimOthers=mode!=="sky"&&focus>=0;
+  for(const k of CST){const [ccx,ccy]=toScr(k.x,k.y);if(ccx<-400*cam.z||ccy<-300*cam.z||ccx>W+400*cam.z||ccy>H+300*cam.z)continue;
+    const isF=k.i===focus,isH=hover&&hover.c===k.c;const vis=dimOthers?(isF?1:.18):1;
+    cx.lineWidth=1;cx.strokeStyle=`rgba(255,216,154,${(isF||isH?.55:.16)*vis})`;cx.beginPath();
+    for(const [a,b] of k.edges){const [x1,y1]=toScr(k.stars[a].x,k.stars[a].y),[x2,y2]=toScr(k.stars[b].x,k.stars[b].y);cx.moveTo(x1,y1);cx.lineTo(x2,y2)}cx.stroke();
+    for(const s of k.stars){const [x,y]=toScr(s.x,s.y);const tw=.75+.25*Math.sin(t*2+s.tw);const r=(s.l==="fr"?3.2:2.1)*Math.max(.8,cam.z)*tw;
+      const hot=hover===s;const glow=cx.createRadialGradient(x,y,0,x,y,r*7);glow.addColorStop(0,`rgba(255,236,200,${(hot?.6:.32)*vis})`);glow.addColorStop(1,"rgba(255,236,200,0)");cx.fillStyle=glow;cx.beginPath();cx.arc(x,y,r*7,0,7);cx.fill();
+      cx.fillStyle=`rgba(255,248,235,${vis})`;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill();
+      if(s.l!=="fr"&&cam.z<.78&&!(isH||isF))continue;
+      const lbl=s.c.w[s.l];const px=Math.round((s.l==="fr"?15:12)*Math.max(.85,Math.min(1.6,cam.z*1.05)));cx.font=fontFor(s.l,s.l==="ar"?px+3:px,s.l==="fr"?500:400);
+      cx.fillStyle=s.l==="fr"?`rgba(255,216,154,${.95*vis})`:`rgba(243,236,220,${(hot||isH||isF?.95:.62)*vis})`;cx.textAlign="center";cx.textBaseline="top";cx.fillText(lbl,x,y+r+5)}}
+  /* shooting star */
+  if(!reduce){nextShoot-=dt;if(nextShoot<0&&!shoot){shoot={x:R0()*W,y:R0()*H*.4,vx:-(420+R0()*300),vy:160+R0()*120,life:1};nextShoot=9+R0()*10}
+    if(shoot){shoot.x+=shoot.vx*dt;shoot.y+=shoot.vy*dt;shoot.life-=dt*1.1;const tl=cx.createLinearGradient(shoot.x,shoot.y,shoot.x-shoot.vx*.18,shoot.y-shoot.vy*.18);tl.addColorStop(0,`rgba(255,240,210,${shoot.life})`);tl.addColorStop(1,"rgba(255,240,210,0)");cx.strokeStyle=tl;cx.lineWidth=1.6;cx.beginPath();cx.moveTo(shoot.x,shoot.y);cx.lineTo(shoot.x-shoot.vx*.18,shoot.y-shoot.vy*.18);cx.stroke();if(shoot.life<=0)shoot=null}}
+  /* timeline */
+  if(!paused){phaseT+=dt;const lim=mode==="sky"?SKY_T:SPOT_T;$("next-p").style.setProperty("--p",Math.min(1,phaseT/lim));
+    if(mode==="sky"&&phaseT>=SKY_T){open(order[cycle%order.length]);cycle++}
+    else if(mode==="spot"&&phaseT>=SPOT_T){closeSpot()}}
+  requestAnimationFrame(draw)}
+
+/* ---------- spotlight ---------- */
+function open(i){focus=i;const k=CST[i];tgt={x:k.x,y:k.y,z:Math.min(2.2,baseZ*2.4)};mode="spot";phaseT=0;$("list").hidden=true;
+  setTimeout(()=>{if(focus!==i)return;fill(i);const s=$("sheet");s.hidden=false;requestAnimationFrame(()=>s.classList.add("on"));$("sp-close").focus({preventScroll:true})},reduce?0:1300);
+  $("next-l").textContent="Retour au ciel"}
+function fill(i){const c=CONCEPTS[i];const W2=$("sp-word");W2.textContent=c.w[lang];W2.lang=lang;W2.dir=lang==="ar"?"rtl":"ltr";
+  $("sp-idx").innerHTML=`Constellation <b>${String(i+1).padStart(2,"0")}</b> / ${CONCEPTS.length} · ${LANGS[lang]}`;
+  $("sp-ring").innerHTML=ORDER.filter(l=>l!==lang).map((l,j)=>`<span lang="${l}" dir="${l==="ar"?"rtl":"ltr"}" style="animation-delay:${.5+j*.07}s"><small>${l.toUpperCase()}</small>${c.w[l]}</span>`).join("");
+  const D=$("sp-def");D.textContent=c.d[lang];D.lang=lang;D.dir=lang==="ar"?"rtl":"ltr";
+  $("sp-defs").innerHTML=DEF_LANGS.filter(l=>l!==lang).map((l,j)=>`<div lang="${l}" dir="${l==="ar"?"rtl":"ltr"}" style="animation-delay:${1.2+j*.12}s"><b>${LANGS[l]}</b><p>${c.d[l]}</p></div>`).join("")}
+function closeSpot(){const s=$("sheet");s.classList.remove("on");setTimeout(()=>{if(mode!=="spot")s.hidden=true},reduce?0:900);mode="sky";focus=-1;tgt=null;phaseT=0;$("next-l").textContent="Prochaine notion"}
+function step(d){const i=((focus<0?0:focus)+d+CONCEPTS.length)%CONCEPTS.length;const s=$("sheet");s.classList.remove("on");setTimeout(()=>{s.hidden=true;open(i)},reduce?0:350)}
+$("sp-close").onclick=closeSpot;$("sp-next").onclick=()=>step(1);$("sp-prev").onclick=()=>step(-1);
+$("sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSpot()});
+
+/* ---------- interaction ---------- */
+function pick(mx,my){let best=null,bd=22;for(const k of CST)for(const s of k.stars){const [x,y]=toScr(s.x,s.y);const d=Math.hypot(mx-x,my-y-8);if(d<bd){bd=d;best=s}}return best}
+cv.addEventListener("mousemove",e=>{if(mode!=="sky")return;hover=pick(e.clientX,e.clientY);const tip=$("tip");
+  if(hover){tip.hidden=false;tip.style.left=e.clientX+"px";tip.style.top=e.clientY+"px";tip.innerHTML=`<small>${LANGS[hover.l]} · ${hover.c.w[lang]}</small><span lang="${hover.l}">${hover.c.w[hover.l]}</span>`;cv.style.cursor="pointer"}
+  else{tip.hidden=true;cv.style.cursor="crosshair"}});
+cv.addEventListener("mouseleave",()=>{hover=null;$("tip").hidden=true});
+cv.addEventListener("click",e=>{if(mode!=="sky")return;const s=pick(e.clientX,e.clientY)||nearestCst(e.clientX,e.clientY);if(s){$("tip").hidden=true;open(CONCEPTS.indexOf(s.c))}});
+function nearestCst(mx,my){let best=null,bd=140;for(const k of CST){const [x,y]=toScr(k.x,k.y);const d=Math.hypot(mx-x,my-y);if(d<bd){bd=d;best=k.stars[0]}}return best}
+$("btn-pause").onclick=()=>{paused=!paused;$("btn-pause").setAttribute("aria-pressed",paused);$("pause-l").textContent=paused?"Reprendre":"Pause";$("ico-pause").innerHTML=paused?'<path d="M7 4v16l13-8z"/>':'<path d="M7 5h3v14H7zM14 5h3v14h-3z"/>'};
+$("btn-full").onclick=()=>{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen?.().catch(()=>{})};
+const sel=$("lang");sel.innerHTML=DEF_LANGS.map(l=>`<option value="${l}"${l===lang?" selected":""}>${LANGS[l]}</option>`).join("");
+sel.onchange=()=>{lang=sel.value;try{localStorage.setItem("cst-lang",lang)}catch(e){}buildList();if(focus>=0&&!$("sheet").hidden)fill(focus)};
+function buildList(){$("list").innerHTML=CONCEPTS.map((c,i)=>`<button type="button" data-i="${i}"><span lang="${lang}">${c.w[lang]}</span><span lang="ar">${lang==="ar"?c.w.fr:c.w.ar}</span></button>`).join("");$("list").querySelectorAll("button").forEach(b=>b.onclick=()=>{if(mode==="spot"){const s=$("sheet");s.classList.remove("on");s.hidden=true}open(+b.dataset.i)})}
+buildList();
+$("btn-list").onclick=()=>{const L=$("list");L.hidden=!L.hidden;$("btn-list").setAttribute("aria-expanded",!L.hidden)};
+addEventListener("keydown",e=>{if(e.key==="Escape"){if(mode==="spot")closeSpot();$("list").hidden=true}else if(e.key===" "&&e.target.tagName!=="BUTTON"&&e.target.tagName!=="SELECT"){e.preventDefault();$("btn-pause").click()}else if(mode==="spot"&&e.key==="ArrowRight")step(1);else if(mode==="spot"&&e.key==="ArrowLeft")step(-1)});
+document.fonts&&document.fonts.ready.then(()=>{});
+requestAnimationFrame(t=>{last=t;draw(t)});
+</script>
+
+</body>
+</html>
