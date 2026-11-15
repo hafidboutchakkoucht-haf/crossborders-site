@@ -145,6 +145,80 @@ html.js .rv.in{opacity:1;transform:none}
 
 /* Expertises */
 .band{background:var(--surface);border-block:1px solid var(--rule)}
+/* Médiathèque : cascade de photos, reportages, avis vidéo */
+.media{background:var(--night);color:var(--on-night);overflow:hidden}
+.media .index{border-color:rgba(241,242,248,.14)}.media .index b{color:var(--gold)}.media .index .label{color:rgba(241,242,248,.7)}
+.media .h2 i{color:var(--gold)}.media .lead{color:rgba(241,242,248,.75)}
+.mfilters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.mfilters button{font:inherit;font-size:.82rem;color:var(--on-night);background:transparent;border:1px solid rgba(241,242,248,.22);border-radius:999px;padding:8px 16px;cursor:pointer;transition:background .25s,border-color .25s}
+.mfilters button:hover{border-color:rgba(241,242,248,.6)}
+.mfilters button[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--night)}
+.mfilters button small{opacity:.7;margin-left:6px;font-variant-numeric:tabular-nums}
+.cascade{position:relative;height:clamp(520px,72vh,720px);display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:14px;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(180deg,transparent,#000 9%,#000 91%,transparent)}
+.ccol{overflow:hidden;min-width:0}
+.ctrack{display:grid;gap:14px;animation:cascade var(--dur,60s) linear infinite;will-change:transform}
+.ccol:nth-child(even) .ctrack{animation-direction:reverse}
+.cascade:hover .ctrack,.cascade:focus-within .ctrack{animation-play-state:paused}
+@keyframes cascade{from{transform:translateY(0)}to{transform:translateY(calc(-50% - 7px))}}
+.ph{position:relative;margin:0;border-radius:6px;overflow:hidden;cursor:zoom-in;background:#151a33}
+.ph button{all:unset;display:block;cursor:zoom-in}
+.ph img{display:block;width:100%;height:auto;aspect-ratio:var(--ar,3/4);object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1),filter .6s}
+.ph:hover img{transform:scale(1.05)}
+.ph figcaption{position:absolute;inset:auto 0 0 0;padding:44px 14px 12px;background:linear-gradient(transparent,rgba(5,6,13,.92));display:grid;gap:2px;font-size:.82rem;line-height:1.35;pointer-events:none}
+.ph figcaption b{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.ph figcaption span{font-family:var(--serif);font-size:1.08rem;font-weight:500;line-height:1.15}
+.ph figcaption small{color:rgba(241,242,248,.6);font-size:.72rem}
+.ph:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+.msub{display:flex;justify-content:space-between;align-items:end;gap:16px 32px;flex-wrap:wrap;margin:96px 0 28px}
+.msub h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.05;margin:0}
+.msub h3 i{color:var(--gold)}
+.msub p{margin:0;max-width:34rem;color:rgba(241,242,248,.72)}
+.strip{position:relative;padding-block:26px;background:#05060d;border-block:1px solid rgba(241,242,248,.08)}
+.strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:10px;background:radial-gradient(circle,rgba(241,242,248,.22) 2.6px,transparent 3px) 0 0/22px 10px repeat-x;animation:perfs 6s linear infinite}
+.strip::before{top:8px}.strip::after{bottom:8px}
+@keyframes perfs{to{background-position:-220px 0}}
+.reel{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-inline:max(24px,calc((100vw - 1240px)/2 + 24px));scroll-padding-inline:max(24px,calc((100vw - 1240px)/2 + 24px));scrollbar-width:none}
+.reel::-webkit-scrollbar{display:none}
+.vcard{all:unset;flex:0 0 auto;scroll-snap-align:start;cursor:pointer;display:grid;gap:12px;width:var(--w,300px);position:relative}
+.vcard .fr{position:relative;height:clamp(300px,42vw,400px);border-radius:6px;overflow:hidden;background:#151a33}
+.vcard img,.vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.vcard video{opacity:0}
+.vcard.live video{opacity:1}.vcard:hover img{transform:scale(1.04)}
+.vcard .pl{position:absolute;left:14px;bottom:14px;width:48px;height:48px;border-radius:50%;background:var(--gold);display:grid;place-items:center;box-shadow:0 0 0 8px rgba(227,178,60,.18);transition:transform .3s}
+.vcard:hover .pl{transform:scale(1.1)}
+.vcard .pl::after{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--night);margin-left:4px}
+.vcard .du{position:absolute;right:12px;top:12px;font-size:.72rem;font-variant-numeric:tabular-nums;background:rgba(5,6,13,.75);padding:3px 8px;border-radius:999px}
+.vcard .meta{display:grid;gap:3px;white-space:normal}
+.vcard .meta b{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.vcard .meta strong{font-family:var(--serif);font-weight:500;font-size:1.3rem;line-height:1.1}
+.vcard .meta span{font-size:.84rem;color:rgba(241,242,248,.7)}
+.vcard:focus-visible .fr{outline:2px solid var(--gold);outline-offset:3px}
+.avis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.avis .vcard{width:auto}.avis .vcard .fr{height:auto;aspect-ratio:16/10}
+.acall{border:1px dashed rgba(241,242,248,.3);border-radius:6px;padding:28px;display:grid;gap:12px;align-content:center}
+.acall h4{margin:0;font-family:var(--serif);font-weight:500;font-size:1.5rem;line-height:1.1}
+.acall p{margin:0;font-size:.92rem;color:rgba(241,242,248,.72)}
+.acall .btn{justify-self:start;background:var(--gold);border-color:var(--gold);color:var(--night)}
+.mnav{display:flex;gap:8px}
+.mnav button{all:unset;cursor:pointer;width:42px;height:42px;border-radius:50%;border:1px solid rgba(241,242,248,.25);display:grid;place-items:center}
+.mnav button:hover{border-color:var(--gold);color:var(--gold)}
+.mnav button:focus-visible{outline:2px solid var(--gold)}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,6,13,.94);display:grid;grid-template-rows:1fr auto;padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));opacity:0;transition:opacity .35s}
+.lb.on{opacity:1}
+.lb .stage{display:grid;place-items:center;min-height:0}
+.lb img,.lb video{max-width:min(1200px,100%);max-height:100%;border-radius:4px;display:block;background:#000}
+.lb .cap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--on-night);padding-top:14px;max-width:1200px;width:100%;margin:0 auto}
+.lb .cap div{display:grid;gap:2px}
+.lb .cap b{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.lb .cap span{font-family:var(--serif);font-size:1.3rem}
+.lb .ctl{display:flex;gap:8px}
+.lb .ctl button{all:unset;cursor:pointer;border:1px solid rgba(241,242,248,.3);border-radius:999px;padding:8px 16px;font-size:.85rem;color:var(--on-night)}
+.lb .ctl button:hover,.lb .ctl button:focus-visible{border-color:var(--gold);color:var(--gold)}
+@media (max-width:980px){.cascade{--cols:2}.avis{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.ph figcaption small{display:none}.ph figcaption span{font-size:.95rem}.ph figcaption{padding:32px 10px 9px}.cascade{height:560px;gap:10px}.ctrack{gap:10px}.avis{grid-template-columns:1fr}.msub{margin-top:72px}}
+@media (prefers-reduced-motion:reduce){.ctrack,.strip::before,.strip::after{animation:none}.cascade{height:auto;-webkit-mask-image:none;mask-image:none}.ctrack .dup{display:none}}
+
 .sky{background:var(--night);color:var(--on-night);overflow:hidden}
 .sky .h2 i{color:var(--gold)}
 .sky .index b{color:var(--gold)}.sky .index .label{color:rgba(241,242,248,.7)}
@@ -565,19 +639,21 @@ html.js .rv.in{opacity:1;transform:none}
   </div>
 </section>
 
-<section class="sec tight band" id="galerie">
+<section class="sec media" id="galerie" aria-labelledby="media-h">
   <div class="wrap">
-    <div class="index"><b>10</b><span class="label">Sur le terrain</span></div>
-    <div class="gal">
-      <figure class="w7"><img src="img/hambourg-presentation.jpg" alt="Présentation de Cross Borders devant les participants, diapositive « Qui sommes-nous ? »"><figcaption>Présentation de Cross Borders aux participants · Hambourg, juillet 2026</figcaption></figure>
-      <figure class="w5"><img src="img/hambourg-tournoi.jpg" alt="Deux participants présentent le code de bonne conduite d'un tournoi sportif" style="object-position:50% 45%"><figcaption>Atelier : le code de bonne conduite du tournoi</figcaption></figure>
-      <figure class="w4"><img src="img/hambourg-soiree-italie.jpg" alt="Table de spécialités italiennes lors de la soirée interculturelle"><figcaption>Soirée interculturelle : l'Italie</figcaption></figure>
-      <figure class="w4"><img src="img/hambourg-soiree-hongrie.jpg" alt="Des participants présentent des spécialités hongroises"><figcaption>Soirée interculturelle : la Hongrie</figcaption></figure>
-      <figure class="w4"><img src="img/hambourg-soiree-turquie.jpg" alt="Table de spécialités turques sur un drapeau turc"><figcaption>Soirée interculturelle : la Turquie</figcaption></figure>
-      <figure class="w6"><img src="img/hambourg-groupe.jpg" alt="Groupe de participants devant la table italienne"><figcaption>Les participants de la délégation italienne</figcaption></figure>
-      <figure class="w6"><img src="img/hambourg-atelier-respect.jpg" alt="Une participante présente l'atelier sur le respect des joueurs" style="object-position:50% 40%"><figcaption>Atelier : respecter les joueurs sur le terrain</figcaption></figure>
+    <div class="index"><b>10</b><span class="label">Nos activités en images</span></div>
+    <div class="head"><h2 class="h2" id="media-h">Ce que nous vivons, <i>image par image.</i></h2><p class="lead">Ateliers, rencontres, prototypes d'entreprise : chaque photo est datée et rattachée à son projet. La cascade s'arrête quand vous la survolez ; cliquez sur une image pour l'agrandir.</p></div>
+    <div class="mfilters" id="m-filters" role="group" aria-label="Filtrer les photos par projet"></div>
+    <div class="cascade" id="m-cascade" aria-label="Photos des activités"></div>
+
+    <div class="msub"><h3>Reportages <i>sur le terrain</i></h3><div class="mnav"><button type="button" id="r-prev" aria-label="Reportage précédent">←</button><button type="button" id="r-next" aria-label="Reportage suivant">→</button></div></div>
+  </div>
+  <div class="strip"><div class="reel" id="m-reel" aria-label="Vidéos des activités"></div></div>
+  <div class="wrap">
+    <div class="msub"><h3>Ils témoignent, <i>en vidéo</i></h3><p>La parole aux jeunes qui ont participé à nos projets.</p></div>
+    <div class="avis" id="m-avis">
+      <div class="acall"><span class="label" style="color:var(--gold)">Votre avis compte</span><h4>Vous avez participé à un projet ?</h4><p>Envoyez-nous une vidéo d'une minute : ce que vous avez appris, ce que vous retenez, ce que vous diriez à un jeune qui hésite à partir.</p><a class="btn small" href="#contact">Envoyer mon témoignage</a></div>
     </div>
-    <p class="swipe">Faites glisser pour voir toutes les photos →</p>
   </div>
 </section>
 
@@ -676,12 +752,93 @@ var W=[['frontières.','fr'],['borders.','en'],['fronteras.','es'],['Grenzen.','
 setInterval(function(){s.classList.add('out');setTimeout(function(){i=(i+1)%W.length;s.textContent=W[i][0];s.lang=W[i][1];s.classList.remove('out');s.classList.add('pre');s.offsetWidth;s.classList.remove('pre')},450)},2800);})();
 /* Apparition au défilement et compteurs */
 (function(){if(calm||!('IntersectionObserver' in window))return;document.documentElement.classList.add('js');
-var sel='.index,.head,.manifest .big,.mv div,.rows article,.case,.actions article,.guide-t,.steps li,.idea,.figs div,.tl li,.gal,.reels,.pt>div,.join article,.word-grid>*';
+var sel='.index,.head,.manifest .big,.mv div,.rows article,.case,.actions article,.guide-t,.steps li,.idea,.figs div,.tl li,.cascade,.strip,.avis,.reels,.pt>div,.join article,.word-grid>*';
 var els=[].slice.call(document.querySelectorAll(sel));
 els.forEach(function(e){var sib=[].slice.call(e.parentNode.children).indexOf(e);e.style.transitionDelay=Math.min(sib,4)*90+'ms';e.classList.add('rv')});
 function count(b){var t=b.textContent,nums=t.match(/\d+/g);if(!nums)return;var st=null;function f(ts){if(!st)st=ts;var k=Math.min((ts-st)/1400,1),e=1-Math.pow(1-k,3),j=0;b.textContent=t.replace(/\d+/g,function(n){return Math.round(+n*e)});if(k<1)requestAnimationFrame(f);else b.textContent=t}requestAnimationFrame(f)}
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');var b=en.target.querySelector&&en.target.matches('.figs div')&&en.target.querySelector('b');if(b)count(b);io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
 els.forEach(function(e){io.observe(e)});})();
+</script>
+<script>
+/* ============ Médiathèque ============
+   Pour ajouter une photo : déposer le fichier dans img/ et ajouter une ligne dans PHOTOS.
+   Pour ajouter une vidéo : déposer le MP4 et son affiche JPG dans videos/activites/ et ajouter une ligne dans VIDEOS (ou AVIS pour un témoignage).
+   p = clé du projet (voir PROJETS). */
+var PROJETS={
+  reze26:{nom:"Femmes en milieu rural",annee:"2026",lieu:"Rezé",date:"Mars 2026"},
+  hamb26:{nom:"Rencontre internationale de jeunes",annee:"2026",lieu:"Hambourg",date:"Juillet 2026"}
+};
+var PHOTOS=[
+  {src:"img/reze-2026-07.jpg",p:"reze26",t:"Prototype d'entreprise : le recyclage textile",ar:"3/4"},
+  {src:"img/hambourg-presentation.jpg",p:"hamb26",t:"Présentation de Cross Borders aux participants",ar:"4/3"},
+  {src:"img/reze-2026-02.jpg",p:"reze26",t:"Cartographie des obstacles : social, économique, culturel",ar:"3/4"},
+  {src:"img/reze-2026-10.jpg",p:"reze26",t:"Travail en groupes mixtes",ar:"3/4"},
+  {src:"img/hambourg-soiree-turquie.jpg",p:"hamb26",t:"Soirée interculturelle : la Turquie",ar:"4/3"},
+  {src:"img/reze-2026-03.jpg",p:"reze26",t:"Restitution : motivations, obstacles et solutions",ar:"3/4"},
+  {src:"img/reze-2026-09.jpg",p:"reze26",t:"Proposition de valeur : des vêtements recyclés",ar:"3/4"},
+  {src:"img/hambourg-tournoi.jpg",p:"hamb26",t:"Atelier : le code de bonne conduite du tournoi",ar:"4/3"},
+  {src:"img/reze-2026-01.jpg",p:"reze26",t:"Sélection des idées de campagne",ar:"3/4"},
+  {src:"img/reze-2026-06.jpg",p:"reze26",t:"Le Business Model Canvas, case par case",ar:"3/4"},
+  {src:"img/hambourg-soiree-italie.jpg",p:"hamb26",t:"Soirée interculturelle : l'Italie",ar:"4/3"},
+  {src:"img/reze-2026-08.jpg",p:"reze26",t:"Rencontre avec des acteurs locaux",ar:"3/4"},
+  {src:"img/reze-2026-04.jpg",p:"reze26",t:"Présentation du futur hub numérique",ar:"3/4"},
+  {src:"img/hambourg-groupe.jpg",p:"hamb26",t:"La délégation italienne",ar:"4/3"},
+  {src:"img/reze-2026-05.jpg",p:"reze26",t:"Accueil des participants",ar:"3/4"},
+  {src:"img/hambourg-soiree-hongrie.jpg",p:"hamb26",t:"Soirée interculturelle : la Hongrie",ar:"4/3"},
+  {src:"img/hambourg-atelier-respect.jpg",p:"hamb26",t:"Atelier : respecter les joueurs sur le terrain",ar:"4/3"}
+];
+var VIDEOS=[
+  {src:"videos/activites/reze-2026-clip.mp4",poster:"videos/activites/reze-2026-clip.jpg",p:"reze26",t:"Le clip du projet",d:"Les participants présentent l'échange, pancarte à la main.",du:"0:45",w:9/16},
+  {src:"videos/activites/reze-2026-women-in-business.mp4",poster:"videos/activites/reze-2026-women-in-business.jpg",p:"reze26",t:"Women in Business",d:"Une semaine d'ateliers en moins de trente secondes.",du:"0:27",w:9/16},
+  {src:"videos/activites/reze-2026-micro-trottoir.mp4",poster:"videos/activites/reze-2026-micro-trottoir.jpg",p:"reze26",t:"Micro-trottoir à Nantes",d:"Les participants interrogent les passants dans la rue.",du:"14:26",w:16/9},
+  {src:"videos/activites/reze-2026-interview.mp4",poster:"videos/activites/reze-2026-interview.jpg",p:"reze26",t:"Interview d'une professionnelle",d:"Une participante pose ses questions sur le métier et le parcours.",du:"1:32",w:16/9}
+];
+var AVIS=[
+  {src:"videos/activites/reze-2026-temoignage.mp4",poster:"videos/activites/reze-2026-temoignage.jpg",p:"reze26",t:"La parole à un participant",d:"Prise de parole devant le groupe, à l'issue des ateliers.",du:"0:44"}
+];
+(function(){
+var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function esc(x){return String(x).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function tag(p){var P=PROJETS[p];return P.annee+' · '+P.lieu}
+/* ---- filtres + cascade ---- */
+var cur='all',F=document.getElementById('m-filters'),C=document.getElementById('m-cascade');
+function filters(){var keys=Object.keys(PROJETS);F.innerHTML=['all'].concat(keys).map(function(k){var n=k==='all'?PHOTOS.length:PHOTOS.filter(function(x){return x.p===k}).length;var l=k==='all'?'Tous les projets':PROJETS[k].lieu+' '+PROJETS[k].annee+' · '+PROJETS[k].nom;return '<button type="button" data-k="'+k+'" aria-pressed="'+(k===cur)+'">'+esc(l)+'<small>'+n+'</small></button>'}).join('');
+  [].forEach.call(F.querySelectorAll('button'),function(b){b.onclick=function(){cur=b.dataset.k;filters();cascade()}})}
+function card(x,i,dup){var P=PROJETS[x.p];return '<figure class="ph" style="--ar:'+x.ar+'"'+(dup?' aria-hidden="true"':'')+'><button type="button" data-i="'+i+'"'+(dup?' tabindex="-1"':'')+' aria-label="Agrandir : '+esc(x.t)+'"><img src="'+x.src+'" alt="'+esc(x.t)+'" loading="lazy" decoding="async"></button><figcaption><b>'+esc(tag(x.p))+'</b><span>'+esc(x.t)+'</span><small>'+esc(P.nom)+'</small></figcaption></figure>'}
+var list=[];
+function cascade(){list=PHOTOS.filter(function(x){return cur==='all'||x.p===cur});var cols=innerWidth<=980?2:3;var buckets=[];for(var c=0;c<cols;c++)buckets.push([]);
+  list.forEach(function(x,i){buckets[i%cols].push([x,i])});
+  C.innerHTML=buckets.map(function(b,ci){var h=b.map(function(e){return card(e[0],e[1])}).join('');var d=b.map(function(e){return card(e[0],e[1],1)}).join('');
+    return '<div class="ccol"><div class="ctrack" style="--dur:'+(b.length*9+ci*7)+'s">'+h+(calm?'':'<div class="dup" style="display:contents">'+d+'</div>')+'</div></div>'}).join('');
+  [].forEach.call(C.querySelectorAll('button[data-i]'),function(b){b.onclick=function(){openPhoto(+b.dataset.i)}})}
+var lastCols=0;addEventListener('resize',function(){var c=innerWidth<=980?2:3;if(c!==lastCols){lastCols=c;cascade()}});
+/* ---- visionneuse ---- */
+var LB=null,lbi=0,lbMode='',back=null;
+function shell(){if(LB)return LB;LB=document.createElement('div');LB.className='lb';LB.hidden=true;LB.setAttribute('role','dialog');LB.setAttribute('aria-modal','true');LB.setAttribute('aria-label','Visionneuse');
+  LB.innerHTML='<div class="stage" id="lb-stage"></div><div class="cap"><div><b id="lb-tag"></b><span id="lb-t"></span></div><div class="ctl"><button type="button" id="lb-prev">← Précédent</button><button type="button" id="lb-next">Suivant →</button><button type="button" id="lb-x">Fermer</button></div></div>';
+  document.body.appendChild(LB);LB.querySelector('#lb-x').onclick=close;LB.querySelector('#lb-prev').onclick=function(){step(-1)};LB.querySelector('#lb-next').onclick=function(){step(1)};
+  LB.addEventListener('click',function(e){if(e.target===LB||e.target.id==='lb-stage')close()});
+  addEventListener('keydown',function(e){if(LB.hidden)return;if(e.key==='Escape')close();else if(e.key==='ArrowRight')step(1);else if(e.key==='ArrowLeft')step(-1)});return LB}
+function show(){var st=LB.querySelector('#lb-stage');var x,src;if(lbMode==='photo'){x=list[lbi];st.innerHTML='<img src="'+x.src+'" alt="'+esc(x.t)+'">'}
+  else{var arr=lbMode==='video'?VIDEOS:AVIS;x=arr[lbi];st.innerHTML='<video controls autoplay playsinline poster="'+x.poster+'"><source src="'+x.src+'" type="video/mp4"></video>'}
+  LB.querySelector('#lb-tag').textContent=tag(x.p)+' · '+PROJETS[x.p].nom;LB.querySelector('#lb-t').textContent=x.t;
+  var n=lbMode==='photo'?list.length:(lbMode==='video'?VIDEOS:AVIS).length;LB.querySelector('#lb-prev').hidden=LB.querySelector('#lb-next').hidden=n<2}
+function open(mode,i){shell();back=document.activeElement;lbMode=mode;lbi=i;show();LB.hidden=false;document.documentElement.style.overflow='hidden';requestAnimationFrame(function(){LB.classList.add('on')});LB.querySelector('#lb-x').focus()}
+function openPhoto(i){open('photo',i)}
+function step(d){var n=lbMode==='photo'?list.length:(lbMode==='video'?VIDEOS:AVIS).length;lbi=(lbi+d+n)%n;show()}
+function close(){LB.classList.remove('on');var v=LB.querySelector('video');if(v)v.pause();setTimeout(function(){LB.hidden=true;LB.querySelector('#lb-stage').innerHTML=''},calm?0:300);document.documentElement.style.overflow='';if(back)back.focus()}
+/* ---- reportages et avis ---- */
+function vcard(x,i,mode){var P=PROJETS[x.p];var h=mode==='video'?Math.min(400,Math.max(300,innerWidth*.42)):0;var w=mode==='video'?Math.round(h*x.w):0;
+  return '<button type="button" class="vcard" data-m="'+mode+'" data-i="'+i+'"'+(w?' style="--w:'+w+'px"':'')+' aria-label="Lire : '+esc(x.t)+'"><span class="fr"><img src="'+x.poster+'" alt="" loading="lazy"><video muted loop playsinline preload="none" src="'+x.src+'"></video><span class="pl" aria-hidden="true"></span><span class="du">'+x.du+'</span></span><span class="meta"><b>'+esc(tag(x.p))+' · '+esc(P.nom)+'</b><strong>'+esc(x.t)+'</strong><span>'+esc(x.d)+'</span></span></button>'}
+var R=document.getElementById('m-reel'),A=document.getElementById('m-avis');
+R.innerHTML=VIDEOS.map(function(x,i){return vcard(x,i,'video')}).join('');
+A.insertAdjacentHTML('afterbegin',AVIS.map(function(x,i){return vcard(x,i,'avis')}).join(''));
+[].forEach.call(document.querySelectorAll('.vcard'),function(b){var v=b.querySelector('video');b.onclick=function(){if(v){v.pause();b.classList.remove('live')}open(b.dataset.m,+b.dataset.i)};
+  if(!calm&&matchMedia('(hover:hover)').matches){b.addEventListener('mouseenter',function(){v.currentTime=Math.min(5,v.duration||0);var pr=v.play();if(pr)pr.then(function(){b.classList.add('live')}).catch(function(){})});b.addEventListener('mouseleave',function(){v.pause();b.classList.remove('live')})}});
+function slide(d){var c=R.querySelector('.vcard');R.scrollBy({left:d*((c?c.offsetWidth:300)+18),behavior:calm?'auto':'smooth'})}
+document.getElementById('r-prev').onclick=function(){slide(-1)};document.getElementById('r-next').onclick=function(){slide(1)};
+lastCols=innerWidth<=980?2:3;filters();cascade();
+})();
 </script>
 
 </body>
