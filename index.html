@@ -149,6 +149,13 @@ html.js .rv.in{opacity:1;transform:none}
 .media{background:var(--night);color:var(--on-night);overflow:hidden}
 .media .index{border-color:rgba(241,242,248,.14)}.media .index b{color:var(--gold)}.media .index .label{color:rgba(241,242,248,.7)}
 .media .h2 i{color:var(--gold)}.media .lead{color:rgba(241,242,248,.75)}
+.gcta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;text-decoration:none;color:var(--on-night);border:1px solid rgba(227,178,60,.45);border-radius:10px;padding:16px 22px;margin:-24px 0 36px;background:linear-gradient(90deg,rgba(0,51,153,.35),transparent);transition:border-color .3s,transform .3s}
+.gcta:hover{border-color:var(--gold);transform:translateY(-2px)}
+.gflag svg{width:72px;height:auto;display:block;box-shadow:0 8px 20px -10px #000}
+.gcta strong{display:block;font-family:var(--serif);font-weight:500;font-size:1.6rem;line-height:1.1;margin:2px 0}
+.gcta b{color:var(--gold)}.gcta span span{font-size:.88rem;color:rgba(241,242,248,.72)}
+.garr{font-size:1.6rem;color:var(--gold);transition:transform .3s}.gcta:hover .garr{transform:translateX(6px)}
+@media (max-width:560px){.gcta{grid-template-columns:auto minmax(0,1fr)}.garr{display:none}.gflag svg{width:52px}.gcta strong{font-size:1.25rem}}
 .mfilters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
 .mfilters button{font:inherit;font-size:.82rem;color:var(--on-night);background:transparent;border:1px solid rgba(241,242,248,.22);border-radius:999px;padding:8px 16px;cursor:pointer;transition:background .25s,border-color .25s}
 .mfilters button:hover{border-color:rgba(241,242,248,.6)}
@@ -644,6 +651,7 @@ html.js .rv.in{opacity:1;transform:none}
   <div class="wrap">
     <div class="index"><b>10</b><span class="label">Nos activités en images</span></div>
     <div class="head"><h2 class="h2" id="media-h">Ce que nous vivons, <i>image par image.</i></h2><p class="lead">Ateliers, rencontres, prototypes d'entreprise : chaque photo est datée et rattachée à son projet. La cascade s'arrête quand vous la survolez ; cliquez sur une image pour l'agrandir.</p></div>
+    <a class="gcta" href="galerie/"><span class="gflag" aria-hidden="true"><svg viewBox="0 0 810 540"><rect width="810" height="540" fill="#003399"/><g id="gstars"></g></svg></span><span><b class="label">Nouveau · Erasmus+</b><strong>Entrer dans la galerie internationale</strong><span>Une salle par projet, chaque photo avec son cartel : lieu, date, projet.</span></span><span class="garr" aria-hidden="true">→</span></a>
     <div class="mfilters" id="m-filters" role="group" aria-label="Filtrer les photos par projet"></div>
     <div class="cascade" id="m-cascade" aria-label="Photos des activités"></div>
 
@@ -774,19 +782,21 @@ var PHOTOS=[
   {src:"img/hambourg-presentation.jpg",p:"hamb26",t:"Présentation de Cross Borders aux participants",ar:"4/3"},
   {src:"img/reze-2026-02.jpg",p:"reze26",t:"Cartographie des obstacles : social, économique, culturel",ar:"3/4"},
   {src:"img/reze-2026-10.jpg",p:"reze26",t:"Travail en groupes mixtes",ar:"3/4"},
-  {src:"img/hambourg-soiree-turquie.jpg",p:"hamb26",t:"Soirée interculturelle : la Turquie",ar:"4/3"},
+  {src:"img/hambourg-soiree-turquie.jpg",p:"hamb26",t:"Soirée interculturelle : la Turquie",ar:"16/9"},
   {src:"img/reze-2026-03.jpg",p:"reze26",t:"Restitution : motivations, obstacles et solutions",ar:"3/4"},
   {src:"img/reze-2026-09.jpg",p:"reze26",t:"Proposition de valeur : des vêtements recyclés",ar:"3/4"},
-  {src:"img/hambourg-tournoi.jpg",p:"hamb26",t:"Atelier : le code de bonne conduite du tournoi",ar:"4/3"},
+  {src:"img/hambourg-tournoi.jpg",p:"hamb26",t:"Atelier : le code de bonne conduite du tournoi",ar:"3/4"},
   {src:"img/reze-2026-01.jpg",p:"reze26",t:"Sélection des idées de campagne",ar:"3/4"},
   {src:"img/reze-2026-06.jpg",p:"reze26",t:"Le Business Model Canvas, case par case",ar:"3/4"},
   {src:"img/hambourg-soiree-italie.jpg",p:"hamb26",t:"Soirée interculturelle : l'Italie",ar:"4/3"},
   {src:"img/reze-2026-08.jpg",p:"reze26",t:"Rencontre avec des acteurs locaux",ar:"3/4"},
   {src:"img/reze-2026-04.jpg",p:"reze26",t:"Présentation du futur hub numérique",ar:"3/4"},
-  {src:"img/hambourg-groupe.jpg",p:"hamb26",t:"La délégation italienne",ar:"4/3"},
+  {src:"img/hambourg-groupe.jpg",p:"hamb26",t:"La délégation italienne",ar:"16/9"},
   {src:"img/reze-2026-05.jpg",p:"reze26",t:"Accueil des participants",ar:"3/4"},
   {src:"img/hambourg-soiree-hongrie.jpg",p:"hamb26",t:"Soirée interculturelle : la Hongrie",ar:"4/3"},
-  {src:"img/hambourg-atelier-respect.jpg",p:"hamb26",t:"Atelier : respecter les joueurs sur le terrain",ar:"4/3"}
+  {src:"img/hambourg-atelier-respect.jpg",p:"hamb26",t:"Atelier : respecter les joueurs sur le terrain",ar:"3/4"},
+  {src:"img/hambourg-attestations.jpg",p:"hamb26",t:"La remise des attestations",ar:"3/4"},
+  {src:"img/hambourg-equipe.jpg",p:"hamb26",t:"L'équipe d'accueil avec Ayedara e.V.",ar:"4/3"}
 ];
 var VIDEOS=[
   {src:"videos/activites/reze-2026-clip.mp4",poster:"videos/activites/reze-2026-clip.jpg",p:"reze26",t:"Le clip du projet",d:"Les participants présentent l'échange, pancarte à la main.",du:"0:45",w:9/16},
@@ -838,6 +848,7 @@ A.insertAdjacentHTML('afterbegin',AVIS.map(function(x,i){return vcard(x,i,'avis'
   if(!calm&&matchMedia('(hover:hover)').matches){b.addEventListener('mouseenter',function(){v.currentTime=Math.min(5,v.duration||0);var pr=v.play();if(pr)pr.then(function(){b.classList.add('live')}).catch(function(){})});b.addEventListener('mouseleave',function(){v.pause();b.classList.remove('live')})}});
 function slide(d){var c=R.querySelector('.vcard');R.scrollBy({left:d*((c?c.offsetWidth:300)+18),behavior:calm?'auto':'smooth'})}
 document.getElementById('r-prev').onclick=function(){slide(-1)};document.getElementById('r-next').onclick=function(){slide(1)};
+(function(){var g=document.getElementById("gstars");if(!g)return;var s="";for(var i=0;i<12;i++){var a=i*Math.PI/6,cx=405+180*Math.sin(a),cy=270-180*Math.cos(a),pts=[];for(var k=0;k<10;k++){var b=-Math.PI/2+k*Math.PI/5,r=k%2?11.5:30;pts.push((cx+r*Math.cos(b)).toFixed(1)+","+(cy+r*Math.sin(b)).toFixed(1))}s+='<polygon fill="#ffcc00" points="'+pts.join(" ")+'"/>'}g.innerHTML=s})();
 lastCols=innerWidth<=980?2:3;filters();cascade();
 })();
 </script>

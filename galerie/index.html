@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Galerie internationale · Cross Borders</title>
+<meta name="description" content="La galerie internationale de Cross Borders : nos échanges de jeunes en Europe, salle par salle, avec le lieu, la date et le projet de chaque photographie.">
+<meta property="og:title" content="Galerie internationale · Cross Borders">
+<meta property="og:image" content="https://www.crossborders.ngo/img/galerie-apercu.jpg">
+<link rel="icon" href="../brand/icone.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a night-time museum in the colours of the European flag. A hero with the twelve stars, a map that serves as the floor plan, then one room per project: the wall slides sideways as you scroll, each photograph framed with its museum label. Single dark look, by choice. */
+:root{
+  color-scheme:dark;
+  --eu:#003399; --star:#ffcc00; --wall:#081231; --wall-2:#0d1c48; --mat:#f7f7f4; --ink:#eef0f8; --muted:#9aa6c8; --rule:rgba(238,240,248,.14);
+  --serif:"Cormorant Garamond","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--wall);color:var(--ink)}
+body{font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--star);outline-offset:3px}
+.label{font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.gut{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.in{max-width:1240px;margin-inline:auto}
+
+/* top bar */
+.top{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:max(14px,env(safe-area-inset-top,0px));padding-bottom:14px;
+  background:linear-gradient(rgba(8,18,49,.92),rgba(8,18,49,0));transition:background .4s}
+.top.solid{background:rgba(8,18,49,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top a.back{text-decoration:none;font-size:.86rem;display:flex;align-items:center;gap:10px}
+.top a.back img{height:28px;width:auto}
+.eu{display:flex;align-items:center;gap:10px;font-size:.72rem;line-height:1.25;color:var(--ink)}
+.eu svg{width:46px;height:auto;flex:none;display:block}
+
+/* hero */
+.hero{position:relative;min-height:min(100vh,920px);display:grid;align-items:center;padding-top:110px;padding-bottom:80px;overflow:hidden;
+  background:radial-gradient(90% 70% at 70% 40%,#0d2a7a 0%,#0a1c52 40%,var(--wall) 85%)}
+.hero .in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;width:100%}
+.hero h1{margin:.25em 0 .3em;font:500 clamp(3rem,8.4vw,7.2rem)/.92 var(--serif);letter-spacing:-.01em;text-wrap:balance}
+.hero h1 i{color:var(--star);font-weight:500}
+.hero .lede{font-size:clamp(1.05rem,1.5vw,1.2rem);color:rgba(238,240,248,.82);max-width:34rem;margin:0}
+.hero .kick{color:var(--star)}
+.stats{display:flex;gap:clamp(20px,4vw,44px);margin:36px 0 34px;flex-wrap:wrap}
+.stats div{display:grid}
+.stats b{font:500 clamp(2.2rem,4vw,3.2rem)/1 var(--serif);color:var(--star);font-variant-numeric:tabular-nums}
+.stats span{font-size:.8rem;color:var(--muted)}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:.92rem;padding:14px 24px;border-radius:999px;border:1px solid var(--star);background:var(--star);color:#06102e;cursor:pointer;transition:transform .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:rgba(238,240,248,.35)}
+.btn svg{width:16px;height:16px}
+.ring{position:relative;aspect-ratio:1;width:min(440px,100%);justify-self:center}
+.ring svg{width:100%;height:100%;overflow:visible}
+.ring .st{transform-box:fill-box;transform-origin:center;animation:arrive 1.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes arrive{from{opacity:0;transform:scale(.2) rotate(-90deg)}}
+.ring .orbit{transform-origin:220px 220px;animation:turn 120s linear infinite}
+@keyframes turn{to{transform:rotate(360deg)}}
+.ring .core{font:500 15px var(--sans);letter-spacing:.24em;text-transform:uppercase;fill:var(--ink)}
+.ring .core2{font:italic 500 34px var(--serif);fill:var(--star)}
+.dust{position:absolute;inset:0;z-index:1;pointer-events:none}
+
+/* plan / map */
+.plan{padding-block:110px 90px;background:var(--wall)}
+.plan .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:40px}
+.plan h2,.room h2,.foot h2{font:500 clamp(2.2rem,5vw,3.8rem)/1 var(--serif);margin:.3em 0 0}
+.plan h2 i,.room h2 i{color:var(--star)}
+.plan p{color:var(--muted);margin:0;max-width:34rem}
+.mapbox{position:relative;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#06102b}
+.mapbox svg{display:block;width:100%;height:auto}
+.land{fill:#13235a;stroke:#1f347a;stroke-width:.8}
+.land.hl{fill:#1d3a9c;stroke:var(--star);stroke-width:1}
+.arc{fill:none;stroke:var(--star);stroke-width:1.6;stroke-dasharray:6 6;opacity:.75;animation:flow 2.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.venue{cursor:pointer}
+.venue circle.p{fill:var(--star);stroke:#06102b;stroke-width:3}
+.venue circle.r{fill:none;stroke:var(--star);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:ping 2.2s ease-out infinite}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(3.4);opacity:0}}
+.venue text{font:600 15px var(--sans);fill:var(--ink)}
+.venue text.s{font:500 12px var(--sans);fill:var(--muted)}
+.venue:hover text,.venue:focus text{fill:var(--star)}
+.cty{font:500 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;fill:rgba(238,240,248,.55)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 22px;padding:16px 20px;border-top:1px solid var(--rule);font-size:.82rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--star);margin-right:8px;vertical-align:0}
+.legend i.c{border-radius:2px;background:#1d3a9c;outline:1px solid var(--star)}
+
+/* rooms */
+.room{position:relative;background:var(--wall)}
+.room+.room{border-top:1px solid var(--rule)}
+.sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;
+  background:radial-gradient(60vmax 50vmax at var(--mx,50%) var(--my,45%),rgba(255,236,170,.10),transparent 60%),linear-gradient(180deg,var(--wall-2),var(--wall) 70%)}
+.sticky::after{content:"";position:absolute;left:0;right:0;bottom:12vh;height:1px;background:linear-gradient(90deg,transparent,rgba(238,240,248,.12),transparent)}
+.wall{display:flex;align-items:center;gap:clamp(40px,5vw,72px);padding-inline:max(24px,calc((100vw - 1240px)/2 + 24px)) 12vw;will-change:transform}
+.plaque{flex:0 0 min(440px,82vw);display:grid;gap:14px;align-content:center}
+.plaque .no{font:italic 500 clamp(4rem,9vw,7rem)/.8 var(--serif);color:var(--star)}
+.plaque .where{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:.86rem}
+.plaque .where b{color:var(--ink);font-weight:600}
+.plaque p{margin:0;color:rgba(238,240,248,.82)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:.74rem;border:1px solid var(--rule);border-radius:999px;padding:4px 11px;color:var(--ink)}
+.fund{display:flex;gap:12px;align-items:center;border:1px solid rgba(255,204,0,.35);border-radius:8px;padding:10px 12px;font-size:.76rem;line-height:1.35}
+.fund svg{width:54px;flex:none}
+.fund small{display:block;color:var(--muted);font-size:.7rem;margin-top:2px;word-break:break-word}
+.hint{font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.hint svg{width:30px;animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(8px)}}
+.work{flex:none;margin:0;display:grid;gap:16px;justify-items:start}
+.work button{all:unset;cursor:zoom-in;display:block;position:relative}
+.frame{display:block;padding:clamp(10px,1.2vw,18px);background:var(--mat);box-shadow:0 0 0 1px rgba(0,0,0,.4),0 0 0 6px #121a33,0 0 0 7px rgba(255,204,0,.45),0 40px 70px -30px rgba(0,0,0,.85);transition:transform .6s cubic-bezier(.2,.7,.2,1),box-shadow .6s}
+.work button:hover .frame,.work button:focus-visible .frame{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(0,0,0,.4),0 0 0 6px #121a33,0 0 0 7px var(--star),0 60px 90px -30px rgba(0,0,0,.9)}
+.frame img{display:block;height:var(--h);width:auto;max-width:none}
+.work.p .frame img{--h:min(56vh,520px)}
+.work.l .frame img{--h:min(40vh,380px)}
+.work.lo{align-self:flex-end;margin-bottom:8vh}.work.hi{align-self:flex-start;margin-top:10vh}
+.cartel{background:#f7f7f4;color:#14182a;padding:10px 14px 11px;width:min(260px,70vw);font-size:.78rem;line-height:1.4;box-shadow:0 10px 24px -14px rgba(0,0,0,.8)}
+.cartel b{display:block;font:600 1.02rem/1.15 var(--serif);margin:2px 0 4px}
+.cartel .n{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#4b5270}
+.cartel span{color:#4b5270}
+.end{flex:0 0 auto;display:grid;gap:12px;align-content:center;max-width:300px}
+.end b{font:italic 500 2rem/1.05 var(--serif)}
+.end p{margin:0;color:var(--muted);font-size:.9rem}
+
+/* plan bar */
+.planbar{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(140%);z-index:35;display:flex;gap:6px;align-items:center;padding:6px;border-radius:999px;background:rgba(8,18,49,.9);backdrop-filter:blur(10px);border:1px solid var(--rule);transition:transform .5s cubic-bezier(.2,.8,.2,1);max-width:calc(100% - 32px)}
+.planbar.on{transform:translateX(-50%)}
+.planbar a,.planbar button{all:unset;cursor:pointer;font-size:.8rem;padding:8px 14px;border-radius:999px;white-space:nowrap;position:relative;overflow:hidden}
+.planbar a.cur{background:var(--star);color:#06102e;font-weight:600}
+.planbar a:focus-visible,.planbar button:focus-visible{outline:2px solid var(--star)}
+.planbar .pr{position:absolute;left:0;bottom:0;height:2px;background:var(--star);width:var(--p,0%)}
+.planbar a.cur .pr{background:#06102e}
+
+/* viewer */
+.view{position:fixed;inset:0;z-index:60;background:rgba(4,9,26,.96);display:grid;grid-template-columns:minmax(0,1fr) 340px;opacity:0;transition:opacity .35s}
+.view.on{opacity:1}
+.view .pic{display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top,0px)) 24px 24px max(24px,env(safe-area-inset-left,0px));min-height:0}
+.view .pic img{max-width:100%;max-height:calc(100vh - 48px);display:block;border:12px solid var(--mat);box-shadow:0 30px 80px -20px #000}
+.view aside{border-left:1px solid var(--rule);padding:max(28px,env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) 24px 28px;display:grid;align-content:space-between;gap:24px;overflow:auto}
+.view h3{font:500 2rem/1.05 var(--serif);margin:.4em 0 .5em}
+.view dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0;font-size:.86rem}
+.view dt{color:var(--muted)}
+.view dd{margin:0}
+.view .note{color:rgba(238,240,248,.82);margin:18px 0 0}
+.view .ctl{display:grid;gap:8px}
+.view .row{display:flex;gap:8px}
+.view .row button,.view .ctl>button{all:unset;cursor:pointer;text-align:center;flex:1;border:1px solid var(--rule);border-radius:999px;padding:10px 14px;font-size:.85rem}
+.view .row button:hover,.view .ctl>button:hover{border-color:var(--star);color:var(--star)}
+.view .row button:focus-visible,.view .ctl>button:focus-visible{outline:2px solid var(--star)}
+.view .tour{height:2px;background:var(--rule);border-radius:2px;overflow:hidden}
+.view .tour i{display:block;height:100%;width:0;background:var(--star)}
+
+/* footer */
+.foot{padding-block:90px 60px;background:#050b22;border-top:1px solid var(--rule)}
+.foot .grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:start}
+.foot p{color:var(--muted);margin:0 0 14px;max-width:36rem}
+.disc{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--rule);border-radius:10px;padding:18px;font-size:.8rem;color:var(--muted);line-height:1.55}
+.disc svg{width:72px;flex:none}
+.disc b{color:var(--ink);display:block;margin-bottom:4px;font-size:.86rem}
+
+@media (max-width:900px){
+  .hero .in,.plan .head,.foot .grid{grid-template-columns:1fr}
+  .ring{width:min(300px,80%);order:-1}
+  .view{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
+  .view aside{border-left:0;border-top:1px solid var(--rule);max-height:46vh}
+  .view .pic img{max-height:50vh;border-width:8px}
+}
+@media (max-width:760px),(prefers-reduced-motion:reduce){
+  .room{height:auto!important}
+  .sticky{position:relative;height:auto;padding-block:70px 40px;display:block}
+  .wall{transform:none!important;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;align-items:flex-start;scrollbar-width:thin}
+  .wall>*{scroll-snap-align:start}
+  .work.lo,.work.hi{margin:0;align-self:flex-start}
+  .work.p .frame img{--h:min(52vh,440px)}.work.l .frame img{--h:min(30vh,240px)}
+  .hint svg{animation:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="eu" viewBox="0 0 810 540"><rect width="810" height="540" fill="#003399"/><g id="eus"></g></symbol>
+</defs></svg>
+
+<header class="top gut" id="top">
+  <a class="back" href="../"><img src="../brand/embleme.svg" alt="" width="28" height="28">← Cross Borders</a>
+  <div class="eu"><svg viewBox="0 0 810 540" role="img" aria-label="Drapeau de l'Union européenne"><use href="#eu"/></svg><span>Cofinancé par<br>l'Union européenne</span></div>
+</header>
+
+<main>
+<section class="hero gut" aria-labelledby="h1">
+  <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+  <div class="in">
+    <div>
+      <p class="label kick">Cross Borders · Erasmus+ Jeunesse</p>
+      <h1 id="h1">Galerie <i>internationale</i></h1>
+      <p class="lede">Nos rencontres de jeunes en Europe, exposées salle par salle. Chaque photographie porte son cartel : le projet, le lieu, la date et ce qu'elle raconte.</p>
+      <div class="stats" id="stats"></div>
+      <div class="cta"><a class="btn" href="#plan">Commencer la visite <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a><button class="btn ghost" type="button" id="tour-start"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Visite guidée</button></div>
+    </div>
+    <div class="ring" aria-hidden="true">
+      <svg viewBox="0 0 440 440"><g class="orbit" id="orbit"></g>
+        <text class="core" x="220" y="212" text-anchor="middle">Europe</text>
+        <text class="core2" x="220" y="250" text-anchor="middle">en images</text></svg>
+    </div>
+  </div>
+</section>
+
+<section class="plan gut" id="plan" aria-labelledby="plan-h">
+  <div class="in">
+    <div class="head"><div><p class="label kick" style="color:var(--star)">Le plan de la galerie</p><h2 id="plan-h">Une carte, <i>des rencontres.</i></h2></div><p>Les pays en surbrillance ont envoyé des jeunes à nos projets. Les points dorés sont les lieux des rencontres : cliquez sur l'un d'eux pour entrer dans la salle.</p></div>
+    <div class="mapbox"><svg id="map" role="img" aria-label="Carte de l'Europe : pays partenaires et lieux des rencontres"></svg>
+      <div class="legend"><span><i></i>Lieu d'une rencontre</span><span><i class="c"></i>Pays d'origine des participants</span><span>France, Allemagne, Italie, Hongrie, Turquie</span></div></div>
+  </div>
+</section>
+
+<div id="rooms"></div>
+</main>
+
+<footer class="foot gut">
+  <div class="in grid">
+    <div><p class="label" style="color:var(--star)">La galerie s'agrandit</p><h2 style="font:500 clamp(2rem,4vw,3rem)/1 var(--serif);margin:.3em 0 .5em">Chaque nouveau projet <i style="color:var(--star)">ouvre une salle.</i></h2><p>Vous avez participé à l'une de nos rencontres et vous avez des photos ? Envoyez-les-nous avec le lieu et la date : elles rejoindront la salle du projet.</p><a class="btn" href="../#contact">Envoyer des photos</a></div>
+    <div class="disc"><svg viewBox="0 0 810 540" aria-hidden="true"><use href="#eu"/></svg><div><b>Cofinancé par l'Union européenne</b>Le projet « Inclusion socio-économique des femmes en milieu rural » (2025-1-FR02-KA152-YOU-000298325) est cofinancé par le programme Erasmus+. Les points de vue et avis exprimés n'engagent toutefois que leurs auteurs et ne reflètent pas nécessairement ceux de l'Union européenne ou de l'Agence Erasmus+ France Jeunesse &amp; Sport. Ni l'Union européenne ni l'autorité chargée de l'octroi ne peuvent en être tenues pour responsables.</div></div>
+  </div>
+</footer>
+
+<nav class="planbar" id="planbar" aria-label="Salles de la galerie"></nav>
+<div class="view" id="view" hidden role="dialog" aria-modal="true" aria-labelledby="v-t">
+  <div class="pic" id="v-pic"></div>
+  <aside><div><p class="label" style="color:var(--star)" id="v-room"></p><h3 id="v-t"></h3><dl id="v-dl"></dl><p class="note" id="v-note"></p></div>
+    <div class="ctl"><div class="tour" id="v-tour" hidden><i></i></div><div class="row"><button type="button" id="v-prev">← Précédente</button><button type="button" id="v-next">Suivante →</button></div><button type="button" id="v-play">Lancer la visite guidée</button><button type="button" id="v-x">Fermer</button></div></aside>
+</div>
+
+<script>
+/* ============ Les salles de la galerie ============
+   Pour ouvrir une nouvelle salle : ajouter un bloc dans SALLES.
+   Pour ajouter une photo : déposer le fichier dans img/ et ajouter une ligne dans « oeuvres »
+   (o: "p" pour une photo verticale, "l" pour une photo horizontale). */
+var SALLES=[
+ {id:"reze-2026",num:"I",ville:"Rezé",pays:"France",date:"22–30 mars 2026",titre:"Inclusion socio-économique des femmes en milieu rural",type:"Échange de jeunes Erasmus+",
+  texte:"Neuf jours d'ateliers pour comprendre ce qui freine les femmes des campagnes et imaginer des réponses : cartographie des obstacles, idées de campagne, deux prototypes d'entreprise.",
+  delegations:["France","Allemagne","Italie","Hongrie","Turquie"],ue:"Projet 2025-1-FR02-KA152-YOU-000298325",venue:"reze",
+  oeuvres:[
+   {src:"reze-2026-05.jpg",o:"p",t:"L'accueil des participants",n:"Le premier jour, devant la bâche de l'association : les délégations découvrent le programme de la semaine."},
+   {src:"reze-2026-10.jpg",o:"p",t:"Le travail en groupes mixtes",n:"Chaque table réunit des jeunes de pays différents, autour d'une même question."},
+   {src:"reze-2026-02.jpg",o:"p",t:"La cartographie des obstacles",n:"Freins sociaux, économiques et culturels : le groupe classe ce qui empêche les femmes rurales d'entreprendre."},
+   {src:"reze-2026-01.jpg",o:"p",t:"Le tri des idées de campagne",n:"Chaque idée est évaluée, puis retenue ou écartée, avec la raison écrite à côté."},
+   {src:"reze-2026-03.jpg",o:"p",t:"Motivations, obstacles et solutions",n:"Restitution en plénière du travail sur l'entrepreneuriat féminin."},
+   {src:"reze-2026-04.jpg",o:"p",t:"Le futur hub numérique",n:"Profils d'entrepreneures, offres d'emploi et de bourses, agenda : l'architecture d'une plateforme imaginée par le groupe."},
+   {src:"reze-2026-06.jpg",o:"p",t:"Le Business Model Canvas",n:"Partenaires, activités, ressources, clients : le modèle d'entreprise rempli case par case."},
+   {src:"reze-2026-07.jpg",o:"p",t:"Un prototype : le recyclage textile",n:"Collecte, lavage, couture, revente : les partenaires et les activités clés d'une entreprise de vêtements recyclés."},
+   {src:"reze-2026-09.jpg",o:"p",t:"La proposition de valeur",n:"Zéro déchet, matériaux durables, fidélisation des clients : ce que l'entreprise promet."},
+   {src:"reze-2026-08.jpg",o:"p",t:"Rencontre avec des acteurs locaux",n:"Sortie sur le terrain, à la rencontre de celles et ceux qui font vivre le territoire."}
+  ]},
+ {id:"hambourg-2026",num:"II",ville:"Hambourg",pays:"Allemagne",date:"Juillet 2026",titre:"Rencontre internationale de jeunes",type:"Avec Ayedara e.V.",
+  texte:"Dans le prolongement de notre coopération franco-allemande : présentation des associations, ateliers sur le fair-play et le respect dans le sport, soirée interculturelle, remise des attestations.",
+  delegations:["France","Allemagne","Italie","Hongrie","Turquie"],ue:"",venue:"hambourg",
+  oeuvres:[
+   {src:"hambourg-equipe.jpg",o:"l",t:"L'équipe d'accueil",n:"Réunie derrière la banderole d'Ayedara, l'association partenaire."},
+   {src:"hambourg-presentation.jpg",o:"l",t:"Qui sommes-nous ?",n:"Cross Borders se présente aux participants des autres pays."},
+   {src:"hambourg-tournoi.jpg",o:"p",t:"Le code de bonne conduite",n:"Deux participants présentent les règles du tournoi qu'ils ont écrites."},
+   {src:"hambourg-atelier-respect.jpg",o:"p",t:"Respecter les joueurs",n:"Atelier sur le respect des joueurs et des arbitres sur le terrain."},
+   {src:"hambourg-soiree-italie.jpg",o:"l",t:"Soirée interculturelle : l'Italie",n:"La délégation italienne fait goûter ses spécialités."},
+   {src:"hambourg-soiree-hongrie.jpg",o:"l",t:"Soirée interculturelle : la Hongrie",n:"Plats et récits venus de Hongrie."},
+   {src:"hambourg-soiree-turquie.jpg",o:"l",t:"Soirée interculturelle : la Turquie",n:"La table turque, dressée sur le drapeau."},
+   {src:"hambourg-groupe.jpg",o:"l",t:"La délégation italienne",n:"Les participants italiens, réunis autour de leur table."},
+   {src:"hambourg-attestations.jpg",o:"p",t:"La remise des attestations",n:"Le dernier jour, chacun repart avec la reconnaissance de ce qu'il a appris."}
+  ]}
+];
+var RATIO={"hambourg-tournoi.jpg": "900/1200", "reze-2026-02.jpg": "1050/1400", "hambourg-soiree-hongrie.jpg": "1400/1050", "reze-2026-05.jpg": "1050/1400", "hambourg-soiree-turquie.jpg": "1400/788", "hambourg-equipe.jpg": "1600/1200", "reze-2026-01.jpg": "1050/1400", "constellations.jpg": "1600/900", "hambourg-presentation.jpg": "1600/1200", "hambourg-atelier-respect.jpg": "900/1200", "hambourg-soiree-italie.jpg": "1400/1050", "reze-2026-08.jpg": "1050/1400", "reze-2026-09.jpg": "1050/1400", "reze-2026-03.jpg": "1050/1400", "hambourg-attestations.jpg": "1050/1400", "hambourg-groupe.jpg": "1600/900", "reze-2026-06.jpg": "1050/1400", "reze-2026-04.jpg": "1050/1400", "president.jpg": "700/700", "reze-2026-10.jpg": "1050/1400", "reze-2026-07.jpg": "1050/1400"};
+var MAP={"W":1000,"H":620,"paths":[{"n":"Kazakhstan","h":0,"d":"M1010,230L1001,225L992,231L974,223L974,205L968,203L967,177L986,181L980,166L993,133L1010,122L1010,230Z"},{"n":"Russia","h":0,"d":"M634,198L611,201L595,200L597,191L613,182L627,184L632,186L632,192ZM1010,122L993,133L980,166L986,181L967,177L968,203L974,205L974,223L992,231L1001,225L1010,230L1010,345L1010,345L1001,346L994,353L990,351L966,350L943,356L929,357L928,360L903,350L884,349L867,341L877,334L882,313L871,308L889,292L887,288L876,296L873,287L878,278L890,272L890,264L882,255L884,242L881,236L860,237L852,240L841,233L832,240L813,238L812,234L804,227L794,229L791,223L793,218L781,209L769,215L765,215L763,220L758,221L751,208L746,202L748,200L758,198L762,192L757,187L747,186L747,182L741,179L730,168L731,161L727,152L715,150L709,154L706,149L692,147L686,135L683,125L676,121L680,113L672,94L677,80L675,77L684,63L671,55L687,23L693,8L694,-3L683,-10L1010,-10ZM816,341L818,335L830,336L835,336L838,339L840,339L841,341L849,343L864,337L863,346L849,354L833,372L823,371L823,360L806,359L807,354L819,343Z"},{"n":"Norway","h":0,"d":"M517,-10L515,-4L505,-4L499,16L499,45L506,56L503,82L494,97L489,109L481,96L458,120L443,124L428,112L426,89L427,38L438,25L465,8L482,-10L517,-10Z"},{"n":"France","h":1,"d":"M418,309L425,315L445,320L437,334L434,350L430,353L423,351L423,356L412,367L411,377L418,374L422,384L421,390L425,398L419,405L422,422L431,425L428,434L413,445L383,437L359,441L356,454L337,454L321,442L314,446L287,431L282,422L293,410L303,369L292,344L284,331L264,318L266,303L285,302L307,312L307,287L319,299L353,287L360,270L372,268L373,275L379,276L384,286L393,297L400,296L411,307L414,309ZM448,458L458,450L460,469L454,486L447,481L444,466Z"},{"n":"Israel","h":0,"d":"M926,630L927,626L925,609L926,602L926,602L932,600L933,596L938,594L941,603L939,607L940,607L940,607L939,615L931,614L932,629L934,630L926,630Z"},{"n":"Lebanon","h":0,"d":"M938,594L933,596L932,600L926,602L927,583L931,565L931,564L939,563L945,570L938,581Z"},{"n":"Palestine","h":0,"d":"M934,630L932,629L931,614L939,615L943,628L943,630L934,630Z"},{"n":"Tunisia","h":0,"d":"M430,630L434,614L432,593L437,582L456,574L468,577L467,588L482,580L484,584L475,595L474,605L480,611L478,630L430,630Z"},{"n":"Algeria","h":0,"d":"M247,630L247,627L248,614L244,598L263,590L283,589L296,582L314,578L344,578L373,579L382,583L399,576L418,577L424,583L437,582L432,593L434,614L430,630L247,630Z"},{"n":"Jordan","h":0,"d":"M943,630L943,628L939,615L939,615L940,607L963,608L989,573L1006,596L1004,601L972,624L980,630L943,630Z"},{"n":"Iraq","h":0,"d":"M1010,499L1007,495L1010,492L1010,499ZM1010,596L1006,596L1006,596L989,573L1010,548L1010,596Z"},{"n":"Syria","h":0,"d":"M1010,492L1007,495L1010,499L1010,548L1010,548L989,573L963,608L940,607L940,607L939,607L941,603L938,594L938,581L945,570L939,563L931,564L924,549L925,538L928,532L931,526L928,514L935,516L951,504L962,505L975,499L991,484L1000,481L1010,475L1010,492Z"},{"n":"Armenia","h":0,"d":"M1010,397L1008,390L1002,384L1010,379L1010,397Z"},{"n":"Sweden","h":0,"d":"M584,-10L576,1L558,22L553,53L562,68L573,79L565,105L554,111L552,147L546,168L532,166L525,184L511,185L507,165L497,140L489,109L489,109L494,97L503,82L506,56L499,45L499,16L505,-4L515,-4L517,-10L584,-10Z"},{"n":"Belarus","h":0,"d":"M692,147L706,149L709,154L715,150L727,152L731,161L730,168L741,179L747,182L747,186L757,187L762,192L758,198L748,200L746,202L751,208L758,221L747,225L744,230L746,241L740,240L729,244L724,240L720,245L715,243L704,245L689,243L675,244L665,246L659,253L653,255L651,245L646,236L653,230L651,222L647,214L645,205L657,203L669,193L669,180L678,172L675,162L682,157Z"},{"n":"Ukraine","h":0,"d":"M758,221L763,220L765,215L769,215L781,209L793,218L791,223L794,229L804,227L812,234L813,238L832,240L841,233L852,240L860,237L881,236L884,242L882,255L890,264L890,272L878,278L873,287L876,296L865,301L858,311L846,317L836,328L840,339L838,339L835,336L830,336L818,335L816,341L813,339L790,341L787,333L774,339L772,352L764,370L757,368L750,373L743,371L746,368L747,360L750,352L748,349L750,346L752,349L761,348L764,345L761,344L761,340L755,336L751,328L745,326L744,318L737,314L731,315L719,310L710,314L708,318L702,319L699,325L689,329L685,333L677,329L668,330L659,329L653,335L652,329L643,325L645,316L648,310L651,310L646,301L656,282L662,278L662,272L653,255L659,253L665,246L675,244L689,243L704,245L715,243L720,245L724,240L729,244L740,240L746,241L744,230L747,225Z"},{"n":"Poland","h":0,"d":"M645,205L647,214L651,222L653,230L646,236L651,245L653,255L662,272L662,278L656,282L646,301L651,310L648,310L633,303L624,307L617,306L609,311L601,305L596,308L595,307L588,297L577,296L576,290L566,288L564,294L557,290L557,284L547,282L540,276L534,262L535,255L531,243L526,236L530,230L526,219L535,213L554,202L569,193L582,196L583,201L595,200L611,201L634,198L641,199Z"},{"n":"Austria","h":0,"d":"M571,338L570,347L562,348L565,352L561,366L559,370L546,371L539,376L526,375L505,370L502,362L487,366L485,370L477,367L469,366L463,362L465,357L465,353L469,352L476,358L478,353L491,354L502,350L508,350L513,355L514,351L512,337L517,334L522,324L533,331L540,322L545,320L557,326L563,325L570,328L569,331Z"},{"n":"Hungary","h":1,"d":"M643,325L652,329L653,335L645,341L640,356L633,372L622,377L613,377L602,384L596,387L584,384L572,376L567,374L564,366L561,366L565,352L562,348L570,347L571,338L579,343L584,345L596,342L597,337L602,336L609,332L611,333L617,330L620,324L624,323L640,327Z"},{"n":"Moldova","h":0,"d":"M708,318L710,314L719,310L731,315L737,314L744,318L745,326L751,328L755,336L761,340L761,344L764,345L761,348L752,349L750,346L748,349L750,352L747,360L746,368L743,371L738,362L738,352L735,343L724,333L718,325L712,319Z"},{"n":"Romania","h":0,"d":"M743,371L750,373L757,368L764,370L766,376L760,382L755,381L756,407L747,407L734,402L717,410L710,417L688,420L675,418L670,421L664,413L661,409L664,405L659,403L655,409L646,404L643,395L633,391L631,384L622,377L633,372L640,356L645,341L653,335L659,329L668,330L677,329L685,333L689,329L699,325L702,319L708,318L712,319L718,325L724,333L735,343L738,352L738,362Z"},{"n":"Lithuania","h":0,"d":"M675,162L678,172L669,180L669,193L657,203L645,205L641,199L634,198L632,192L632,186L627,184L613,182L608,164L621,156L641,154L653,150L655,154L662,154Z"},{"n":"Latvia","h":0,"d":"M676,121L683,125L686,135L692,147L682,157L675,162L662,154L655,154L653,150L641,154L621,156L608,164L607,148L611,134L621,125L632,139L642,138L641,121L650,115L656,117L667,123Z"},{"n":"Estonia","h":0,"d":"M675,77L677,80L672,94L680,113L676,121L667,123L656,117L650,115L641,121L640,108L637,111L628,105L625,93L638,84L651,79L664,80Z"},{"n":"Germany","h":1,"d":"M526,219L530,230L526,236L531,243L535,255L534,262L540,276L534,278L531,276L527,280L518,284L513,290L503,295L505,301L507,310L514,315L522,324L517,334L512,337L514,351L513,355L508,350L502,350L491,354L478,353L476,358L469,352L465,353L449,346L446,350L434,350L437,334L445,320L425,315L418,309L420,299L418,294L420,280L420,257L428,258L432,250L436,231L434,223L437,219L448,218L450,223L459,213L457,205L457,193L466,196L474,193L474,201L486,206L486,214L499,210L506,204L520,213Z"},{"n":"Bulgaria","h":0,"d":"M664,413L670,421L675,418L688,420L710,417L717,410L734,402L747,407L756,407L750,418L748,434L755,445L741,445L727,455L728,466L714,470L702,465L690,473L678,474L674,460L665,454L668,451L666,449L667,441L672,434L663,426L661,418Z"},{"n":"Greece","h":0,"d":"M757,595L756,602L730,608L730,605L707,604L709,594L720,600L734,596L747,596L747,599ZM678,474L690,473L702,465L714,470L728,466L727,455L735,459L733,474L730,477L720,478L711,477L692,486L705,496L698,501L688,503L678,493L676,498L681,511L691,519L686,525L696,534L706,539L708,551L691,548L698,558L687,562L697,580L685,582L670,575L661,558L656,544L648,535L638,523L636,517L643,506L643,499L648,495L648,489L658,486L664,480L672,479L675,475Z"},{"n":"Turkey","h":1,"d":"M1010,475L1000,481L991,484L975,499L962,505L951,504L935,516L928,514L931,526L928,532L925,538L916,531L920,521L910,526L894,526L886,542L861,552L844,544L825,548L824,558L812,564L793,556L774,561L760,541L745,532L750,514L737,505L751,481L776,475L779,457L810,453L825,434L842,423L867,414L899,420L924,420L940,410L954,407L968,389L983,381L1002,384L1008,390L1010,397L1010,475ZM727,455L741,445L755,445L759,453L775,457L773,462L754,468L749,476L737,490L730,481L730,477L733,474L735,459Z"},{"n":"Albania","h":0,"d":"M648,489L648,495L643,499L643,506L636,517L633,516L632,511L623,505L620,495L620,480L621,473L618,470L617,463L623,452L624,456L628,453L632,459L636,460L638,468L637,476L640,485Z"},{"n":"Croatia","h":0,"d":"M567,374L572,376L584,384L596,387L602,384L606,392L612,397L607,406L599,402L589,403L575,400L568,401L565,406L560,401L557,410L565,420L569,427L576,434L583,439L589,447L604,454L602,458L587,451L577,444L562,439L549,423L552,422L544,413L544,405L534,402L529,412L525,405L525,397L525,397L536,397L539,394L544,397L550,397L549,391L555,389L556,380Z"},{"n":"Switzerland","h":0,"d":"M465,353L465,357L463,362L469,366L477,367L475,376L469,379L458,376L454,385L447,385L445,382L436,388L429,389L422,384L418,374L411,377L412,367L423,356L423,351L430,353L434,350L446,350L449,346Z"},{"n":"Luxembourg","h":0,"d":"M418,294L420,299L418,309L414,309L411,307L414,295Z"},{"n":"Belgium","h":0,"d":"M420,280L418,294L414,295L411,307L400,296L393,297L384,286L379,276L373,275L372,268L383,265L393,267L406,264L413,274Z"},{"n":"Netherlands","h":0,"d":"M434,223L436,231L432,250L428,258L420,257L420,280L413,274L406,264L393,267L383,265L391,260L405,229L424,222Z"},{"n":"Portugal","h":0,"d":"M164,428L171,424L178,423L179,434L189,437L192,435L201,438L203,449L194,453L189,470L186,472L183,482L175,482L178,496L170,509L174,517L170,522L162,528L162,536L153,539L145,534L136,534L143,518L145,504L138,500L137,491L142,478L151,472L155,464L161,452L164,443L163,435Z"},{"n":"Spain","h":0,"d":"M162,536L162,528L170,522L174,517L170,509L178,496L175,482L183,482L186,472L189,470L194,453L203,449L201,438L192,435L189,437L179,434L178,423L171,424L164,428L169,413L166,402L191,393L209,402L229,407L245,414L258,416L282,422L287,431L314,446L321,442L337,454L356,454L355,467L338,479L317,481L314,488L302,498L293,514L297,528L286,536L280,549L266,551L251,566L229,562L212,558L200,563L191,569L183,565L178,557L177,543Z"},{"n":"Ireland","h":0,"d":"M271,189L269,205L255,221L229,227L212,219L228,200L228,177L249,166L261,158L260,170L255,181L263,182Z"},{"n":"Italy","h":1,"d":"M477,367L485,370L487,366L502,362L505,370L526,375L525,386L529,395L517,392L504,400L505,410L503,417L509,428L523,438L532,456L550,473L563,472L567,477L563,481L578,488L590,494L605,504L607,508L605,516L595,507L580,504L574,519L587,526L585,537L578,539L570,559L563,561L563,554L566,542L569,537L562,525L556,514L549,512L544,502L533,499L526,490L514,489L501,479L487,465L476,452L471,431L464,428L452,421L444,423L435,433L428,434L431,425L422,422L419,405L425,398L421,390L422,384L429,389L436,388L445,382L447,385L454,385L458,376L469,379L475,376ZM547,556L560,554L555,571L558,578L554,589L541,582L532,579L507,569L509,557L530,559ZM445,496L454,489L463,505L460,534L452,532L445,539L439,533L440,507L436,494Z"},{"n":"Denmark","h":0,"d":"M474,193L466,196L457,193L452,180L453,158L455,153L459,146L469,145L474,140L483,134L482,145L479,152L480,158L487,161L483,169L480,167L471,182ZM504,169L508,180L501,197L488,185L486,176Z"},{"n":"United Kingdom","h":0,"d":"M271,189L263,182L255,181L260,170L261,158L271,160L281,176ZM307,208L307,208L312,196L306,181L306,181L292,174L290,167L297,159L294,152L286,161L290,140L287,128L296,108L309,92L317,96L331,97L314,118L326,117L339,120L332,136L318,153L330,157L331,160L337,187L345,191L348,217L351,226L366,232L362,246L355,251L358,263L345,272L327,269L303,270L297,265L286,273L275,268L263,274L257,268L282,250L294,248L294,248L275,240L273,231L288,228L284,215L289,202Z"},{"n":"Georgia","h":0,"d":"M1010,379L1002,384L983,381L968,389L966,379L957,367L945,363L936,364L928,360L928,360L929,357L943,356L966,350L990,351L994,353L1001,346L1010,345L1010,379Z"},{"n":"Slovenia","h":0,"d":"M526,375L539,376L546,371L559,370L561,366L564,366L567,374L556,380L555,389L549,391L550,397L544,397L539,394L536,397L525,397L529,395L525,386Z"},{"n":"Finland","h":0,"d":"M683,-10L694,-3L693,8L687,23L671,55L652,61L635,72L618,79L610,68L599,63L599,41L591,22L594,8L601,-6L604,-10L683,-10Z"},{"n":"Slovakia","h":0,"d":"M648,310L645,316L643,325L640,327L624,323L620,324L617,330L611,333L609,332L602,336L597,337L596,342L584,345L579,343L571,338L569,331L570,328L572,323L578,323L583,321L583,319L585,317L586,312L589,311L591,307L595,307L596,308L601,305L609,311L617,306L624,307L633,303Z"},{"n":"Czechia","h":0,"d":"M540,276L547,282L557,284L557,290L564,294L566,288L576,290L577,296L588,297L595,307L591,307L589,311L586,312L585,317L583,319L583,321L578,323L572,323L570,328L563,325L557,326L545,320L540,322L533,331L522,324L514,315L507,310L505,301L503,295L513,290L518,284L527,280L531,276L534,278Z"},{"n":"Saudi Arabia","h":0,"d":"M980,630L972,624L1004,601L1006,596L1010,596L1010,630Z"},{"n":"N. Cyprus","h":0,"d":"M871,571L872,571L873,565L886,561L899,550L891,563L893,567L891,566L888,569L885,569L885,570L884,568L882,567L879,568L875,571Z"},{"n":"Cyprus","h":0,"d":"M871,571L875,571L879,568L882,567L884,568L885,570L885,569L888,569L891,566L893,567L894,568L879,582L869,582L863,574Z"},{"n":"Morocco","h":0,"d":"M99,630L102,623L118,612L139,607L154,602L172,583L180,571L193,574L202,586L219,588L236,597L244,598L244,598L248,614L247,627L247,630L99,630Z"},{"n":"Bosnia and Herz.","h":0,"d":"M604,454L589,447L583,439L576,434L569,427L565,420L557,410L560,401L565,406L568,401L575,400L589,403L599,402L607,406L612,405L609,415L617,423L616,433L613,434L610,437L605,442Z"},{"n":"Macedonia","h":0,"d":"M665,454L674,460L678,474L675,475L672,479L664,480L658,486L648,489L640,485L637,476L638,468L640,468L640,463L649,459L653,458L658,456Z"},{"n":"Serbia","h":0,"d":"M602,384L613,377L622,377L631,384L633,391L643,395L646,404L655,409L659,403L664,405L661,409L664,413L661,418L663,426L672,434L667,441L666,449L668,451L665,454L658,456L653,458L652,456L654,453L655,448L653,448L649,445L646,444L644,441L641,440L638,437L635,439L634,446L630,448L632,446L625,442L620,440L617,438L613,434L616,433L617,423L609,415L612,405L607,406L612,397L606,392Z"},{"n":"Montenegro","h":0,"d":"M628,453L624,456L623,452L617,463L618,470L615,468L610,462L602,458L604,454L605,442L610,437L613,434L617,438L620,440L625,442L632,446L630,448Z"},{"n":"Kosovo","h":0,"d":"M638,468L636,460L632,459L628,453L630,448L634,446L635,439L638,437L641,440L644,441L646,444L649,445L653,448L655,448L654,453L652,456L653,458L649,459L640,463L640,468Z"}],"P":{"reze":[302.6,343.5],"hambourg":[474.3,224.3],"Hungary":[607.2,355.7],"Germany":[478.4,277],"Turkey":[885.9,475.2],"Italy":[509.5,456]}};
+(function(){
+var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function $(id){return document.getElementById(id)}
+function esc(x){return String(x).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+/* EU flag: 12 five-pointed stars on a circle (radius = 1/3 of the height, star radius = 1/18) */
+function star(cx,cy,r){var p=[];for(var k=0;k<10;k++){var a=-Math.PI/2+k*Math.PI/5,rr=k%2?r*.382:r;p.push((cx+rr*Math.cos(a)).toFixed(2)+','+(cy+rr*Math.sin(a)).toFixed(2))}return p.join(' ')}
+var s='';for(var i=0;i<12;i++){var a=i*Math.PI/6;s+='<polygon fill="#ffcc00" points="'+star(405+180*Math.sin(a),270-180*Math.cos(a),30)+'"/>'}$('eus').innerHTML=s;
+var o='<circle cx="220" cy="220" r="168" fill="none" stroke="rgba(255,204,0,.18)" stroke-width="1"/>';for(i=0;i<12;i++){a=i*Math.PI/6;o+='<polygon class="st" style="animation-delay:'+(i*.09)+'s" fill="#ffcc00" points="'+star(220+168*Math.sin(a),220-168*Math.cos(a),19)+'"/>'}$('orbit').innerHTML=o;
+/* stats */
+var nPh=SALLES.reduce(function(n,x){return n+x.oeuvres.length},0),pays={};SALLES.forEach(function(x){x.delegations.forEach(function(p){pays[p]=1})});
+$('stats').innerHTML='<div><b>'+SALLES.length+'</b><span>salles</span></div><div><b>'+nPh+'</b><span>photographies</span></div><div><b>'+Object.keys(pays).length+'</b><span>pays</span></div><div><b>2026</b><span>année exposée</span></div>';
+/* map */
+var m=$('map');m.setAttribute('viewBox','0 0 '+MAP.W+' '+MAP.H);var g=MAP.paths.map(function(p){return '<path class="land'+(p.h?' hl':'')+'" d="'+p.d+'"/>'}).join('');
+var P=MAP.P,arcs='';['Germany','Italy','Hungary','Turkey'].forEach(function(c,i){['reze','hambourg'].forEach(function(v){var a=P[c],b=P[v];var mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2-Math.hypot(a[0]-b[0],a[1]-b[1])*.22;arcs+='<path class="arc" style="animation-delay:'+(i*.3)+'s" d="M'+a[0]+' '+a[1]+' Q'+mx+' '+my+' '+b[0]+' '+b[1]+'"/>'})});
+var cty={Germany:'Allemagne',Italy:'Italie',Hungary:'Hongrie',Turkey:'Turquie'},lab='';for(var k in cty)lab+='<text class="cty" x="'+P[k][0]+'" y="'+(P[k][1]+(k==='Germany'?24:4))+'" text-anchor="middle">'+cty[k]+'</text>';
+var ven=SALLES.map(function(x){var p=P[x.venue];var left=x.venue==='reze';return '<g class="venue" tabindex="0" role="link" aria-label="Salle '+x.num+' : '+esc(x.ville)+', '+esc(x.date)+'" data-room="'+x.id+'"><circle class="r" cx="'+p[0]+'" cy="'+p[1]+'" r="8"/><circle class="p" cx="'+p[0]+'" cy="'+p[1]+'" r="8"/><text x="'+(p[0]+(left?-16:16))+'" y="'+(p[1]-4)+'" text-anchor="'+(left?'end':'start')+'">Salle '+x.num+' · '+esc(x.ville)+'</text><text class="s" x="'+(p[0]+(left?-16:16))+'" y="'+(p[1]+14)+'" text-anchor="'+(left?'end':'start')+'">'+esc(x.date)+'</text></g>'}).join('');
+m.innerHTML=g+'<g>'+arcs+'</g>'+lab+ven;
+[].forEach.call(m.querySelectorAll('.venue'),function(v){function go(){document.getElementById(v.dataset.room).scrollIntoView({behavior:calm?'auto':'smooth'})}v.onclick=go;v.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}}});
+/* rooms */
+var all=[];
+$('rooms').innerHTML=SALLES.map(function(x,ri){
+  var works=x.oeuvres.map(function(w,wi){var idx=all.length;all.push({w:w,r:x,k:wi});var pos=w.o==='l'?(wi%2?' lo':' hi'):'';
+    return '<figure class="work '+w.o+pos+'"><button type="button" data-i="'+idx+'" aria-label="Examiner : '+esc(w.t)+'"><span class="frame"><img src="../img/'+w.src+'" alt="'+esc(w.t)+'" style="aspect-ratio:'+(RATIO[w.src]||(w.o==='p'?'3/4':'4/3'))+'" loading="lazy" decoding="async"></span></button><figcaption class="cartel"><span class="n">Salle '+x.num+' · N° '+(wi+1)+'</span><b>'+esc(w.t)+'</b><span>'+esc(x.ville)+' · '+esc(x.date)+'</span></figcaption></figure>'}).join('');
+  var fund=x.ue?'<div class="fund"><svg viewBox="0 0 810 540" aria-hidden="true"><use href="#eu"/></svg><div>Cofinancé par l\'Union européenne · Erasmus+<small>'+esc(x.ue)+'</small></div></div>':'';
+  return '<section class="room" id="'+x.id+'" aria-labelledby="h-'+x.id+'"><div class="sticky"><div class="wall">'+
+   '<div class="plaque"><span class="no">'+x.num+'</span><p class="label" style="color:var(--star)">'+esc(x.type)+'</p><h2 id="h-'+x.id+'">'+esc(x.titre)+'</h2><div class="where"><span><b>'+esc(x.ville)+'</b> · '+esc(x.pays)+'</span><span>'+esc(x.date)+'</span><span>'+x.oeuvres.length+' photographies</span></div><p>'+esc(x.texte)+'</p><div class="chips" aria-label="Pays représentés">'+x.delegations.map(function(d){return '<span>'+esc(d)+'</span>'}).join('')+'</div>'+fund+'<p class="hint"><svg viewBox="0 0 30 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 6h28M23 1l5 5-5 5"/></svg>Faites défiler pour parcourir la salle</p></div>'+
+   works+'<div class="end"><b>'+(ri<SALLES.length-1?'Salle suivante : '+esc(SALLES[ri+1].ville):'Fin de la visite')+'</b><p>'+(ri<SALLES.length-1?esc(SALLES[ri+1].titre)+' · '+esc(SALLES[ri+1].date):'Merci de votre visite. La prochaine salle ouvrira avec notre prochain projet.')+'</p></div></div></div></section>'}).join('');
+/* horizontal walk driven by vertical scroll */
+var rooms=[].slice.call(document.querySelectorAll('.room'));
+function flat(){return innerWidth<=760||calm}
+function size(){rooms.forEach(function(r){var w=r.querySelector('.wall');if(flat()){r.style.height='';w.style.transform='';return}var extra=Math.max(0,w.scrollWidth-innerWidth);r.dataset.extra=extra;r.style.height=(innerHeight+extra)+'px'});tick()}
+var bar=$('planbar');bar.innerHTML='<a href="#plan">Plan</a>'+SALLES.map(function(x){return '<a href="#'+x.id+'">Salle '+x.num+' · '+esc(x.ville)+'<span class="pr"></span></a>'}).join('');
+var links=[].slice.call(bar.querySelectorAll('a'));
+function tick(){var y=scrollY,cur=0;rooms.forEach(function(r,i){var top=r.offsetTop,ex=+r.dataset.extra||0,p=Math.min(1,Math.max(0,(y-top)/(ex||1)));if(!flat())r.querySelector('.wall').style.transform='translate3d('+(-p*ex)+'px,0,0)';
+   if(y>=top-innerHeight*.5)cur=i+1;links[i+1].querySelector('.pr').style.setProperty('--p',(p*100)+'%')});
+  links.forEach(function(a,i){a.classList.toggle('cur',i===cur)});
+  var planTop=$('plan').offsetTop;bar.classList.toggle('on',y>planTop-innerHeight*.4);$('top').classList.toggle('solid',y>40)}
+addEventListener('scroll',function(){requestAnimationFrame(tick)},{passive:true});addEventListener('resize',size);addEventListener('load',size);
+[].forEach.call(document.querySelectorAll('.wall img'),function(im){im.addEventListener('load',size,{once:true})});size();
+/* gallery light follows the visitor */
+[].forEach.call(document.querySelectorAll('.sticky'),function(st){st.addEventListener('pointermove',function(e){var r=st.getBoundingClientRect();st.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');st.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')})});
+/* viewer and guided tour */
+var V=$('view'),cur=0,timer=null,t0=0,back=null,D=6000;
+function show(i){cur=(i+all.length)%all.length;var it=all[cur],w=it.w,x=it.r;$('v-pic').innerHTML='<img src="../img/'+w.src+'" alt="'+esc(w.t)+'">';
+  $('v-room').textContent='Salle '+x.num+' · N° '+(it.k+1)+' sur '+x.oeuvres.length;$('v-t').textContent=w.t;
+  $('v-dl').innerHTML='<dt>Projet</dt><dd>'+esc(x.titre)+'</dd><dt>Lieu</dt><dd>'+esc(x.ville)+', '+esc(x.pays)+'</dd><dt>Date</dt><dd>'+esc(x.date)+'</dd><dt>Cadre</dt><dd>'+esc(x.type)+'</dd>';$('v-note').textContent=w.n}
+function open(i){back=document.activeElement;show(i);V.hidden=false;document.documentElement.style.overflow='hidden';requestAnimationFrame(function(){V.classList.add('on')});$('v-x').focus()}
+function close(){stop();V.classList.remove('on');setTimeout(function(){V.hidden=true},calm?0:300);document.documentElement.style.overflow='';if(back)back.focus()}
+function run(ts){if(!timer)return;if(!t0)t0=ts;var p=(ts-t0)/D;$('v-tour').firstChild.style.width=Math.min(100,p*100)+'%';if(p>=1){t0=ts;show(cur+1)}timer=requestAnimationFrame(run)}
+function play(){if(timer)return stop();$('v-tour').hidden=false;t0=0;timer=requestAnimationFrame(run);$('v-play').textContent='Mettre en pause la visite'}
+function stop(){if(timer)cancelAnimationFrame(timer);timer=null;$('v-tour').hidden=true;$('v-play').textContent='Lancer la visite guidée'}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.work button');if(b)open(+b.dataset.i)});
+$('v-prev').onclick=function(){t0=0;show(cur-1)};$('v-next').onclick=function(){t0=0;show(cur+1)};$('v-x').onclick=close;$('v-play').onclick=play;
+$('tour-start').onclick=function(){open(0);play()};
+addEventListener('keydown',function(e){if(V.hidden)return;if(e.key==='Escape')close();else if(e.key==='ArrowRight'){t0=0;show(cur+1)}else if(e.key==='ArrowLeft'){t0=0;show(cur-1)}});
+/* gold dust in the hero */
+var cv=$('dust'),cx=cv.getContext('2d'),pts=[];function rs(){var r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);cv.width=r.width*d;cv.height=r.height*d;cx.setTransform(d,0,0,d,0,0);pts=[];for(var i=0;i<110;i++)pts.push({x:Math.random()*r.width,y:Math.random()*r.height,s:Math.random()*1.4+.3,v:Math.random()*.25+.05,t:Math.random()*6})}
+function dust(t){var r=cv.getBoundingClientRect();cx.clearRect(0,0,r.width,r.height);pts.forEach(function(p){p.y-=p.v;if(p.y<0)p.y=r.height;var a=.25+.35*Math.sin(t/900+p.t);cx.fillStyle='rgba(255,214,90,'+a+')';cx.beginPath();cx.arc(p.x,p.y,p.s,0,7);cx.fill()});if(!calm)requestAnimationFrame(dust)}
+rs();addEventListener('resize',rs);requestAnimationFrame(dust);
+})();
+</script>
+</body>
+</html>
