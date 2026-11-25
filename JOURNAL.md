@@ -2,6 +2,9 @@
 
 Entrées les plus récentes en haut. Chaque conversation ajoute une entrée à la fin de son travail.
 
+## 2026-11-26 — Chiffres de réseau et de diffusion
+- Ajout, sur indication du président : « 25 partenaires en Europe » et « 25 000+ vues de nos activités sur les réseaux sociaux, avec nos partenaires ». Garder les justificatifs (captures) en cas de demande d'un financeur.
+
 ## 2026-11-26 — Chiffre de vues retiré
 - Le président a préféré retirer « 11 500+ vues » de la rubrique Impact. Ne jamais afficher de chiffre non vérifiable : les financeurs comparent avec les rapports finaux.
 
