@@ -2,6 +2,13 @@
 
 Entrées les plus récentes en haut. Chaque conversation ajoute une entrée à la fin de son travail.
 
+## 2026-11-26 — Allègement et référencement
+- Retrait des numéros de sections, des italiques colorées dans les titres et du bandeau défilant (remplacé par une ligne fixe « Nos terrains »).
+- Expertises intégrées à « L'association » ; constellations réduites à un bandeau avec lien ; « Temps forts » : 3 actions visibles, les autres repliables.
+- Impact : ajout de « 11 500+ vues » (5 756 vues comptées sur les reportages du projet de mars 2026, multipliées par 2 car le projet précédent est identique, selon le président).
+- Référencement : titre, description, balises de partage, données structurées, robots.txt et sitemap.xml.
+- En attente : photos des projets sans image ; vues des activités avec les partenaires (à ajouter quand le président les fournira).
+
 ## 2026-11-25 — Fichier de consignes et journal
 - Création de `AGENTS.md` (règles permanentes) et de ce journal, pour que chaque nouvelle conversation reprenne le travail sans perte.
 - Audit du design remis au président ; refonte en attente de son accord.
