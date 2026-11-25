@@ -2,6 +2,9 @@
 
 Entrées les plus récentes en haut. Chaque conversation ajoute une entrée à la fin de son travail.
 
+## 2026-11-26 — Chiffre de vues retiré
+- Le président a préféré retirer « 11 500+ vues » de la rubrique Impact. Ne jamais afficher de chiffre non vérifiable : les financeurs comparent avec les rapports finaux.
+
 ## 2026-11-26 — Allègement et référencement
 - Retrait des numéros de sections, des italiques colorées dans les titres et du bandeau défilant (remplacé par une ligne fixe « Nos terrains »).
 - Expertises intégrées à « L'association » ; constellations réduites à un bandeau avec lien ; « Temps forts » : 3 actions visibles, les autres repliables.
