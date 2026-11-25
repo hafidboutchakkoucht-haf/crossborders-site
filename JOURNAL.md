@@ -3,7 +3,7 @@
 Entrées les plus récentes en haut. Chaque conversation ajoute une entrée à la fin de son travail.
 
 ## 2026-11-25 — Fichier de consignes et journal
-- Création de `CLAUDE.md` (règles permanentes) et de ce journal, pour que chaque nouvelle conversation reprenne le travail sans perte.
+- Création de `AGENTS.md` (règles permanentes) et de ce journal, pour que chaque nouvelle conversation reprenne le travail sans perte.
 - Audit du design remis au président ; refonte en attente de son accord.
 
 ## Acquis (novembre 2026)
