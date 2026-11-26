@@ -439,6 +439,8 @@ html.js .rv.in{opacity:1;transform:none}
 details.more{margin-top:8px}details.more summary{cursor:pointer;font-weight:600;padding:14px 0;color:var(--accent);list-style:none}details.more summary::-webkit-details-marker{display:none}details.more summary::after{content:" +"}details.more[open] summary::after{content:" −"}
 .figs{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
 .figs b{white-space:nowrap;font-size:clamp(2.1rem,3.6vw,3.2rem)}
+@media (max-width:1180px){.top .wrap{flex-wrap:nowrap}.menu{display:inline-block}.nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--rule);flex-direction:column;gap:0;padding:8px 24px 20px;font-size:1.05rem}.nav a{padding-block:12px;border-top:1px solid var(--rule)}.top.open .nav{display:flex}.top .btn{margin-left:auto;margin-right:12px}}
+@media (max-width:1240px) and (min-width:1181px){.nav{gap:4px 18px}}
 </style>
 </head>
 <body>
@@ -447,7 +449,7 @@ details.more{margin-top:8px}details.more summary{cursor:pointer;font-weight:600;
   <div class="wrap">
     <a class="brand" href="#accueil" aria-label="Cross Borders, accueil"><img src="brand/embleme.svg" alt="" width="68" height="44">Cross<span>Borders</span></a>
     <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="#president">Le président</a>
+      <a href="#president">Le mot du président</a>
       <a href="#association">L'association</a>
       <a href="#projets">Projets</a>
       <a href="#europe">Europe</a>
@@ -484,12 +486,12 @@ details.more{margin-top:8px}details.more summary{cursor:pointer;font-weight:600;
 
 <section class="sec word" id="president">
   <div class="wrap">
-    <div class="index"><b>01</b><span class="label">Le communiqué du président</span></div>
+    <div class="index"><b>01</b><span class="label">Le mot du président</span></div>
     <div class="word-grid">
       <aside>
         <figure class="portrait"><img src="img/president.jpg" alt="Portrait de Hafid Boutchakkoucht, président de Cross Borders"><figcaption>Hafid Boutchakkoucht, président</figcaption></figure>
         <p class="month" id="w-month"></p>
-        <p>Chaque mois, le président de Cross Borders s'adresse aux adhérents, aux partenaires et aux habitants.</p>
+        <p>Chaque mois, un message aux adhérents, aux partenaires et aux habitants.</p>
         <div class="archive" id="w-archive" aria-label="Communiqués précédents"></div>
       </aside>
       <div>

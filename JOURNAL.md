@@ -2,6 +2,9 @@
 
 Entrées les plus récentes en haut. Chaque conversation ajoute une entrée à la fin de son travail.
 
+## 2026-11-26 — « Le mot du président »
+- Menu et rubrique : « Le président » devient « Le mot du président » (plus modeste). Menu replié en bouton « Menu » sous 1180 px pour éviter qu'il passe sur deux lignes.
+
 ## 2026-11-26 — Chiffres de réseau et de diffusion
 - Ajout, sur indication du président : « 25 partenaires en Europe » et « 25 000+ vues de nos activités sur les réseaux sociaux, avec nos partenaires ». Garder les justificatifs (captures) en cas de demande d'un financeur.
 
