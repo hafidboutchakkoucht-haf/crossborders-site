@@ -2,6 +2,11 @@
 
 Entrées les plus récentes en haut. Chaque conversation ajoute une entrée à la fin de son travail.
 
+## 2026-11-28 — Kit officiel de l'association
+- Kit d'identité (logos, charte graphique, papier à en-tête, modèle PowerPoint, signature e-mail, visuels réseaux sociaux) préparé à partir du logo convenu par le président (version en dégradés, image fournie).
+- Ajout de `brand/signature-email.png`, appelé par la signature e-mail du kit : ne pas le renommer ni le supprimer.
+- Point ouvert : le site utilise une version redessinée (aplats vectoriels) de l'emblème, légèrement différente du logo du kit ; le président doit choisir une version unique.
+
 ## 2026-11-26 — « Le mot du président »
 - Menu et rubrique : « Le président » devient « Le mot du président » (plus modeste). Menu replié en bouton « Menu » sous 1180 px pour éviter qu'il passe sur deux lignes.
 
